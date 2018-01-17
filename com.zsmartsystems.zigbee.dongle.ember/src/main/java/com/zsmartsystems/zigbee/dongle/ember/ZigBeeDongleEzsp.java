@@ -135,9 +135,11 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
      * The Ember version used in this system. Set during initialisation and saved in case the client is interested.
      */
     private String versionString = "Unknown";
+    
 
     public ZigBeeDongleEzsp(final ZigBeePort serialPort) {
         this.serialPort = serialPort;
+        this.zigbeeTransportReceive = null;
 
         stackConfiguration = new HashMap<EzspConfigId, Integer>();
         stackConfiguration.put(EzspConfigId.EZSP_CONFIG_SOURCE_ROUTE_TABLE_SIZE, 16);
@@ -169,7 +171,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
     public ZigBeeInitializeResponse initialize() {
         logger.debug("EZSP dongle initialize.");
 
-        zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.UNINITIALISED);
+        if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.UNINITIALISED);}
 
         if (!serialPort.open()) {
             logger.error("Unable to open Ember serial port");
@@ -253,7 +255,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         networkParameters = getNetworkParameters();
         getCurrentSecurityState();
 
-        zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.INITIALISING);
+        if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.INITIALISING); }
 
         logger.debug("EZSP dongle initialize done: Initialised {}",
                 networkInitResponse.getStatus() == EmberStatus.EMBER_NOT_JOINED);
@@ -298,7 +300,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         logger.debug(networkStateResponse.toString());
         logger.debug("EZSP networkStateResponse {}", networkStateResponse.getStatus());
         if (networkStateResponse.getStatus() == EmberNetworkStatus.EMBER_JOINED_NETWORK) {
-            zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.ONLINE);
+        	if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.ONLINE); }
         }
 
         // Get the security state - mainly for debug
@@ -467,7 +469,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
             apsFrame.setSequence(incomingMessage.getSequenceNumber());
             apsFrame.setSourceAddress(incomingMessage.getSender());
             apsFrame.setPayload(incomingMessage.getMessageContents());
-            zigbeeTransportReceive.receiveCommand(apsFrame);
+            if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.receiveCommand(apsFrame); }
 
             return;
         }
@@ -478,7 +480,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
                 case EMBER_NETWORK_BUSY:
                     break;
                 case EMBER_NETWORK_DOWN:
-                    zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.OFFLINE);
+                	if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.OFFLINE); }
                     break;
                 case EMBER_NETWORK_UP:
                     break;
@@ -512,14 +514,14 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
                     return;
             }
 
-            zigbeeTransportReceive.nodeStatusUpdate(status, joinHandler.getNewNodeId(), joinHandler.getNewNodeEui64());
+            if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.nodeStatusUpdate(status, joinHandler.getNewNodeId(), joinHandler.getNewNodeEui64()); }
 
         }
 
         if (response instanceof EzspChildJoinHandler) {
             EzspChildJoinHandler joinHandler = (EzspChildJoinHandler) response;
-            zigbeeTransportReceive.nodeStatusUpdate(ZigBeeNodeStatus.UNSECURED_JOIN, joinHandler.getChildId(),
-                    joinHandler.getChildEui64());
+            if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.nodeStatusUpdate(ZigBeeNodeStatus.UNSECURED_JOIN, joinHandler.getChildId(),
+                    joinHandler.getChildEui64()); }
 
             /*
              * // Convert to an announce
@@ -560,7 +562,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
     @Override
     public void handleLinkStateChange(boolean linkState) {
         // Handle link changes and notify framework or just reset link with dongle?
-        zigbeeTransportReceive.setNetworkState(linkState ? ZigBeeTransportState.ONLINE : ZigBeeTransportState.OFFLINE);
+    	if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(linkState ? ZigBeeTransportState.ONLINE : ZigBeeTransportState.OFFLINE); }
     }
 
     @Override
@@ -655,7 +657,7 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         EzspVersionResponse versionResponse = (EzspVersionResponse) versionTransaction.getResponse();
         logger.debug(versionResponse.toString());
 
-        zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.OFFLINE);
+        if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.OFFLINE); }
         callback.firmwareUpdateCallback(ZigBeeTransportFirmwareStatus.FIRMWARE_UPDATE_STARTED);
 
         // Send the bootload command, but ignore the response since there doesn't seem to be one
@@ -709,4 +711,165 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         bootloadHandler.cancelUpdate();
         return true;
     }
+    
+    
+    // Low level API
+    
+    /**
+     * Minimal initialization : ASH + EZSP Protocol
+     * @return true if success
+     */
+    public boolean initializeEzspProtocol()
+    {
+    	boolean lo_success = false;
+    	
+        logger.debug("EZSP dongle initialize ASH.");
+
+        if (!serialPort.open()) {
+            logger.error("Unable to open Ember serial port");
+        }
+        else {
+            ashHandler = new AshFrameHandler(this);
+
+            // Connect to the ASH handler and NCP
+            ashHandler.start(serialPort);
+            ashHandler.connect();
+
+            // We MUST send the version command first.
+            EzspVersionRequest version = new EzspVersionRequest();
+            version.setDesiredProtocolVersion(EzspFrame.getEzspVersion());
+            EzspTransaction versionTransaction = ashHandler
+                    .sendEzspTransaction(new EzspSingleResponseTransaction(version, EzspVersionResponse.class));
+            EzspVersionResponse versionResponse = (EzspVersionResponse) versionTransaction.getResponse();
+            logger.debug(versionResponse.toString());
+            
+            if( EzspFrame.getEzspVersion() != versionResponse.getProtocolVersion() )
+            {
+            	// check if it is a supported version
+            	if( EzspFrame.setEzspVersion(versionResponse.getProtocolVersion()) )
+            	{
+                    version = new EzspVersionRequest();
+                    version.setDesiredProtocolVersion(EzspFrame.getEzspVersion());
+                    versionTransaction = ashHandler
+                            .sendEzspTransaction(new EzspSingleResponseTransaction(version, EzspVersionResponse.class));
+                    versionResponse = (EzspVersionResponse) versionTransaction.getResponse();
+                    logger.debug(versionResponse.toString());
+
+                    StringBuilder builder = new StringBuilder(60);
+                    builder.append("EZSP Version=");
+                    builder.append(versionResponse.getProtocolVersion());
+                    builder.append(", Stack Type=");
+                    builder.append(versionResponse.getStackType());
+                    builder.append(", Stack Version=");
+                    for (int cnt = 3; cnt >= 0; cnt--) {
+                        builder.append((versionResponse.getStackVersion() >> (cnt * 4)) & 0x0F);
+                        if (cnt != 0) {
+                            builder.append('.');
+                        }
+                    }
+                    versionString = builder.toString();
+                    
+                    logger.debug("EZSP Protocol version : {}", versionString);
+                    lo_success = true;
+            	}
+            }
+        }
+    	
+    	return lo_success;
+    }
+    
+    /**
+     * set a new configuration value for stack, Not send to NCP, use applyStackConfiguration function for that
+     * @param i_configId : configuration Id
+     * @param i_value : configuration value
+     */
+    public void setStackConfigurationValue( EzspConfigId i_configId, Integer i_value ) {
+    	stackConfiguration.put(i_configId, i_value);    	
+    }
+    
+    /**
+     * Apply to NCP current stack configuration value, shall be done before initializing network
+     */
+    public void applyStackConfiguration() {
+        // Perform any stack configuration
+        EmberStackConfiguration stackConfigurer = new EmberStackConfiguration(ashHandler);
+
+        stackConfigurer.setConfiguration(stackConfiguration);
+        Map<EzspConfigId, Integer> configuration = stackConfigurer.getConfiguration(stackConfiguration.keySet());
+        for (EzspConfigId config : configuration.keySet()) {
+            logger.debug("Configuration state {} = {}", config, configuration.get(config));
+        }
+    }
+    
+    /**
+     * set a new poicy value, Not send to NCP, use applyStackPolicy function for that
+     * @param i_policyId
+     * @param i_decisionId
+     */
+    public void setStackPolicyValue( EzspPolicyId i_policyId, EzspDecisionId i_decisionId ) {
+    	stackPolicies.put(i_policyId, i_decisionId);    	
+    }
+    
+    /**
+     * Apply to NCP current policy value, shall be done before initializing network
+     */
+    public void applyStackPolicy() {
+        // Perform any stack configuration
+        EmberStackConfiguration stackConfigurer = new EmberStackConfiguration(ashHandler);
+
+        stackConfigurer.setPolicy(stackPolicies);
+        Map<EzspPolicyId, EzspDecisionId> policies = stackConfigurer.getPolicy(stackPolicies.keySet());
+        for (EzspPolicyId policy : policies.keySet()) {
+            logger.debug("Policy state {} = {}", policy, policies.get(policy));
+        }
+    }
+    
+    /**
+     * adding a new endpoint to NCP, shall be done before initializing network
+     * @param i_epNumber
+     * @param i_deviceId
+     * @param i_profileId
+     * @param i_inClusterList
+     * @param i_outClusterList
+     * @return
+     */
+    public EzspStatus addEndpoint(int i_epNumber, int i_deviceId, int i_profileId, int[] i_inClusterList, int[] i_outClusterList) {
+	    // Add endpoint
+	    EzspAddEndpointRequest addEndpoint = new EzspAddEndpointRequest();
+	    addEndpoint.setEndpoint(i_epNumber);
+	    addEndpoint.setDeviceId(i_deviceId);
+	    addEndpoint.setProfileId(i_profileId);
+	    addEndpoint.setInputClusterList(i_inClusterList);
+	    addEndpoint.setOutputClusterList(i_outClusterList);
+	    logger.debug(addEndpoint.toString());
+	    EzspTransaction addEndpointTransaction = ashHandler
+	            .sendEzspTransaction(new EzspSingleResponseTransaction(addEndpoint, EzspAddEndpointResponse.class));
+	    EzspAddEndpointResponse addEndpointResponse = (EzspAddEndpointResponse) addEndpointTransaction.getResponse();
+	    logger.debug(addEndpointResponse.toString());
+	    
+	    return addEndpointResponse.getStatus();
+    }
+
+    /**
+     * Initialize zigbee pro stack
+     * @return
+     */
+    public EmberStatus initializeZigbeeNetwork() {
+	    // Initialise the network
+	    EzspNetworkInitRequest networkInitRequest = new EzspNetworkInitRequest();
+	    EzspTransaction networkInitTransaction = ashHandler.sendEzspTransaction(
+	            new EzspSingleResponseTransaction(networkInitRequest, EzspNetworkInitResponse.class));
+	    EzspNetworkInitResponse networkInitResponse = (EzspNetworkInitResponse) networkInitTransaction.getResponse();
+	    logger.debug(networkInitResponse.toString());
+	
+	    networkParameters = getNetworkParameters();
+	    getCurrentSecurityState();
+	
+	    logger.debug("EZSP dongle initialize done: Initialised {}",
+	            networkInitResponse.getStatus() == EmberStatus.EMBER_NOT_JOINED);
+	    
+	    return networkInitResponse.getStatus();
+    }
+
+    
 }

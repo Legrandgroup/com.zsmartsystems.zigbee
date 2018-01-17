@@ -47,6 +47,7 @@
         <module>com.zsmartsystems.zigbee.console</module>
         <module>com.zsmartsystems.zigbee.serial</module>
         <module>com.zsmartsystems.zigbee.test</module>
+        <module>com.zsmartsystems.zigbee.dongle.ember.sniffer</module>
     </modules>
 
     <build>

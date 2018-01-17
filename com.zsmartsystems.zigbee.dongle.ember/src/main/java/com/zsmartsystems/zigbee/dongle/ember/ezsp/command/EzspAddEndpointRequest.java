@@ -79,6 +79,7 @@ public class EzspAddEndpointRequest extends EzspFrameRequest {
      */
     public EzspAddEndpointRequest() {
         frameId = FRAME_ID;
+        appFlags = 0;
         serializer = new EzspSerializer();
     }
 
