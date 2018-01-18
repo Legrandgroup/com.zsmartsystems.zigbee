@@ -8,7 +8,9 @@
 package com.zsmartsystems.zigbee.dongle.ember;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -25,6 +27,7 @@ import com.zsmartsystems.zigbee.ZigBeeProfileType;
 import com.zsmartsystems.zigbee.dongle.ember.ash.AshFrameHandler;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrame;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrameRequest;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrameResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspAddEndpointRequest;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspAddEndpointResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspChildJoinHandler;
@@ -135,6 +138,11 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
      * The Ember version used in this system. Set during initialisation and saved in case the client is interested.
      */
     private String versionString = "Unknown";
+    
+    /**
+     * ezsp frame listener    
+     */
+    private List<EzspFrameHandler> ezspListener = new ArrayList<EzspFrameHandler>();    
     
 
     public ZigBeeDongleEzsp(final ZigBeePort serialPort) {
@@ -452,8 +460,20 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
     }
 
     @Override
-    public void handlePacket(EzspFrame response) {
+    public void handlePacket(final EzspFrame response) {
         logger.debug("RX: " + response.toString());
+        
+		Thread thread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				for( EzspFrameHandler l_listener : ezspListener ) {
+					l_listener.handlePacket( response );
+				}
+			
+			}
+		});
+		thread.start();        
 
         if (response instanceof EzspIncomingMessageHandler) {
             EzspIncomingMessageHandler incomingMessage = (EzspIncomingMessageHandler) response;
@@ -871,5 +891,33 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
 	    return networkInitResponse.getStatus();
     }
 
+    /**
+     * Direct call EZSP NCP function
+     * @param request
+     * @param requiredResponse
+     * @return
+     */
+	public EzspFrameResponse singleCall(EzspFrameRequest request, Class<?> requiredResponse) {
+        EzspTransaction transaction = ashHandler
+                .sendEzspTransaction(new EzspSingleResponseTransaction(request, requiredResponse));
+        logger.debug(transaction.toString());
+        return transaction.getResponse();
+	}
+	
+    /***************************************************************************
+     * Listener management
+     */
+
+	public void addListener(EzspFrameHandler listener) {
+		if( !this.ezspListener.contains(listener) ) {
+			this.ezspListener.add(listener);
+		}
+    }
+
+	public void removeListener(EzspFrameHandler listener) {
+		if( this.ezspListener.contains(listener) ) {
+			this.ezspListener.remove(listener);
+		}
+    }	
     
 }
