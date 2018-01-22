@@ -102,6 +102,20 @@ public class SnifferMain {
      * @param args the command arguments
      */
     public static void main(final String[] args) {
+    	
+    	Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				captureEnable = false;
+    	        try {
+    				Thread.sleep(1000);
+    			} catch (InterruptedException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+			}
+		}));    	
         
         final String serialPortName = "/dev/ttyUSB0";
         final int serialBaud = 57600;
@@ -115,20 +129,6 @@ public class SnifferMain {
 
         logger.info("ASH Init");
         if( dongle.initializeEzspProtocol() ) {
-        	
-        	Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-    			
-    			@Override
-    			public void run() {
-    				captureEnable = false;
-        	        try {
-        				Thread.sleep(1000);
-        			} catch (InterruptedException e) {
-        				// TODO Auto-generated catch block
-        				e.printStackTrace();
-        			}
-    			}
-    		}));
         	
         	/** @todo for testing initialization of zigbee pro stack
         	logger.info("Configure stack");
