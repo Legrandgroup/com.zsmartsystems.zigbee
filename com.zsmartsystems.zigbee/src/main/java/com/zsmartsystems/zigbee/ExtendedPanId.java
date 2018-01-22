@@ -10,6 +10,7 @@ package com.zsmartsystems.zigbee;
 import java.math.BigInteger;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Represents a 64 bit extended PAN Id
@@ -26,6 +27,13 @@ public class ExtendedPanId {
     public ExtendedPanId() {
         this.panId = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
     }
+    
+    public void CreateRandom() {
+    	Random random = new Random();
+        for (int cnt = 0; cnt < 8; cnt++) {
+        	panId[cnt] = random.nextInt(256);
+        }
+    }    
 
     /**
      * Create an {@link ExtendedPanId} from a {@link BigInteger}
