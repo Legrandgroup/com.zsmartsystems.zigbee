@@ -277,5 +277,9 @@ public class EzspDeserializer {
     
     public EmberGpAddress deserializeEmberGpAddress() {
         return new EmberGpAddress(this);
-    }    
+    }  
+    
+	public int getPosition() {
+		return position;
+	}    
 }
