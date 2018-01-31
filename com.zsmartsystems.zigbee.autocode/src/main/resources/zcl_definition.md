@@ -409,6 +409,10 @@ unauthorised persons in a public building.
 ### Received
 
 #### Reset to Factory Defaults Command [0x00]
+On receipt of this command, the device resets all the attributes of all its clusters
+to their factory defaults. Note that ZigBee networking functionality,bindings, groups
+or other persistent data are not affected by this command
+
 |Field Name                 |Data Type                  |
 |---------------------------|---------------------------|
 
@@ -922,6 +926,34 @@ No cluster specific commands.
 
 ## On/off Switch Configuration [0x0007]
 Attributes and commands for configuring On/Off switching devices
+
+### Attributes
+
+|Id     |Name                 |Type                       |Access     |Implement |Reporting |
+|-------|---------------------|---------------------------|-----------|----------|----------|
+|0x0000 |SwitchType           |8-bit enumeration          |Read Only  |Mandatory |          |
+|0x0010 |SwitchActions        |8-bit enumeration          |Read Write |Mandatory |          |
+
+#### SwitchType Attribute
+The SwitchTypeattribute  specifies  the  basic  functionality  of  the  On/Off  switching  device.
+
+|Id     |Name                      |
+|-------|--------------------------|
+|0x0000 |Toggle                    |
+|0x0001 |Momentary                 |
+|0x0002 |Multifunction             |
+
+#### SwitchActions Attribute
+
+The SwitchActions attribute is 8 bits in length and specifies the commands of the On/Off cluster
+to be generated when the switch moves between its two states
+
+|Id     |Name                      |
+|-------|--------------------------|
+|0x0000 |On                        |
+|0x0001 |Off                       |
+|0x0002 |Toggle                    |
+
 
 ### Received
 
@@ -1758,14 +1790,13 @@ ii) generate new log record at the time of request and send Get Relay Status Log
 
 #### Get Weekly Schedule Response [0x00]
 
-|Field Name                 |Data Type                  |
-|---------------------------|---------------------------|
-|Number of Transitions      |8-bit Enumeration          |
+|Number of Transitions      |Enumeration 8-bit          |
 |Day of Week                |Enumeration 8-bit          |
 |Mode                       |Enumeration 8-bit          |
 |Transition                 |Unsigned 16-bit integer    |
 |Heat Set                   |Unsigned 16-bit integer    |
 |Cool Set                   |Unsigned 16-bit integer    |
+
 
 #### Get Relay Status Log Response [0x01]
 
@@ -1818,17 +1849,27 @@ specification CIE 1931 Color Space, [B4]. Color control is carried out in terms 
 x,y values, as defined by this specification. 
 
 ### Attributes
-|Id     |Name                  |Type                       |Access     |Implement |Reporting |
-|-------|----------------------|---------------------------|-----------|----------|----------|
-|0x0000 |CurrentHue            |Unsigned 8-bit Integer     |Read only  |Optional  |Mandatory |
-|0x0001 |CurrentSaturation     |Unsigned 8-bit Integer     |Read only  |Optional  |Mandatory |
-|0x0002 |RemainingTime         |Unsigned 16-bit Integer    |Read only  |Optional  |          |
-|0x0003 |CurrentX              |Unsigned 16-bit Integer    |Read only  |Mandatory |Mandatory |
-|0x0004 |CurrentY              |Unsigned 16-bit Integer    |Read only  |Mandatory |Mandatory |
-|0x0005 |DriftCompensation     |8-bit Enumeration          |Read only  |Optional  |          |
-|0x0006 |CompensationText      |Character string           |Read only  |Optional  |          |
-|0x0007 |ColorTemperature      |Unsigned 16-bit Integer    |Read only  |Optional  |Mandatory |
-|0x0008 |ColorMode             |8-bit Enumeration          |Read only  |Optional  |          |
+|Id     |Name                       |Type                       |Access     |Implement |Reporting |
+|-------|---------------------------|---------------------------|-----------|----------|----------|
+|0x0000 |CurrentHue                 |Unsigned 8-bit Integer     |Read only  |Optional  |Mandatory |
+|0x0001 |CurrentSaturation          |Unsigned 8-bit Integer     |Read only  |Optional  |Mandatory |
+|0x0002 |RemainingTime              |Unsigned 16-bit Integer    |Read only  |Optional  |          |
+|0x0003 |CurrentX                   |Unsigned 16-bit Integer    |Read only  |Mandatory |Mandatory |
+|0x0004 |CurrentY                   |Unsigned 16-bit Integer    |Read only  |Mandatory |Mandatory |
+|0x0005 |DriftCompensation          |8-bit Enumeration          |Read only  |Optional  |          |
+|0x0006 |CompensationText           |Character string           |Read only  |Optional  |          |
+|0x0007 |ColorTemperature           |Unsigned 16-bit Integer    |Read only  |Optional  |Mandatory |
+|0x0008 |ColorMode                  |8-bit Enumeration          |Read only  |Optional  |          |
+|0x4000 |EnhancedCurrentHue         |Unsigned 16-bit Integer    |Read only  |Optional  |Mandatory |
+|0x4001 |EnhancedColorMode          |8-bit Enumeration          |Read only  |Optional  |          |
+|0x4002 |ColorLoopActive            |Unsigned 8-bit Integer     |Read only  |Optional  |          |
+|0x4003 |ColorLoopDirection         |Unsigned 8-bit Integer     |Read only  |Optional  |          |
+|0x4004 |ColorLoopTime              |Unsigned 16-bit Integer    |Read only  |Optional  |          |
+|0x4005 |ColorLoopStartHue          |Unsigned 16-bit Integer    |Read only  |Optional  |          |
+|0x4006 |ColorLoopStoredHue         |Unsigned 16-bit Integer    |Read only  |Optional  |          |
+|0x400A |ColorCapabilities          |16-bit Bitmap              |Read only  |Optional  |          |
+|0x400B |ColorTemperatureMin        |Unsigned 16-bit Integer    |Read only  |Optional  |          |
+|0x400C |ColorTemperatureMax        |Unsigned 16-bit Integer    |Read only  |Optional  |          |
 
 
 #### CurrentHue Attribute
@@ -1901,9 +1942,81 @@ If either the CurrentHue or CurrentSaturation attribute is implemented, this att
 implemented, otherwise it is optional. The value of the ColorMode attribute cannot be written directly
 - it is set upon reception of another command in to the appropriate mode for that command.
 
-0x00 CurrentHue and CurrentSaturation
-0x01 CurrentX and CurrentY
-0x02 ColorTemperatureMireds
+|Id     |Name                              |
+|-------|----------------------------------|
+|0x0000 |CurrentHue and CurrentSaturation  |
+|0x0001 |CurrentX and CurrentY             |
+|0x0002 |ColorTemperature                  |
+
+
+#### EnhancedCurrentHue Attribute
+The EnhancedCurrentHueattribute represents non-equidistant steps along the CIE 1931 color
+triangle, and it provides 16-bits precision. The upper 8 bits of this attribute SHALL be
+used as an index in the implementation specific XY lookup table to provide the non-equidistance
+steps (see the ZLL test specification for an example).  The lower 8 bits SHALL be used to
+interpolate between these steps in a linear way in order to provide color zoom for the user.
+
+#### EnhancedColorMode Attribute
+The EnhancedColorModeattribute specifies which attributes are currently determining the color of the device.
+To provide compatibility with standard ZCL, the original ColorModeattribute SHALLindicate ‘CurrentHueand CurrentSaturation’
+when the light uses the EnhancedCurrentHueattribute.
+ 
+|Id     |Name                                     |
+|-------|-----------------------------------------|
+|0x0000 |CurrentHue and CurrentSaturation         |
+|0x0001 |CurrentX and CurrentY                    |
+|0x0002 |ColorTemperature                         |
+|0x0002 |EnhancedCurrentHue and CurrentSaturation |
+
+#### ColorCapabilities Attribute
+The ColorCapabilitiesattribute specifies the color capabilities of the device supporting the
+color control cluster.
+
+Note:The support of the CurrentXand CurrentYattributes is mandatory regardless of color capabilities.
+
+|Id     |Name                |
+|-------|--------------------|
+|0x0001 |Hue and Saturation  |
+|0x0002 |Enhanced Hue        |
+|0x0004 |Color Loop          |
+|0x0008 |XY Attribute        |
+|0x0010 |Color Temperature   |
+
+#### ColorLoopActive Attribute
+The ColorLoopActive attribute specifies the current active status of the color loop.
+If this attribute has the value 0x00, the color loop SHALLnot be active. If this attribute
+has the value 0x01, the color loop SHALL be active. All other values (0x02 – 0xff) are reserved.
+
+#### ColorLoopDirection Attribute
+The ColorLoopDirection attribute specifies the current direction of the color loop.
+If this attribute has the value 0x00, the EnhancedCurrentHue attribute SHALL be decremented.
+If this attribute has the value 0x01, the EnhancedCurrentHue attribute SHALL be incremented.
+All other values (0x02 – 0xff) are reserved.
+
+#### ColorLoopTime Attribute
+The ColorLoopTime attribute specifies the number of seconds it SHALL take to perform a full
+color loop, i.e.,to cycle all values of the EnhancedCurrentHue attribute (between 0x0000 and 0xffff).
+
+#### ColorLoopStartHue Attribute
+The ColorLoopStartEnhancedHueattribute specifies the value of the EnhancedCurrentHue attribute
+from which the color loop SHALL be started.
+
+#### ColorLoopStoredHue Attribute
+The ColorLoopStoredEnhancedHue attribute specifies the value of the EnhancedCurrentHue attribute
+before the color loop was started. Once the color loop is complete, the EnhancedCurrentHue
+attribute SHALL be restored to this value.
+
+#### ColorTemperatureMin Attribute
+The ColorTempPhysicalMinMiredsattribute indicates the minimum mired value
+supported by the hardware. ColorTempPhysicalMinMiredscorresponds to the maximum
+color temperature in kelvins supported by the hardware.
+ColorTempPhysicalMinMireds ≤ ColorTemperatureMireds
+
+#### ColorTemperatureMax Attribute
+The ColorTempPhysicalMaxMiredsattribute indicates the maximum mired value
+supported by the hard-ware. ColorTempPhysicalMaxMiredscorresponds to the minimum
+color temperature in kelvins supported by the hardware.
+ColorTemperatureMireds ≤ ColorTempPhysicalMaxMireds.
 
 ### Received
 
@@ -1978,6 +2091,37 @@ implemented, otherwise it is optional. The value of the ColorMode attribute cann
 |---------------------------|---------------------------|
 |Color Temperature          |Unsigned 16-bit integer    |
 |Transition time            |Unsigned 16-bit integer    |
+
+#### Enhanced Move To Hue Command [0x40]
+|Field Name                 |Data Type                  |
+|---------------------------|---------------------------|
+|Hue                        |Unsigned 16-bit integer    |
+|Direction                  |8-bit enumeration          |
+|Transition time            |Unsigned 16-bit integer    |
+
+#### Enhanced Step Hue Command [0x41]
+|Field Name                 |Data Type                  |
+|---------------------------|---------------------------|
+|Step Mode                  |8-bit enumeration          |
+|Step Size                  |Unsigned 16-bit integer    |
+|Transition time            |Unsigned 16-bit integer    |
+
+#### Enhanced Move To Hue and Saturation Command [0x42]
+|Field Name                 |Data Type                  |
+|---------------------------|---------------------------|
+|Hue                        |Unsigned 16-bit integer    |
+|Saturation                 |8-bit enumeration          |
+|Transition time            |Unsigned 16-bit integer    |
+
+#### Color Loop Set Command [0x43]
+|Field Name                 |Data Type                  |
+|---------------------------|---------------------------|
+|Update Flags               |8-bit bitmap               |
+|Action                     |8-bit enumeration          |
+|Direction                  |8-bit enumeration          |
+|Transition time            |Unsigned 16-bit integer    |
+|Start Hue                  |Unsigned 16-bit integer    |
+
 
 ### Generated
 

@@ -31,10 +31,14 @@ import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrameResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspAddEndpointRequest;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspAddEndpointResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspChildJoinHandler;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetChildDataRequest;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetChildDataResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetCurrentSecurityStateRequest;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetCurrentSecurityStateResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetNetworkParametersRequest;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetNetworkParametersResponse;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetParentChildParametersRequest;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspGetParentChildParametersResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspIncomingMessageHandler;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspLaunchStandaloneBootloaderRequest;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspLaunchStandaloneBootloaderResponse;
@@ -315,6 +319,17 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         EmberCurrentSecurityState currentSecurityState = getCurrentSecurityState();
         logger.debug("Current Security State = {}", currentSecurityState);
 
+        EzspGetParentChildParametersRequest childParametersRequest = new EzspGetParentChildParametersRequest();
+        EzspTransaction childParametersTransaction = ashHandler.sendEzspTransaction(
+                new EzspSingleResponseTransaction(childParametersRequest, EzspGetParentChildParametersResponse.class));
+        EzspGetParentChildParametersResponse childParametersResponse = (EzspGetParentChildParametersResponse) childParametersTransaction
+                .getResponse();
+
+        logger.debug("Current Parent Child Information = {}", childParametersResponse);
+        for (int childId = 0; childId < childParametersResponse.getChildCount(); childId++) {
+            getChildInformation(childId);
+        }
+
         logger.debug("EZSP dongle startup done.");
 
         return true;
@@ -369,6 +384,17 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         EzspGetNetworkParametersResponse networkParametersResponse = (EzspGetNetworkParametersResponse) networkParametersTransaction
                 .getResponse();
         logger.debug(networkParametersResponse.toString());
+    }
+
+    private EzspGetChildDataResponse getChildInformation(int childId) {
+        EzspGetChildDataRequest childDataRequest = new EzspGetChildDataRequest();
+        childDataRequest.setIndex(childId);
+        EzspTransaction childDataTransaction = ashHandler.sendEzspTransaction(
+                new EzspSingleResponseTransaction(childDataRequest, EzspGetChildDataResponse.class));
+        EzspGetChildDataResponse childDataResponse = (EzspGetChildDataResponse) childDataTransaction.getResponse();
+        logger.debug(childDataResponse.toString());
+
+        return childDataResponse;
     }
 
     /**
