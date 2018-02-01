@@ -185,84 +185,21 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
 
         if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.UNINITIALISED);}
 
-        if (!serialPort.open()) {
-            logger.error("Unable to open Ember serial port");
-            return ZigBeeInitializeResponse.FAILED;
+        if(!initializeEzspProtocol()) {
+        	return ZigBeeInitializeResponse.FAILED;
         }
-        ashHandler = new AshFrameHandler(this);
-
-        // Connect to the ASH handler and NCP
-        ashHandler.start(serialPort);
-        ashHandler.connect();
-
-        // We MUST send the version command first.
-        EzspVersionRequest version = new EzspVersionRequest();
-        version.setDesiredProtocolVersion(4);
-        EzspTransaction versionTransaction = ashHandler
-                .sendEzspTransaction(new EzspSingleResponseTransaction(version, EzspVersionResponse.class));
-        EzspVersionResponse versionResponse = (EzspVersionResponse) versionTransaction.getResponse();
-        logger.debug(versionResponse.toString());
-
-        StringBuilder builder = new StringBuilder(60);
-        builder.append("EZSP Version=");
-        builder.append(versionResponse.getProtocolVersion());
-        builder.append(", Stack Type=");
-        builder.append(versionResponse.getStackType());
-        builder.append(", Stack Version=");
-        for (int cnt = 3; cnt >= 0; cnt--) {
-            builder.append((versionResponse.getStackVersion() >> (cnt * 4)) & 0x0F);
-            if (cnt != 0) {
-                builder.append('.');
-            }
-        }
-        versionString = builder.toString();
-
+        
         // Perform any stack configuration
-        EmberStackConfiguration stackConfigurer = new EmberStackConfiguration(ashHandler);
-
-        Map<EzspConfigId, Integer> configuration = stackConfigurer.getConfiguration(stackConfiguration.keySet());
-        for (EzspConfigId config : configuration.keySet()) {
-            logger.debug("Configuration state {} = {}", config, configuration.get(config));
-        }
-
-        Map<EzspPolicyId, EzspDecisionId> policies = stackConfigurer.getPolicy(stackPolicies.keySet());
-        for (EzspPolicyId policy : policies.keySet()) {
-            logger.debug("Policy state {} = {}", policy, policies.get(policy));
-        }
-
-        stackConfigurer.setConfiguration(stackConfiguration);
-        configuration = stackConfigurer.getConfiguration(stackConfiguration.keySet());
-        for (EzspConfigId config : configuration.keySet()) {
-            logger.debug("Configuration state {} = {}", config, configuration.get(config));
-        }
-
-        stackConfigurer.setPolicy(stackPolicies);
-        policies = stackConfigurer.getPolicy(stackPolicies.keySet());
-        for (EzspPolicyId policy : policies.keySet()) {
-            logger.debug("Policy state {} = {}", policy, policies.get(policy));
-        }
+        applyStackConfiguration();
+        applyStackPolicy();
 
         getNetworkParameters();
 
         // Add the endpoint
-        EzspAddEndpointRequest addEndpoint = new EzspAddEndpointRequest();
-        addEndpoint.setEndpoint(1);
-        addEndpoint.setDeviceId(0);
-        addEndpoint.setProfileId(ZigBeeProfileType.HOME_AUTOMATION.getId());
-        addEndpoint.setInputClusterList(new int[] { 0 });
-        addEndpoint.setOutputClusterList(new int[] { 0 });
-        logger.debug(addEndpoint.toString());
-        EzspTransaction addEndpointTransaction = ashHandler
-                .sendEzspTransaction(new EzspSingleResponseTransaction(addEndpoint, EzspAddEndpointResponse.class));
-        EzspAddEndpointResponse addEndpointResponse = (EzspAddEndpointResponse) addEndpointTransaction.getResponse();
-        logger.debug(addEndpointResponse.toString());
+        addEndpoint(1, 0x0000, ZigBeeProfileType.HOME_AUTOMATION.getId(), new int[] { 0 }, new int[] { 0 });
 
         // Now initialise the network
-        EzspNetworkInitRequest networkInitRequest = new EzspNetworkInitRequest();
-        EzspTransaction networkInitTransaction = ashHandler.sendEzspTransaction(
-                new EzspSingleResponseTransaction(networkInitRequest, EzspNetworkInitResponse.class));
-        EzspNetworkInitResponse networkInitResponse = (EzspNetworkInitResponse) networkInitTransaction.getResponse();
-        logger.debug(networkInitResponse.toString());
+        EmberStatus l_nwk_init_status = initializeZigbeeNetwork();
 
         networkParameters = getNetworkParameters();
         getCurrentSecurityState();
@@ -270,10 +207,10 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         if( null != zigbeeTransportReceive ) { zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.INITIALISING); }
 
         logger.debug("EZSP dongle initialize done: Initialised {}",
-                networkInitResponse.getStatus() == EmberStatus.EMBER_NOT_JOINED);
+        		l_nwk_init_status == EmberStatus.EMBER_NOT_JOINED);
 
         // Check if the network is initialised or if we're yet to join
-        if (networkInitResponse.getStatus() == EmberStatus.EMBER_NOT_JOINED) {
+        if (l_nwk_init_status == EmberStatus.EMBER_NOT_JOINED) {
             return ZigBeeInitializeResponse.NOT_JOINED;
         }
 
