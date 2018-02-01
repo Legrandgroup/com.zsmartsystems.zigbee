@@ -16,6 +16,7 @@ import java.util.Date;
 
 import org.slf4j.LoggerFactory;
 
+import com.zsmartsystems.zigbee.ZigBeeProfileType;
 import com.zsmartsystems.zigbee.dongle.ember.EzspFrameHandler;
 import com.zsmartsystems.zigbee.dongle.ember.ZigBeeDongleEzsp;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.EzspFrame;
@@ -25,6 +26,9 @@ import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspMfgLibSetChannelRe
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspMfgLibStartRequest;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.command.EzspMfgLibStartResponse;
 import com.zsmartsystems.zigbee.dongle.ember.ezsp.structure.EmberStatus;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.structure.EzspConfigId;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.structure.EzspDecisionId;
+import com.zsmartsystems.zigbee.dongle.ember.ezsp.structure.EzspPolicyId;
 import com.zsmartsystems.zigbee.serial.ZigBeeSerialPort;
 import com.zsmartsystems.zigbee.transport.ZigBeePort;
 import com.zsmartsystems.zigbee.transport.ZigBeePort.FlowControl;
@@ -130,7 +134,8 @@ public class SnifferMain {
         logger.info("ASH Init");
         if( dongle.initializeEzspProtocol() ) {
         	
-        	/** @todo for testing initialization of zigbee pro stack
+        	/** @todo for testing initialization of zigbee pro stack */
+        	/*
         	logger.info("Configure stack");
             dongle.setStackConfigurationValue( EzspConfigId.EZSP_CONFIG_ADDRESS_TABLE_SIZE, 100 );
             dongle.applyStackConfiguration();
@@ -147,6 +152,7 @@ public class SnifferMain {
             */
         	
         	/** @todo for testing initialization of mfgLib */
+            
         	// add listener for receive alla ezsp response and handler
         	dongle.addListener( ezspListener );
         	
@@ -218,6 +224,7 @@ public class SnifferMain {
                     }
         		}
         	}
+        	
         }
 
         dongle.shutdown();
