@@ -21,3 +21,5 @@ simple-network.xml
 
 *.ota
 *.ebl
+*.project
+*.cap
