@@ -13,7 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>getParentChildParameters</b>.
  * <p>
- * Returns information about the children of the local node and the parent of the local node.
+ * Returns information about the children of the local node and the parent of
+ * the local node.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -22,32 +23,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetParentChildParametersRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0x29;
+	public static int FRAME_ID = 0x29;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspGetParentChildParametersRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspGetParentChildParametersRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        return "EzspGetParentChildParametersRequest []";
-    }
+	@Override
+	public String toString() {
+		return "EzspGetParentChildParametersRequest []";
+	}
 }

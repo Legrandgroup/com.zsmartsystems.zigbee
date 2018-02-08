@@ -23,129 +23,132 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspValueId
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetValueRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0xAB;
+	public static int FRAME_ID = 0xAB;
 
-    /**
-     * Identifies which policy to change.
-     * <p>
-     * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
-     */
-    private EzspValueId valueId;
+	/**
+	 * Identifies which policy to change.
+	 * <p>
+	 * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
+	 */
+	private EzspValueId valueId;
 
-    /**
-     * The length of the value parameter in bytes.
-     * <p>
-     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-     */
-    private int valueLength;
+	/**
+	 * The length of the value parameter in bytes.
+	 * <p>
+	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+	 */
+	private int valueLength;
 
-    /**
-     * The new value.
-     * <p>
-     * EZSP type is <i>uint8_t[]</i> - Java type is {@link int[]}
-     */
-    private int[] value;
+	/**
+	 * The new value.
+	 * <p>
+	 * EZSP type is <i>uint8_t[]</i> - Java type is {@link int[]}
+	 */
+	private int[] value;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspSetValueRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspSetValueRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    /**
-     * Identifies which policy to change.
-     * <p>
-     * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
-     *
-     * @return the current valueId as {@link EzspValueId}
-     */
-    public EzspValueId getValueId() {
-        return valueId;
-    }
+	/**
+	 * Identifies which policy to change.
+	 * <p>
+	 * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
+	 *
+	 * @return the current valueId as {@link EzspValueId}
+	 */
+	public EzspValueId getValueId() {
+		return valueId;
+	}
 
-    /**
-     * Identifies which policy to change.
-     *
-     * @param valueId the valueId to set as {@link EzspValueId}
-     */
-    public void setValueId(EzspValueId valueId) {
-        this.valueId = valueId;
-    }
+	/**
+	 * Identifies which policy to change.
+	 *
+	 * @param valueId
+	 *            the valueId to set as {@link EzspValueId}
+	 */
+	public void setValueId(EzspValueId valueId) {
+		this.valueId = valueId;
+	}
 
-    /**
-     * The length of the value parameter in bytes.
-     * <p>
-     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-     *
-     * @return the current valueLength as {@link int}
-     */
-    public int getValueLength() {
-        return valueLength;
-    }
+	/**
+	 * The length of the value parameter in bytes.
+	 * <p>
+	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+	 *
+	 * @return the current valueLength as {@link int}
+	 */
+	public int getValueLength() {
+		return valueLength;
+	}
 
-    /**
-     * The length of the value parameter in bytes.
-     *
-     * @param valueLength the valueLength to set as {@link int}
-     */
-    public void setValueLength(int valueLength) {
-        this.valueLength = valueLength;
-    }
+	/**
+	 * The length of the value parameter in bytes.
+	 *
+	 * @param valueLength
+	 *            the valueLength to set as {@link int}
+	 */
+	public void setValueLength(int valueLength) {
+		this.valueLength = valueLength;
+	}
 
-    /**
-     * The new value.
-     * <p>
-     * EZSP type is <i>uint8_t[]</i> - Java type is {@link int[]}
-     *
-     * @return the current value as {@link int[]}
-     */
-    public int[] getValue() {
-        return value;
-    }
+	/**
+	 * The new value.
+	 * <p>
+	 * EZSP type is <i>uint8_t[]</i> - Java type is {@link int[]}
+	 *
+	 * @return the current value as {@link int[]}
+	 */
+	public int[] getValue() {
+		return value;
+	}
 
-    /**
-     * The new value.
-     *
-     * @param value the value to set as {@link int[]}
-     */
-    public void setValue(int[] value) {
-        this.value = value;
-    }
+	/**
+	 * The new value.
+	 *
+	 * @param value
+	 *            the value to set as {@link int[]}
+	 */
+	public void setValue(int[] value) {
+		this.value = value;
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        serializer.serializeEzspValueId(valueId);
-        serializer.serializeUInt8(valueLength);
-        serializer.serializeUInt8Array(value);
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		serializer.serializeEzspValueId(valueId);
+		serializer.serializeUInt8(valueLength);
+		serializer.serializeUInt8Array(value);
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(97);
-        builder.append("EzspSetValueRequest [valueId=");
-        builder.append(valueId);
-        builder.append(", valueLength=");
-        builder.append(valueLength);
-        builder.append(", value=");
-        for (int c = 0; c < value.length; c++) {
-            if (c > 0) {
-                builder.append(' ');
-            }
-            builder.append(String.format("%02X", value[c]));
-        }
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(97);
+		builder.append("EzspSetValueRequest [valueId=");
+		builder.append(valueId);
+		builder.append(", valueLength=");
+		builder.append(valueLength);
+		builder.append(", value=");
+		for (int c = 0; c < value.length; c++) {
+			if (c > 0) {
+				builder.append(' ');
+			}
+			builder.append(String.format("%02X", value[c]));
+		}
+		builder.append(']');
+		return builder.toString();
+	}
 }

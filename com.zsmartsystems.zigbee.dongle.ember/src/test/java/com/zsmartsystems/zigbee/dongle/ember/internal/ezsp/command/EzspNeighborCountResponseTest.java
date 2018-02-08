@@ -20,13 +20,13 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameTest;
  *
  */
 public class EzspNeighborCountResponseTest extends EzspFrameTest {
-    @Test
-    public void testVersion() {
-        EzspFrame.setEzspVersion(4);
-        EzspNeighborCountResponse response = new EzspNeighborCountResponse(getPacketData("28 80 7A 01"));
+	@Test
+	public void testVersion() {
+		EzspFrame.setEzspVersion(4);
+		EzspNeighborCountResponse response = new EzspNeighborCountResponse(getPacketData("28 80 7A 01"));
 
-        assertEquals(true, response.isResponse());
-        assertEquals(EzspNeighborCountResponse.FRAME_ID, response.getFrameId());
-        assertEquals(1, response.getValue());
-    }
+		assertEquals(true, response.isResponse());
+		assertEquals(EzspNeighborCountResponse.FRAME_ID, response.getFrameId());
+		assertEquals(1, response.getValue());
+	}
 }

@@ -14,8 +14,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>findKeyTableEntry</b>.
  * <p>
- * This function searches through the Key Table and tries to find the entry that matches the
- * passed search criteria.
+ * This function searches through the Key Table and tries to find the entry that
+ * matches the passed search criteria.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,100 +24,102 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspFindKeyTableEntryRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0x75;
+	public static int FRAME_ID = 0x75;
 
-    /**
-     * The address to search for. Alternatively, all zeros may be passed in to search for the first
-     * empty entry.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     */
-    private IeeeAddress address;
+	/**
+	 * The address to search for. Alternatively, all zeros may be passed in to
+	 * search for the first empty entry.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 */
+	private IeeeAddress address;
 
-    /**
-     * This  indicates  whether  to  search  for  an  entry  that  contains  a  link  key  or  a  master  key.
-     * truemeans to search for an entry with a Link Key.
-     * <p>
-     * EZSP type is <i>bool</i> - Java type is {@link boolean}
-     */
-    private boolean linkKey;
+	/**
+	 * This indicates whether to search for an entry that contains a link key or a
+	 * master key. truemeans to search for an entry with a Link Key.
+	 * <p>
+	 * EZSP type is <i>bool</i> - Java type is {@link boolean}
+	 */
+	private boolean linkKey;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspFindKeyTableEntryRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspFindKeyTableEntryRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    /**
-     * The address to search for. Alternatively, all zeros may be passed in to search for the first
-     * empty entry.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     *
-     * @return the current address as {@link IeeeAddress}
-     */
-    public IeeeAddress getAddress() {
-        return address;
-    }
+	/**
+	 * The address to search for. Alternatively, all zeros may be passed in to
+	 * search for the first empty entry.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 *
+	 * @return the current address as {@link IeeeAddress}
+	 */
+	public IeeeAddress getAddress() {
+		return address;
+	}
 
-    /**
-     * The address to search for. Alternatively, all zeros may be passed in to search for the first
-     * empty entry.
-     *
-     * @param address the address to set as {@link IeeeAddress}
-     */
-    public void setAddress(IeeeAddress address) {
-        this.address = address;
-    }
+	/**
+	 * The address to search for. Alternatively, all zeros may be passed in to
+	 * search for the first empty entry.
+	 *
+	 * @param address
+	 *            the address to set as {@link IeeeAddress}
+	 */
+	public void setAddress(IeeeAddress address) {
+		this.address = address;
+	}
 
-    /**
-     * This  indicates  whether  to  search  for  an  entry  that  contains  a  link  key  or  a  master  key.
-     * truemeans to search for an entry with a Link Key.
-     * <p>
-     * EZSP type is <i>bool</i> - Java type is {@link boolean}
-     *
-     * @return the current linkKey as {@link boolean}
-     */
-    public boolean getLinkKey() {
-        return linkKey;
-    }
+	/**
+	 * This indicates whether to search for an entry that contains a link key or a
+	 * master key. truemeans to search for an entry with a Link Key.
+	 * <p>
+	 * EZSP type is <i>bool</i> - Java type is {@link boolean}
+	 *
+	 * @return the current linkKey as {@link boolean}
+	 */
+	public boolean getLinkKey() {
+		return linkKey;
+	}
 
-    /**
-     * This  indicates  whether  to  search  for  an  entry  that  contains  a  link  key  or  a  master  key.
-     * truemeans to search for an entry with a Link Key.
-     *
-     * @param linkKey the linkKey to set as {@link boolean}
-     */
-    public void setLinkKey(boolean linkKey) {
-        this.linkKey = linkKey;
-    }
+	/**
+	 * This indicates whether to search for an entry that contains a link key or a
+	 * master key. truemeans to search for an entry with a Link Key.
+	 *
+	 * @param linkKey
+	 *            the linkKey to set as {@link boolean}
+	 */
+	public void setLinkKey(boolean linkKey) {
+		this.linkKey = linkKey;
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        serializer.serializeEmberEui64(address);
-        serializer.serializeBool(linkKey);
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		serializer.serializeEmberEui64(address);
+		serializer.serializeBool(linkKey);
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(81);
-        builder.append("EzspFindKeyTableEntryRequest [address=");
-        builder.append(address);
-        builder.append(", linkKey=");
-        builder.append(linkKey);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(81);
+		builder.append("EzspFindKeyTableEntryRequest [address=");
+		builder.append(address);
+		builder.append(", linkKey=");
+		builder.append(linkKey);
+		builder.append(']');
+		return builder.toString();
+	}
 }

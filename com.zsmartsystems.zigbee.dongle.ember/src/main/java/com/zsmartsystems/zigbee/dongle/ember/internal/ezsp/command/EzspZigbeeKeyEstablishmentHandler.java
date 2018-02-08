@@ -12,10 +12,11 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
 import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus;
 
 /**
- * Class to implement the Ember EZSP command <b>zigbeeKeyEstablishmentHandler</b>.
+ * Class to implement the Ember EZSP command
+ * <b>zigbeeKeyEstablishmentHandler</b>.
  * <p>
- * This is a callback that indicates the success or failure of an attempt to establish a key with a
- * partner device.
+ * This is a callback that indicates the success or failure of an attempt to
+ * establish a key with a partner device.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,85 +25,90 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspZigbeeKeyEstablishmentHandler extends EzspFrameResponse {
-    public static int FRAME_ID = 0x9B;
+	public static int FRAME_ID = 0x9B;
 
-    /**
-     * This is the IEEE address of the partner that the device successfully established a key with.
-     * This value is all zeros on a failure.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     */
-    private IeeeAddress partner;
+	/**
+	 * This is the IEEE address of the partner that the device successfully
+	 * established a key with. This value is all zeros on a failure.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 */
+	private IeeeAddress partner;
 
-    /**
-     * This is the status indicating what was established or why the key establishment failed.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     */
-    private EmberStatus status;
+	/**
+	 * This is the status indicating what was established or why the key
+	 * establishment failed.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 */
+	private EmberStatus status;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspZigbeeKeyEstablishmentHandler(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspZigbeeKeyEstablishmentHandler(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        partner = deserializer.deserializeEmberEui64();
-        status = deserializer.deserializeEmberStatus();
-    }
+		// Deserialize the fields
+		partner = deserializer.deserializeEmberEui64();
+		status = deserializer.deserializeEmberStatus();
+	}
 
-    /**
-     * This is the IEEE address of the partner that the device successfully established a key with.
-     * This value is all zeros on a failure.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     *
-     * @return the current partner as {@link IeeeAddress}
-     */
-    public IeeeAddress getPartner() {
-        return partner;
-    }
+	/**
+	 * This is the IEEE address of the partner that the device successfully
+	 * established a key with. This value is all zeros on a failure.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 *
+	 * @return the current partner as {@link IeeeAddress}
+	 */
+	public IeeeAddress getPartner() {
+		return partner;
+	}
 
-    /**
-     * This is the IEEE address of the partner that the device successfully established a key with.
-     * This value is all zeros on a failure.
-     *
-     * @param partner the partner to set as {@link IeeeAddress}
-     */
-    public void setPartner(IeeeAddress partner) {
-        this.partner = partner;
-    }
+	/**
+	 * This is the IEEE address of the partner that the device successfully
+	 * established a key with. This value is all zeros on a failure.
+	 *
+	 * @param partner
+	 *            the partner to set as {@link IeeeAddress}
+	 */
+	public void setPartner(IeeeAddress partner) {
+		this.partner = partner;
+	}
 
-    /**
-     * This is the status indicating what was established or why the key establishment failed.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     *
-     * @return the current status as {@link EmberStatus}
-     */
-    public EmberStatus getStatus() {
-        return status;
-    }
+	/**
+	 * This is the status indicating what was established or why the key
+	 * establishment failed.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 *
+	 * @return the current status as {@link EmberStatus}
+	 */
+	public EmberStatus getStatus() {
+		return status;
+	}
 
-    /**
-     * This is the status indicating what was established or why the key establishment failed.
-     *
-     * @param status the status to set as {@link EmberStatus}
-     */
-    public void setStatus(EmberStatus status) {
-        this.status = status;
-    }
+	/**
+	 * This is the status indicating what was established or why the key
+	 * establishment failed.
+	 *
+	 * @param status
+	 *            the status to set as {@link EmberStatus}
+	 */
+	public void setStatus(EmberStatus status) {
+		this.status = status;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(86);
-        builder.append("EzspZigbeeKeyEstablishmentHandler [partner=");
-        builder.append(partner);
-        builder.append(", status=");
-        builder.append(status);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(86);
+		builder.append("EzspZigbeeKeyEstablishmentHandler [partner=");
+		builder.append(partner);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(']');
+		return builder.toString();
+	}
 }

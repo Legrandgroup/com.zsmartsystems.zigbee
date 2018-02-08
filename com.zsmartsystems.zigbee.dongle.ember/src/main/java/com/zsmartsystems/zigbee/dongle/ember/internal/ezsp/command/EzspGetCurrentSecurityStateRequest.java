@@ -13,7 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>getCurrentSecurityState</b>.
  * <p>
- * Gets the current security state that is being used by a device that is joined in the network.
+ * Gets the current security state that is being used by a device that is joined
+ * in the network.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -22,32 +23,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetCurrentSecurityStateRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0x69;
+	public static int FRAME_ID = 0x69;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspGetCurrentSecurityStateRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspGetCurrentSecurityStateRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        return "EzspGetCurrentSecurityStateRequest []";
-    }
+	@Override
+	public String toString() {
+		return "EzspGetCurrentSecurityStateRequest []";
+	}
 }

@@ -18,68 +18,70 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberConcentratorType {
-    /**
-     * Default unknown value
-     */
-    UNKNOWN(-1),
+	/**
+	 * Default unknown value
+	 */
+	UNKNOWN(-1),
 
-    /**
-     * A concentrator with insufficient memory to store source routes for the entire network.
-     * Route records are sent to the concentrator prior to every inbound APS unicast.
-     */
-    EMBER_LOW_RAM_CONCENTRATOR(0xFFF8),
+	/**
+	 * A concentrator with insufficient memory to store source routes for the entire
+	 * network. Route records are sent to the concentrator prior to every inbound
+	 * APS unicast.
+	 */
+	EMBER_LOW_RAM_CONCENTRATOR(0xFFF8),
 
-    /**
-     * A concentrator with sufficient memory to store source routes for the entire network. Remote
-     * nodes stop sending route records once the concentrator has successfully received one.
-     */
-    EMBER_HIGH_RAM_CONCENTRATOR(0xFFF9);
+	/**
+	 * A concentrator with sufficient memory to store source routes for the entire
+	 * network. Remote nodes stop sending route records once the concentrator has
+	 * successfully received one.
+	 */
+	EMBER_HIGH_RAM_CONCENTRATOR(0xFFF9);
 
-    /**
-     * A mapping between the integer code and its corresponding type to
-     * facilitate lookup by code.
-     */
-    private static Map<Integer, EmberConcentratorType> codeMapping;
+	/**
+	 * A mapping between the integer code and its corresponding type to facilitate
+	 * lookup by code.
+	 */
+	private static Map<Integer, EmberConcentratorType> codeMapping;
 
-    private int key;
+	private int key;
 
-    private EmberConcentratorType(int key) {
-        this.key = key;
-    }
+	private EmberConcentratorType(int key) {
+		this.key = key;
+	}
 
-    private static void initMapping() {
-        codeMapping = new HashMap<Integer, EmberConcentratorType>();
-        for (EmberConcentratorType s : values()) {
-            codeMapping.put(s.key, s);
-        }
-    }
+	private static void initMapping() {
+		codeMapping = new HashMap<Integer, EmberConcentratorType>();
+		for (EmberConcentratorType s : values()) {
+			codeMapping.put(s.key, s);
+		}
+	}
 
-    /**
-     * Lookup function based on the EmberStatus type code. Returns null if the
-     * code does not exist.
-     *
-     * @param code
-     *            the code to lookup
-     * @return enumeration value of the alarm type.
-     */
-    public static EmberConcentratorType getEmberConcentratorType(int code) {
-        if (codeMapping == null) {
-            initMapping();
-        }
+	/**
+	 * Lookup function based on the EmberStatus type code. Returns null if the code
+	 * does not exist.
+	 *
+	 * @param code
+	 *            the code to lookup
+	 * @return enumeration value of the alarm type.
+	 */
+	public static EmberConcentratorType getEmberConcentratorType(int code) {
+		if (codeMapping == null) {
+			initMapping();
+		}
 
-        if (codeMapping.get(code) == null) {
-            return UNKNOWN;
-        }
+		if (codeMapping.get(code) == null) {
+			return UNKNOWN;
+		}
 
-        return codeMapping.get(code);
-    }
+		return codeMapping.get(code);
+	}
 
-    /**
-     * Returns the EZSP protocol defined value for this enum
-     *
-     * @return the EZSP protocol key
-     */
-    public int getKey() {
-        return key;
-    }
+	/**
+	 * Returns the EZSP protocol defined value for this enum
+	 *
+	 * @return the EZSP protocol key
+	 */
+	public int getKey() {
+		return key;
+	}
 }

@@ -18,87 +18,90 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberCurrentSecurityBitmask {
-    /**
-     * Default unknown value
-     */
-    UNKNOWN(-1),
+	/**
+	 * Default unknown value
+	 */
+	UNKNOWN(-1),
 
-    /**
-     * This denotes that the device is running in a network with ZigBee Standard Security.
-     */
-    EMBER_STANDARD_SECURITY_MODE(0x0000),
+	/**
+	 * This denotes that the device is running in a network with ZigBee Standard
+	 * Security.
+	 */
+	EMBER_STANDARD_SECURITY_MODE(0x0000),
 
-    /**
-     * This denotes that the device is running in a network with ZigBee High Security.
-     */
-    EMBER_HIGH_SECURITY_MODE(0x0001),
+	/**
+	 * This denotes that the device is running in a network with ZigBee High
+	 * Security.
+	 */
+	EMBER_HIGH_SECURITY_MODE(0x0001),
 
-    /**
-     * This denotes that the device is running in a network without a centralized Trust Center.
-     */
-    EMBER_DISTRIBUTED_TRUST_CENTER_MODE(0x0002),
+	/**
+	 * This denotes that the device is running in a network without a centralized
+	 * Trust Center.
+	 */
+	EMBER_DISTRIBUTED_TRUST_CENTER_MODE(0x0002),
 
-    /**
-     * This denotes that the device has a Global Link Key. The Trust Center Link Key is the same across
-     * multiple nodes.
-     */
-    EMBER_GLOBAL_LINK_KEY(0x0004),
+	/**
+	 * This denotes that the device has a Global Link Key. The Trust Center Link Key
+	 * is the same across multiple nodes.
+	 */
+	EMBER_GLOBAL_LINK_KEY(0x0004),
 
-    /**
-     * This denotes that the node has a Trust Center Link Key.
-     */
-    EMBER_HAVE_TRUST_CENTER_LINK_KEY(0x0010),
+	/**
+	 * This denotes that the node has a Trust Center Link Key.
+	 */
+	EMBER_HAVE_TRUST_CENTER_LINK_KEY(0x0010),
 
-    /**
-     * This denotes that the Trust Center is using a Hashed Link Key.
-     */
-    EMBER_TRUST_CENTER_USES_HASHED_LINK_KEY(0x0084);
+	/**
+	 * This denotes that the Trust Center is using a Hashed Link Key.
+	 */
+	EMBER_TRUST_CENTER_USES_HASHED_LINK_KEY(0x0084);
 
-    /**
-     * A mapping between the integer code and its corresponding type to
-     * facilitate lookup by code.
-     */
-    private static Map<Integer, EmberCurrentSecurityBitmask> codeMapping;
+	/**
+	 * A mapping between the integer code and its corresponding type to facilitate
+	 * lookup by code.
+	 */
+	private static Map<Integer, EmberCurrentSecurityBitmask> codeMapping;
 
-    private int key;
+	private int key;
 
-    private EmberCurrentSecurityBitmask(int key) {
-        this.key = key;
-    }
+	private EmberCurrentSecurityBitmask(int key) {
+		this.key = key;
+	}
 
-    private static void initMapping() {
-        codeMapping = new HashMap<Integer, EmberCurrentSecurityBitmask>();
-        for (EmberCurrentSecurityBitmask s : values()) {
-            codeMapping.put(s.key, s);
-        }
-    }
+	private static void initMapping() {
+		codeMapping = new HashMap<Integer, EmberCurrentSecurityBitmask>();
+		for (EmberCurrentSecurityBitmask s : values()) {
+			codeMapping.put(s.key, s);
+		}
+	}
 
-    /**
-     * Lookup function based on the EmberStatus type code. Returns null if the
-     * code does not exist.
-     *
-     * @param code
-     *            the code to lookup
-     * @return enumeration value of the alarm type.
-     */
-    public static EmberCurrentSecurityBitmask getEmberCurrentSecurityBitmask(int code) {
-        if (codeMapping == null) {
-            initMapping();
-        }
+	/**
+	 * Lookup function based on the EmberStatus type code. Returns null if the code
+	 * does not exist.
+	 *
+	 * @param code
+	 *            the code to lookup
+	 * @return enumeration value of the alarm type.
+	 */
+	public static EmberCurrentSecurityBitmask getEmberCurrentSecurityBitmask(int code) {
+		if (codeMapping == null) {
+			initMapping();
+		}
 
-        if (codeMapping.get(code) == null) {
-            return UNKNOWN;
-        }
+		if (codeMapping.get(code) == null) {
+			return UNKNOWN;
+		}
 
-        return codeMapping.get(code);
-    }
+		return codeMapping.get(code);
+	}
 
-    /**
-     * Returns the EZSP protocol defined value for this enum
-     *
-     * @return the EZSP protocol key
-     */
-    public int getKey() {
-        return key;
-    }
+	/**
+	 * Returns the EZSP protocol defined value for this enum
+	 *
+	 * @return the EZSP protocol key
+	 */
+	public int getKey() {
+		return key;
+	}
 }

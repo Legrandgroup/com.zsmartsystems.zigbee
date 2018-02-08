@@ -35,102 +35,104 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.transaction.EzspTrans
  *
  */
 public class EzspNeighborTable {
-    /**
-     * The {@link Logger}.
-     */
-    private final Logger logger = LoggerFactory.getLogger(EmberNetworkInitialisation.class);
+	/**
+	 * The {@link Logger}.
+	 */
+	private final Logger logger = LoggerFactory.getLogger(EmberNetworkInitialisation.class);
 
-    /**
-     * Scheduler to run the service
-     */
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+	/**
+	 * Scheduler to run the service
+	 */
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    private AshFrameHandler ashHandler;
+	private AshFrameHandler ashHandler;
 
-    private int routingEntries;
+	private int routingEntries;
 
-    /**
-     * @param ashHandler the {@link AshFrameHandler} used to communicate with the NCP
-     */
-    public EzspNeighborTable(AshFrameHandler ashHandler, int updatePeriod) {
-        this.ashHandler = ashHandler;
+	/**
+	 * @param ashHandler
+	 *            the {@link AshFrameHandler} used to communicate with the NCP
+	 */
+	public EzspNeighborTable(AshFrameHandler ashHandler, int updatePeriod) {
+		this.ashHandler = ashHandler;
 
-        Runnable neighborUpdateThread = new Runnable() {
-            @Override
-            public void run() {
-                updateNeighbors();
-            }
-        };
+		Runnable neighborUpdateThread = new Runnable() {
+			@Override
+			public void run() {
+				updateNeighbors();
+			}
+		};
 
-        routingEntries = getConfiguration(EzspConfigId.EZSP_CONFIG_SOURCE_ROUTE_TABLE_SIZE);
+		routingEntries = getConfiguration(EzspConfigId.EZSP_CONFIG_SOURCE_ROUTE_TABLE_SIZE);
 
-        scheduler.scheduleAtFixedRate(neighborUpdateThread, updatePeriod, updatePeriod, TimeUnit.SECONDS);
-    }
+		scheduler.scheduleAtFixedRate(neighborUpdateThread, updatePeriod, updatePeriod, TimeUnit.SECONDS);
+	}
 
-    private void updateNeighbors() {
-        for (int neighbor = 0; neighbor < getNeighborCount(); neighbor++) {
-            getNeighbor(neighbor);
-        }
+	private void updateNeighbors() {
+		for (int neighbor = 0; neighbor < getNeighborCount(); neighbor++) {
+			getNeighbor(neighbor);
+		}
 
-        for (int route = 0; route < routingEntries; route++) {
-            getRoute(route);
-        }
-    }
+		for (int route = 0; route < routingEntries; route++) {
+			getRoute(route);
+		}
+	}
 
-    private int getNeighborCount() {
-        // Check if the network is initialised
-        EzspNeighborCountRequest neighborCountRequest = new EzspNeighborCountRequest();
-        EzspTransaction neighborCountTransaction = ashHandler.sendEzspTransaction(
-                new EzspSingleResponseTransaction(neighborCountRequest, EzspNeighborCountResponse.class));
-        EzspNeighborCountResponse neighborCountResponse = (EzspNeighborCountResponse) neighborCountTransaction
-                .getResponse();
-        logger.debug(neighborCountResponse.toString());
-        logger.debug("EZSP neighborCountResponse {}", neighborCountResponse);
+	private int getNeighborCount() {
+		// Check if the network is initialised
+		EzspNeighborCountRequest neighborCountRequest = new EzspNeighborCountRequest();
+		EzspTransaction neighborCountTransaction = ashHandler.sendEzspTransaction(
+				new EzspSingleResponseTransaction(neighborCountRequest, EzspNeighborCountResponse.class));
+		EzspNeighborCountResponse neighborCountResponse = (EzspNeighborCountResponse) neighborCountTransaction
+				.getResponse();
+		logger.debug(neighborCountResponse.toString());
+		logger.debug("EZSP neighborCountResponse {}", neighborCountResponse);
 
-        return neighborCountResponse.getValue();
-    }
+		return neighborCountResponse.getValue();
+	}
 
-    private void getNeighbor(int neighbor) {
-        EzspGetNeighborRequest neighborRequest = new EzspGetNeighborRequest();
-        neighborRequest.setIndex(neighbor);
-        EzspTransaction neighborTransaction = ashHandler
-                .sendEzspTransaction(new EzspSingleResponseTransaction(neighborRequest, EzspGetNeighborResponse.class));
-        EzspGetNeighborResponse neighborResponse = (EzspGetNeighborResponse) neighborTransaction.getResponse();
-        logger.debug(neighborResponse.toString());
-        logger.debug("EZSP getNetworkResponse {}", neighborResponse);
-    }
+	private void getNeighbor(int neighbor) {
+		EzspGetNeighborRequest neighborRequest = new EzspGetNeighborRequest();
+		neighborRequest.setIndex(neighbor);
+		EzspTransaction neighborTransaction = ashHandler
+				.sendEzspTransaction(new EzspSingleResponseTransaction(neighborRequest, EzspGetNeighborResponse.class));
+		EzspGetNeighborResponse neighborResponse = (EzspGetNeighborResponse) neighborTransaction.getResponse();
+		logger.debug(neighborResponse.toString());
+		logger.debug("EZSP getNetworkResponse {}", neighborResponse);
+	}
 
-    private void getRoute(int route) {
-        EzspGetRouteTableEntryRequest routeRequest = new EzspGetRouteTableEntryRequest();
-        routeRequest.setIndex(route);
-        EzspTransaction neighborTransaction = ashHandler.sendEzspTransaction(
-                new EzspSingleResponseTransaction(routeRequest, EzspGetRouteTableEntryResponse.class));
-        EzspGetRouteTableEntryResponse routeResponse = (EzspGetRouteTableEntryResponse) neighborTransaction
-                .getResponse();
-        logger.debug(routeResponse.toString());
-        logger.debug("EZSP getRouteTableEntry {}", routeResponse);
-    }
+	private void getRoute(int route) {
+		EzspGetRouteTableEntryRequest routeRequest = new EzspGetRouteTableEntryRequest();
+		routeRequest.setIndex(route);
+		EzspTransaction neighborTransaction = ashHandler.sendEzspTransaction(
+				new EzspSingleResponseTransaction(routeRequest, EzspGetRouteTableEntryResponse.class));
+		EzspGetRouteTableEntryResponse routeResponse = (EzspGetRouteTableEntryResponse) neighborTransaction
+				.getResponse();
+		logger.debug(routeResponse.toString());
+		logger.debug("EZSP getRouteTableEntry {}", routeResponse);
+	}
 
-    /**
-     * Get a configuration value
-     *
-     * @param configId the {@link EzspConfigId} to set
-     * @return the configuration value as {@link Integer} or null on error
-     */
-    private Integer getConfiguration(EzspConfigId configId) {
-        EzspGetConfigurationValueRequest configValue = new EzspGetConfigurationValueRequest();
-        configValue.setConfigId(configId);
+	/**
+	 * Get a configuration value
+	 *
+	 * @param configId
+	 *            the {@link EzspConfigId} to set
+	 * @return the configuration value as {@link Integer} or null on error
+	 */
+	private Integer getConfiguration(EzspConfigId configId) {
+		EzspGetConfigurationValueRequest configValue = new EzspGetConfigurationValueRequest();
+		configValue.setConfigId(configId);
 
-        EzspTransaction configTransaction = ashHandler.sendEzspTransaction(
-                new EzspSingleResponseTransaction(configValue, EzspGetConfigurationValueResponse.class));
-        EzspGetConfigurationValueResponse configResponse = (EzspGetConfigurationValueResponse) configTransaction
-                .getResponse();
-        logger.debug(configResponse.toString());
+		EzspTransaction configTransaction = ashHandler.sendEzspTransaction(
+				new EzspSingleResponseTransaction(configValue, EzspGetConfigurationValueResponse.class));
+		EzspGetConfigurationValueResponse configResponse = (EzspGetConfigurationValueResponse) configTransaction
+				.getResponse();
+		logger.debug(configResponse.toString());
 
-        if (configResponse.getStatus() != EzspStatus.EZSP_SUCCESS) {
-            return null;
-        }
+		if (configResponse.getStatus() != EzspStatus.EZSP_SUCCESS) {
+			return null;
+		}
 
-        return configResponse.getValue();
-    }
+		return configResponse.getValue();
+	}
 }

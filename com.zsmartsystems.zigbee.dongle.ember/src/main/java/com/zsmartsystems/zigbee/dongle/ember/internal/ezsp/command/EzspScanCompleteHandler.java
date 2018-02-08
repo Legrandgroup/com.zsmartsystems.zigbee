@@ -13,9 +13,9 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>scanCompleteHandler</b>.
  * <p>
- * Returns the status of the current scan of type EZSP_ENERGY_SCAN or EZSP_ACTIVE_SCAN.
- * EMBER_SUCCESS signals that the scan has completed. Other error conditions signify a
- * failure to scan on the channel specified.
+ * Returns the status of the current scan of type EZSP_ENERGY_SCAN or
+ * EZSP_ACTIVE_SCAN. EMBER_SUCCESS signals that the scan has completed. Other
+ * error conditions signify a failure to scan on the channel specified.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,85 +24,90 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspScanCompleteHandler extends EzspFrameResponse {
-    public static int FRAME_ID = 0x1C;
+	public static int FRAME_ID = 0x1C;
 
-    /**
-     * The channel on which the current error occurred. Undefined for the case of EMBER_SUCCESS.
-     * <p>
-     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-     */
-    private int channel;
+	/**
+	 * The channel on which the current error occurred. Undefined for the case of
+	 * EMBER_SUCCESS.
+	 * <p>
+	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+	 */
+	private int channel;
 
-    /**
-     * The error condition that occurred on the current channel. Value will be EMBER_SUCCESS when
-     * the scan has completed.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     */
-    private EmberStatus status;
+	/**
+	 * The error condition that occurred on the current channel. Value will be
+	 * EMBER_SUCCESS when the scan has completed.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 */
+	private EmberStatus status;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspScanCompleteHandler(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspScanCompleteHandler(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        channel = deserializer.deserializeUInt8();
-        status = deserializer.deserializeEmberStatus();
-    }
+		// Deserialize the fields
+		channel = deserializer.deserializeUInt8();
+		status = deserializer.deserializeEmberStatus();
+	}
 
-    /**
-     * The channel on which the current error occurred. Undefined for the case of EMBER_SUCCESS.
-     * <p>
-     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-     *
-     * @return the current channel as {@link int}
-     */
-    public int getChannel() {
-        return channel;
-    }
+	/**
+	 * The channel on which the current error occurred. Undefined for the case of
+	 * EMBER_SUCCESS.
+	 * <p>
+	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+	 *
+	 * @return the current channel as {@link int}
+	 */
+	public int getChannel() {
+		return channel;
+	}
 
-    /**
-     * The channel on which the current error occurred. Undefined for the case of EMBER_SUCCESS.
-     *
-     * @param channel the channel to set as {@link int}
-     */
-    public void setChannel(int channel) {
-        this.channel = channel;
-    }
+	/**
+	 * The channel on which the current error occurred. Undefined for the case of
+	 * EMBER_SUCCESS.
+	 *
+	 * @param channel
+	 *            the channel to set as {@link int}
+	 */
+	public void setChannel(int channel) {
+		this.channel = channel;
+	}
 
-    /**
-     * The error condition that occurred on the current channel. Value will be EMBER_SUCCESS when
-     * the scan has completed.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     *
-     * @return the current status as {@link EmberStatus}
-     */
-    public EmberStatus getStatus() {
-        return status;
-    }
+	/**
+	 * The error condition that occurred on the current channel. Value will be
+	 * EMBER_SUCCESS when the scan has completed.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 *
+	 * @return the current status as {@link EmberStatus}
+	 */
+	public EmberStatus getStatus() {
+		return status;
+	}
 
-    /**
-     * The error condition that occurred on the current channel. Value will be EMBER_SUCCESS when
-     * the scan has completed.
-     *
-     * @param status the status to set as {@link EmberStatus}
-     */
-    public void setStatus(EmberStatus status) {
-        this.status = status;
-    }
+	/**
+	 * The error condition that occurred on the current channel. Value will be
+	 * EMBER_SUCCESS when the scan has completed.
+	 *
+	 * @param status
+	 *            the status to set as {@link EmberStatus}
+	 */
+	public void setStatus(EmberStatus status) {
+		this.status = status;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(76);
-        builder.append("EzspScanCompleteHandler [channel=");
-        builder.append(channel);
-        builder.append(", status=");
-        builder.append(status);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(76);
+		builder.append("EzspScanCompleteHandler [channel=");
+		builder.append(channel);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(']');
+		return builder.toString();
+	}
 }

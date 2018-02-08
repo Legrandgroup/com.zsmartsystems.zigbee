@@ -22,58 +22,59 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetValueResponse extends EzspFrameResponse {
-    public static int FRAME_ID = 0xAB;
+	public static int FRAME_ID = 0xAB;
 
-    /**
-     * EZSP_SUCCESS if the value was changed, EZSP_ERROR_INVALID_VALUE if the new value was out of
-     * bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize valueId,
-     * EZSP_ERROR_INVALID_CALL if the value could not be modified.
-     * <p>
-     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-     */
-    private EzspStatus status;
+	/**
+	 * EZSP_SUCCESS if the value was changed, EZSP_ERROR_INVALID_VALUE if the new
+	 * value was out of bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize
+	 * valueId, EZSP_ERROR_INVALID_CALL if the value could not be modified.
+	 * <p>
+	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+	 */
+	private EzspStatus status;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspSetValueResponse(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspSetValueResponse(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        status = deserializer.deserializeEzspStatus();
-    }
+		// Deserialize the fields
+		status = deserializer.deserializeEzspStatus();
+	}
 
-    /**
-     * EZSP_SUCCESS if the value was changed, EZSP_ERROR_INVALID_VALUE if the new value was out of
-     * bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize valueId,
-     * EZSP_ERROR_INVALID_CALL if the value could not be modified.
-     * <p>
-     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-     *
-     * @return the current status as {@link EzspStatus}
-     */
-    public EzspStatus getStatus() {
-        return status;
-    }
+	/**
+	 * EZSP_SUCCESS if the value was changed, EZSP_ERROR_INVALID_VALUE if the new
+	 * value was out of bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize
+	 * valueId, EZSP_ERROR_INVALID_CALL if the value could not be modified.
+	 * <p>
+	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+	 *
+	 * @return the current status as {@link EzspStatus}
+	 */
+	public EzspStatus getStatus() {
+		return status;
+	}
 
-    /**
-     * EZSP_SUCCESS if the value was changed, EZSP_ERROR_INVALID_VALUE if the new value was out of
-     * bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize valueId,
-     * EZSP_ERROR_INVALID_CALL if the value could not be modified.
-     *
-     * @param status the status to set as {@link EzspStatus}
-     */
-    public void setStatus(EzspStatus status) {
-        this.status = status;
-    }
+	/**
+	 * EZSP_SUCCESS if the value was changed, EZSP_ERROR_INVALID_VALUE if the new
+	 * value was out of bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize
+	 * valueId, EZSP_ERROR_INVALID_CALL if the value could not be modified.
+	 *
+	 * @param status
+	 *            the status to set as {@link EzspStatus}
+	 */
+	public void setStatus(EzspStatus status) {
+		this.status = status;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(48);
-        builder.append("EzspSetValueResponse [status=");
-        builder.append(status);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(48);
+		builder.append("EzspSetValueResponse [status=");
+		builder.append(status);
+		builder.append(']');
+		return builder.toString();
+	}
 }

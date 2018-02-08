@@ -23,64 +23,65 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspValueId
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetValueRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0xAA;
+	public static int FRAME_ID = 0xAA;
 
-    /**
-     * Identifies which policy to modify.
-     * <p>
-     * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
-     */
-    private EzspValueId valueId;
+	/**
+	 * Identifies which policy to modify.
+	 * <p>
+	 * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
+	 */
+	private EzspValueId valueId;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspGetValueRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspGetValueRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    /**
-     * Identifies which policy to modify.
-     * <p>
-     * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
-     *
-     * @return the current valueId as {@link EzspValueId}
-     */
-    public EzspValueId getValueId() {
-        return valueId;
-    }
+	/**
+	 * Identifies which policy to modify.
+	 * <p>
+	 * EZSP type is <i>EzspValueId</i> - Java type is {@link EzspValueId}
+	 *
+	 * @return the current valueId as {@link EzspValueId}
+	 */
+	public EzspValueId getValueId() {
+		return valueId;
+	}
 
-    /**
-     * Identifies which policy to modify.
-     *
-     * @param valueId the valueId to set as {@link EzspValueId}
-     */
-    public void setValueId(EzspValueId valueId) {
-        this.valueId = valueId;
-    }
+	/**
+	 * Identifies which policy to modify.
+	 *
+	 * @param valueId
+	 *            the valueId to set as {@link EzspValueId}
+	 */
+	public void setValueId(EzspValueId valueId) {
+		this.valueId = valueId;
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        serializer.serializeEzspValueId(valueId);
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		serializer.serializeEzspValueId(valueId);
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(47);
-        builder.append("EzspGetValueRequest [valueId=");
-        builder.append(valueId);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(47);
+		builder.append("EzspGetValueRequest [valueId=");
+		builder.append(valueId);
+		builder.append(']');
+		return builder.toString();
+	}
 }

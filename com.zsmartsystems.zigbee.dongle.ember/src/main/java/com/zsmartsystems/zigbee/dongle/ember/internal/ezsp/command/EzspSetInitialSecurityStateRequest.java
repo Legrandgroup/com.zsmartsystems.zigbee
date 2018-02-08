@@ -14,10 +14,10 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberInitia
 /**
  * Class to implement the Ember EZSP command <b>setInitialSecurityState</b>.
  * <p>
- * Sets the security state that will be used by the device when it forms or joins the network. This
- * call should not be used when restoring saved network state via networkInit as this will
- * result in a loss of security data and will cause communication problems when the device
- * re-enters the network.
+ * Sets the security state that will be used by the device when it forms or
+ * joins the network. This call should not be used when restoring saved network
+ * state via networkInit as this will result in a loss of security data and will
+ * cause communication problems when the device re-enters the network.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -26,64 +26,67 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberInitia
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetInitialSecurityStateRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0x68;
+	public static int FRAME_ID = 0x68;
 
-    /**
-     * The security configuration to be set.
-     * <p>
-     * EZSP type is <i>EmberInitialSecurityState</i> - Java type is {@link EmberInitialSecurityState}
-     */
-    private EmberInitialSecurityState state;
+	/**
+	 * The security configuration to be set.
+	 * <p>
+	 * EZSP type is <i>EmberInitialSecurityState</i> - Java type is
+	 * {@link EmberInitialSecurityState}
+	 */
+	private EmberInitialSecurityState state;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspSetInitialSecurityStateRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspSetInitialSecurityStateRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    /**
-     * The security configuration to be set.
-     * <p>
-     * EZSP type is <i>EmberInitialSecurityState</i> - Java type is {@link EmberInitialSecurityState}
-     *
-     * @return the current state as {@link EmberInitialSecurityState}
-     */
-    public EmberInitialSecurityState getState() {
-        return state;
-    }
+	/**
+	 * The security configuration to be set.
+	 * <p>
+	 * EZSP type is <i>EmberInitialSecurityState</i> - Java type is
+	 * {@link EmberInitialSecurityState}
+	 *
+	 * @return the current state as {@link EmberInitialSecurityState}
+	 */
+	public EmberInitialSecurityState getState() {
+		return state;
+	}
 
-    /**
-     * The security configuration to be set.
-     *
-     * @param state the state to set as {@link EmberInitialSecurityState}
-     */
-    public void setState(EmberInitialSecurityState state) {
-        this.state = state;
-    }
+	/**
+	 * The security configuration to be set.
+	 *
+	 * @param state
+	 *            the state to set as {@link EmberInitialSecurityState}
+	 */
+	public void setState(EmberInitialSecurityState state) {
+		this.state = state;
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        serializer.serializeEmberInitialSecurityState(state);
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		serializer.serializeEmberInitialSecurityState(state);
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(62);
-        builder.append("EzspSetInitialSecurityStateRequest [state=");
-        builder.append(state);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(62);
+		builder.append("EzspSetInitialSecurityStateRequest [state=");
+		builder.append(state);
+		builder.append(']');
+		return builder.toString();
+	}
 }

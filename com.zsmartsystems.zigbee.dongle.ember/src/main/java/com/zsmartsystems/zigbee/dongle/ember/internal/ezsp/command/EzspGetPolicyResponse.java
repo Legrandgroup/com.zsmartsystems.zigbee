@@ -23,85 +23,87 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetPolicyResponse extends EzspFrameResponse {
-    public static int FRAME_ID = 0x56;
+	public static int FRAME_ID = 0x56;
 
-    /**
-     * EZSP_SUCCESS if the policy was changed, EZSP_ERROR_INVALID_ID if the NCP does not
-     * recognize policyId.
-     * <p>
-     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-     */
-    private EzspStatus status;
+	/**
+	 * EZSP_SUCCESS if the policy was changed, EZSP_ERROR_INVALID_ID if the NCP does
+	 * not recognize policyId.
+	 * <p>
+	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+	 */
+	private EzspStatus status;
 
-    /**
-     * The current decision for the specified policy.
-     * <p>
-     * EZSP type is <i>EzspDecisionId</i> - Java type is {@link EzspDecisionId}
-     */
-    private EzspDecisionId decisionId;
+	/**
+	 * The current decision for the specified policy.
+	 * <p>
+	 * EZSP type is <i>EzspDecisionId</i> - Java type is {@link EzspDecisionId}
+	 */
+	private EzspDecisionId decisionId;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspGetPolicyResponse(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspGetPolicyResponse(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        status = deserializer.deserializeEzspStatus();
-        decisionId = deserializer.deserializeEzspDecisionId();
-    }
+		// Deserialize the fields
+		status = deserializer.deserializeEzspStatus();
+		decisionId = deserializer.deserializeEzspDecisionId();
+	}
 
-    /**
-     * EZSP_SUCCESS if the policy was changed, EZSP_ERROR_INVALID_ID if the NCP does not
-     * recognize policyId.
-     * <p>
-     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-     *
-     * @return the current status as {@link EzspStatus}
-     */
-    public EzspStatus getStatus() {
-        return status;
-    }
+	/**
+	 * EZSP_SUCCESS if the policy was changed, EZSP_ERROR_INVALID_ID if the NCP does
+	 * not recognize policyId.
+	 * <p>
+	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+	 *
+	 * @return the current status as {@link EzspStatus}
+	 */
+	public EzspStatus getStatus() {
+		return status;
+	}
 
-    /**
-     * EZSP_SUCCESS if the policy was changed, EZSP_ERROR_INVALID_ID if the NCP does not
-     * recognize policyId.
-     *
-     * @param status the status to set as {@link EzspStatus}
-     */
-    public void setStatus(EzspStatus status) {
-        this.status = status;
-    }
+	/**
+	 * EZSP_SUCCESS if the policy was changed, EZSP_ERROR_INVALID_ID if the NCP does
+	 * not recognize policyId.
+	 *
+	 * @param status
+	 *            the status to set as {@link EzspStatus}
+	 */
+	public void setStatus(EzspStatus status) {
+		this.status = status;
+	}
 
-    /**
-     * The current decision for the specified policy.
-     * <p>
-     * EZSP type is <i>EzspDecisionId</i> - Java type is {@link EzspDecisionId}
-     *
-     * @return the current decisionId as {@link EzspDecisionId}
-     */
-    public EzspDecisionId getDecisionId() {
-        return decisionId;
-    }
+	/**
+	 * The current decision for the specified policy.
+	 * <p>
+	 * EZSP type is <i>EzspDecisionId</i> - Java type is {@link EzspDecisionId}
+	 *
+	 * @return the current decisionId as {@link EzspDecisionId}
+	 */
+	public EzspDecisionId getDecisionId() {
+		return decisionId;
+	}
 
-    /**
-     * The current decision for the specified policy.
-     *
-     * @param decisionId the decisionId to set as {@link EzspDecisionId}
-     */
-    public void setDecisionId(EzspDecisionId decisionId) {
-        this.decisionId = decisionId;
-    }
+	/**
+	 * The current decision for the specified policy.
+	 *
+	 * @param decisionId
+	 *            the decisionId to set as {@link EzspDecisionId}
+	 */
+	public void setDecisionId(EzspDecisionId decisionId) {
+		this.decisionId = decisionId;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(74);
-        builder.append("EzspGetPolicyResponse [status=");
-        builder.append(status);
-        builder.append(", decisionId=");
-        builder.append(decisionId);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(74);
+		builder.append("EzspGetPolicyResponse [status=");
+		builder.append(status);
+		builder.append(", decisionId=");
+		builder.append(decisionId);
+		builder.append(']');
+		return builder.toString();
+	}
 }

@@ -25,111 +25,125 @@ import java.util.Set;
  */
 public class EmberCurrentSecurityState {
 
-    /**
-     * A bitmask indicating the security options currently in use by a device joined in the network.
-     * <p>
-     * EZSP type is <i>EmberCurrentSecurityBitmask</i> - Java type is {@link EmberCurrentSecurityBitmask}
-     * Parameter allows multiple options so implemented as a {@link Set}.
-     */
-    private Set<EmberCurrentSecurityBitmask> bitmask = new HashSet<EmberCurrentSecurityBitmask>();
+	/**
+	 * A bitmask indicating the security options currently in use by a device joined
+	 * in the network.
+	 * <p>
+	 * EZSP type is <i>EmberCurrentSecurityBitmask</i> - Java type is
+	 * {@link EmberCurrentSecurityBitmask} Parameter allows multiple options so
+	 * implemented as a {@link Set}.
+	 */
+	private Set<EmberCurrentSecurityBitmask> bitmask = new HashSet<EmberCurrentSecurityBitmask>();
 
-    /**
-     * The IEEE Address of the Trust Center device.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     */
-    private IeeeAddress trustCenterLongAddress;
+	/**
+	 * The IEEE Address of the Trust Center device.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 */
+	private IeeeAddress trustCenterLongAddress;
 
-    /**
-     * Default Constructor
-     */
-    public EmberCurrentSecurityState() {
-    }
+	/**
+	 * Default Constructor
+	 */
+	public EmberCurrentSecurityState() {
+	}
 
-    public EmberCurrentSecurityState(EzspDeserializer deserializer) {
-        deserialize(deserializer);
-    }
+	public EmberCurrentSecurityState(EzspDeserializer deserializer) {
+		deserialize(deserializer);
+	}
 
-    /**
-     * A bitmask indicating the security options currently in use by a device joined in the network.
-     * <p>
-     * EZSP type is <i>EmberCurrentSecurityBitmask</i> - Java type is {@link EmberCurrentSecurityBitmask}
-     *
-     * @return the current bitmask as {@link Set} of {@link EmberCurrentSecurityBitmask}
-     */
-    public Set<EmberCurrentSecurityBitmask> getBitmask() {
-        return bitmask;
-    }
+	/**
+	 * A bitmask indicating the security options currently in use by a device joined
+	 * in the network.
+	 * <p>
+	 * EZSP type is <i>EmberCurrentSecurityBitmask</i> - Java type is
+	 * {@link EmberCurrentSecurityBitmask}
+	 *
+	 * @return the current bitmask as {@link Set} of
+	 *         {@link EmberCurrentSecurityBitmask}
+	 */
+	public Set<EmberCurrentSecurityBitmask> getBitmask() {
+		return bitmask;
+	}
 
-    /**
-     * A bitmask indicating the security options currently in use by a device joined in the network.
-     *
-     * @param bitmask the bitmask to add to the {@link Set} as {@link EmberCurrentSecurityBitmask}
-     */
-    public void addBitmask(EmberCurrentSecurityBitmask bitmask) {
-        this.bitmask.add(bitmask);
-    }
+	/**
+	 * A bitmask indicating the security options currently in use by a device joined
+	 * in the network.
+	 *
+	 * @param bitmask
+	 *            the bitmask to add to the {@link Set} as
+	 *            {@link EmberCurrentSecurityBitmask}
+	 */
+	public void addBitmask(EmberCurrentSecurityBitmask bitmask) {
+		this.bitmask.add(bitmask);
+	}
 
-    /**
-     * A bitmask indicating the security options currently in use by a device joined in the network.
-     *
-     * @param bitmask the bitmask to remove to the {@link Set} as {@link EmberCurrentSecurityBitmask}
-     */
-    public void removeBitmask(EmberCurrentSecurityBitmask bitmask) {
-        this.bitmask.remove(bitmask);
-    }
+	/**
+	 * A bitmask indicating the security options currently in use by a device joined
+	 * in the network.
+	 *
+	 * @param bitmask
+	 *            the bitmask to remove to the {@link Set} as
+	 *            {@link EmberCurrentSecurityBitmask}
+	 */
+	public void removeBitmask(EmberCurrentSecurityBitmask bitmask) {
+		this.bitmask.remove(bitmask);
+	}
 
-    /**
-     * The IEEE Address of the Trust Center device.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     *
-     * @return the current trustCenterLongAddress as {@link IeeeAddress}
-     */
-    public IeeeAddress getTrustCenterLongAddress() {
-        return trustCenterLongAddress;
-    }
+	/**
+	 * The IEEE Address of the Trust Center device.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 *
+	 * @return the current trustCenterLongAddress as {@link IeeeAddress}
+	 */
+	public IeeeAddress getTrustCenterLongAddress() {
+		return trustCenterLongAddress;
+	}
 
-    /**
-     * The IEEE Address of the Trust Center device.
-     *
-     * @param trustCenterLongAddress the trustCenterLongAddress to set as {@link IeeeAddress}
-     */
-    public void setTrustCenterLongAddress(IeeeAddress trustCenterLongAddress) {
-        this.trustCenterLongAddress = trustCenterLongAddress;
-    }
+	/**
+	 * The IEEE Address of the Trust Center device.
+	 *
+	 * @param trustCenterLongAddress
+	 *            the trustCenterLongAddress to set as {@link IeeeAddress}
+	 */
+	public void setTrustCenterLongAddress(IeeeAddress trustCenterLongAddress) {
+		this.trustCenterLongAddress = trustCenterLongAddress;
+	}
 
-    /**
-     * Serialise the contents of the EZSP structure.
-     *
-     * @param serializer the {@link EzspSerializer} used to serialize
-     */
-    public int[] serialize(EzspSerializer serializer) {
-        // Serialize the fields
-        serializer.serializeEmberCurrentSecurityBitmask(bitmask);
-        serializer.serializeEmberEui64(trustCenterLongAddress);
-        return serializer.getPayload();
-    }
+	/**
+	 * Serialise the contents of the EZSP structure.
+	 *
+	 * @param serializer
+	 *            the {@link EzspSerializer} used to serialize
+	 */
+	public int[] serialize(EzspSerializer serializer) {
+		// Serialize the fields
+		serializer.serializeEmberCurrentSecurityBitmask(bitmask);
+		serializer.serializeEmberEui64(trustCenterLongAddress);
+		return serializer.getPayload();
+	}
 
-    /**
-     * Deserialise the contents of the EZSP structure.
-     *
-     * @param deserializer the {@link EzspDeserializer} used to deserialize
-     */
-    public void deserialize(EzspDeserializer deserializer) {
-        // Deserialize the fields
-        bitmask = deserializer.deserializeEmberCurrentSecurityBitmask();
-        trustCenterLongAddress = deserializer.deserializeEmberEui64();
-    }
+	/**
+	 * Deserialise the contents of the EZSP structure.
+	 *
+	 * @param deserializer
+	 *            the {@link EzspDeserializer} used to deserialize
+	 */
+	public void deserialize(EzspDeserializer deserializer) {
+		// Deserialize the fields
+		bitmask = deserializer.deserializeEmberCurrentSecurityBitmask();
+		trustCenterLongAddress = deserializer.deserializeEmberEui64();
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(78);
-        builder.append("EmberCurrentSecurityState [bitmask=");
-        builder.append(bitmask);
-        builder.append(", trustCenterLongAddress=");
-        builder.append(trustCenterLongAddress);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(78);
+		builder.append("EmberCurrentSecurityState [bitmask=");
+		builder.append(bitmask);
+		builder.append(", trustCenterLongAddress=");
+		builder.append(trustCenterLongAddress);
+		builder.append(']');
+		return builder.toString();
+	}
 }

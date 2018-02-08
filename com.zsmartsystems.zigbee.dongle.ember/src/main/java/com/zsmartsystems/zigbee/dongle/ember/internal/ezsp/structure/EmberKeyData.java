@@ -21,81 +21,84 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  */
 public class EmberKeyData {
 
-    /**
-     * The key data.
-     * <p>
-     * EZSP type is <i>uint8_t[16]</i> - Java type is {@link int[]}
-     */
-    private int[] contents;
+	/**
+	 * The key data.
+	 * <p>
+	 * EZSP type is <i>uint8_t[16]</i> - Java type is {@link int[]}
+	 */
+	private int[] contents;
 
-    /**
-     * Default Constructor
-     */
-    public EmberKeyData() {
-    }
+	/**
+	 * Default Constructor
+	 */
+	public EmberKeyData() {
+	}
 
-    public EmberKeyData(EzspDeserializer deserializer) {
-        deserialize(deserializer);
-    }
+	public EmberKeyData(EzspDeserializer deserializer) {
+		deserialize(deserializer);
+	}
 
-    /**
-     * The key data.
-     * <p>
-     * EZSP type is <i>uint8_t[16]</i> - Java type is {@link int[]}
-     *
-     * @return the current contents as {@link int[]}
-     */
-    public int[] getContents() {
-        return contents;
-    }
+	/**
+	 * The key data.
+	 * <p>
+	 * EZSP type is <i>uint8_t[16]</i> - Java type is {@link int[]}
+	 *
+	 * @return the current contents as {@link int[]}
+	 */
+	public int[] getContents() {
+		return contents;
+	}
 
-    /**
-     * The key data.
-     *
-     * @param contents the contents to set as {@link int[]}
-     */
-    public void setContents(int[] contents) {
-        this.contents = contents;
-    }
+	/**
+	 * The key data.
+	 *
+	 * @param contents
+	 *            the contents to set as {@link int[]}
+	 */
+	public void setContents(int[] contents) {
+		this.contents = contents;
+	}
 
-    /**
-     * Serialise the contents of the EZSP structure.
-     *
-     * @param serializer the {@link EzspSerializer} used to serialize
-     */
-    public int[] serialize(EzspSerializer serializer) {
-        // Serialize the fields
-        serializer.serializeUInt8Array(contents);
-        return serializer.getPayload();
-    }
+	/**
+	 * Serialise the contents of the EZSP structure.
+	 *
+	 * @param serializer
+	 *            the {@link EzspSerializer} used to serialize
+	 */
+	public int[] serialize(EzspSerializer serializer) {
+		// Serialize the fields
+		serializer.serializeUInt8Array(contents);
+		return serializer.getPayload();
+	}
 
-    /**
-     * Deserialise the contents of the EZSP structure.
-     *
-     * @param deserializer the {@link EzspDeserializer} used to deserialize
-     */
-    public void deserialize(EzspDeserializer deserializer) {
-        // Deserialize the fields
-        contents = deserializer.deserializeUInt8Array(16);
-    }
+	/**
+	 * Deserialise the contents of the EZSP structure.
+	 *
+	 * @param deserializer
+	 *            the {@link EzspDeserializer} used to deserialize
+	 */
+	public void deserialize(EzspDeserializer deserializer) {
+		// Deserialize the fields
+		contents = deserializer.deserializeUInt8Array(16);
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(40);
-        builder.append("EmberKeyData [contents=");
-        builder.append("{");
-        if (contents == null) {
-            builder.append("null");
-        } else {
-            for (int cnt = 0; cnt < contents.length; cnt++) {
-                if (cnt != 0) {
-                    builder.append(' ');
-                }
-                builder.append(String.format("%02X", contents[cnt]));
-            }
-        }
-        builder.append("}");
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(40);
+		builder.append("EmberKeyData [contents=");
+		builder.append("{");
+		if (contents == null) {
+			builder.append("null");
+		} else {
+			for (int cnt = 0; cnt < contents.length; cnt++) {
+				if (cnt != 0) {
+					builder.append(' ');
+				}
+				builder.append(String.format("%02X", contents[cnt]));
+			}
+		}
+		builder.append("}");
+		builder.append(']');
+		return builder.toString();
+	}
 }

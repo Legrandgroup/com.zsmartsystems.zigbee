@@ -13,7 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>mfglibGetPower</b>.
  * <p>
- * Returns the current radio power setting, as previously set via mfglibSetPower().
+ * Returns the current radio power setting, as previously set via
+ * mfglibSetPower().
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -22,32 +23,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibGetPowerRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0x8D;
+	public static int FRAME_ID = 0x8D;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspMfglibGetPowerRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspMfglibGetPowerRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        return "EzspMfglibGetPowerRequest []";
-    }
+	@Override
+	public String toString() {
+		return "EzspMfglibGetPowerRequest []";
+	}
 }

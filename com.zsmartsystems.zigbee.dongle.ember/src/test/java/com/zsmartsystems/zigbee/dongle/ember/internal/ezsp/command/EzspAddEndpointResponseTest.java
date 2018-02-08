@@ -21,14 +21,14 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  *
  */
 public class EzspAddEndpointResponseTest extends EzspFrameTest {
-    @Test
-    public void testVersionError() {
-        EzspFrame.setEzspVersion(4);
-        EzspAddEndpointResponse response = new EzspAddEndpointResponse(getPacketData("02 80 02 36"));
+	@Test
+	public void testVersionError() {
+		EzspFrame.setEzspVersion(4);
+		EzspAddEndpointResponse response = new EzspAddEndpointResponse(getPacketData("02 80 02 36"));
 
-        assertEquals(2, response.getSequenceNumber());
-        assertEquals(true, response.isResponse());
-        assertEquals(EzspAddEndpointResponse.FRAME_ID, response.getFrameId());
-        assertEquals(EzspStatus.EZSP_ERROR_INVALID_VALUE, response.getStatus());
-    }
+		assertEquals(2, response.getSequenceNumber());
+		assertEquals(true, response.isResponse());
+		assertEquals(EzspAddEndpointResponse.FRAME_ID, response.getFrameId());
+		assertEquals(EzspStatus.EZSP_ERROR_INVALID_VALUE, response.getStatus());
+	}
 }

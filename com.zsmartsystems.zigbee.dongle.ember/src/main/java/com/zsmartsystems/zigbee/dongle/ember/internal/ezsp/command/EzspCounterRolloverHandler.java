@@ -21,52 +21,53 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspCounterRolloverHandler extends EzspFrameResponse {
-    public static int FRAME_ID = 0xF2;
+	public static int FRAME_ID = 0xF2;
 
-    /**
-     * Type of Counter.
-     * <p>
-     * EZSP type is <i>EmberCounterType</i> - Java type is {@link int}
-     */
-    private int type;
+	/**
+	 * Type of Counter.
+	 * <p>
+	 * EZSP type is <i>EmberCounterType</i> - Java type is {@link int}
+	 */
+	private int type;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspCounterRolloverHandler(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspCounterRolloverHandler(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        type = deserializer.deserializeUInt8();
-    }
+		// Deserialize the fields
+		type = deserializer.deserializeUInt8();
+	}
 
-    /**
-     * Type of Counter.
-     * <p>
-     * EZSP type is <i>EmberCounterType</i> - Java type is {@link int}
-     *
-     * @return the current type as {@link int}
-     */
-    public int getType() {
-        return type;
-    }
+	/**
+	 * Type of Counter.
+	 * <p>
+	 * EZSP type is <i>EmberCounterType</i> - Java type is {@link int}
+	 *
+	 * @return the current type as {@link int}
+	 */
+	public int getType() {
+		return type;
+	}
 
-    /**
-     * Type of Counter.
-     *
-     * @param type the type to set as {@link int}
-     */
-    public void setType(int type) {
-        this.type = type;
-    }
+	/**
+	 * Type of Counter.
+	 *
+	 * @param type
+	 *            the type to set as {@link int}
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(54);
-        builder.append("EzspCounterRolloverHandler [type=");
-        builder.append(type);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(54);
+		builder.append("EzspCounterRolloverHandler [type=");
+		builder.append(type);
+		builder.append(']');
+		return builder.toString();
+	}
 }

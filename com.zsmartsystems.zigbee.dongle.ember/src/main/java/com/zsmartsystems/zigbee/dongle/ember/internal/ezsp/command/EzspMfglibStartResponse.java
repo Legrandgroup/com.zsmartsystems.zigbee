@@ -13,10 +13,10 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>mfglibStart</b>.
  * <p>
- * Activate use of mfglib test routines and enables the radio receiver to report packets it
- * receives to the mfgLibRxHandler() callback. These packets will not be passed up with a CRC
- * failure. All other mfglib functions will return an error until the mfglibStart() has been
- * called
+ * Activate use of mfglib test routines and enables the radio receiver to report
+ * packets it receives to the mfgLibRxHandler() callback. These packets will not
+ * be passed up with a CRC failure. All other mfglib functions will return an
+ * error until the mfglibStart() has been called
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -25,52 +25,53 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibStartResponse extends EzspFrameResponse {
-    public static int FRAME_ID = 0x83;
+	public static int FRAME_ID = 0x83;
 
-    /**
-     * The success or failure code of the operation.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     */
-    private EmberStatus status;
+	/**
+	 * The success or failure code of the operation.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 */
+	private EmberStatus status;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspMfglibStartResponse(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspMfglibStartResponse(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        status = deserializer.deserializeEmberStatus();
-    }
+		// Deserialize the fields
+		status = deserializer.deserializeEmberStatus();
+	}
 
-    /**
-     * The success or failure code of the operation.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     *
-     * @return the current status as {@link EmberStatus}
-     */
-    public EmberStatus getStatus() {
-        return status;
-    }
+	/**
+	 * The success or failure code of the operation.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 *
+	 * @return the current status as {@link EmberStatus}
+	 */
+	public EmberStatus getStatus() {
+		return status;
+	}
 
-    /**
-     * The success or failure code of the operation.
-     *
-     * @param status the status to set as {@link EmberStatus}
-     */
-    public void setStatus(EmberStatus status) {
-        this.status = status;
-    }
+	/**
+	 * The success or failure code of the operation.
+	 *
+	 * @param status
+	 *            the status to set as {@link EmberStatus}
+	 */
+	public void setStatus(EmberStatus status) {
+		this.status = status;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(51);
-        builder.append("EzspMfglibStartResponse [status=");
-        builder.append(status);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(51);
+		builder.append("EzspMfglibStartResponse [status=");
+		builder.append(status);
+		builder.append(']');
+		return builder.toString();
+	}
 }

@@ -23,18 +23,18 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  *
  */
 public class EzspGetRouteTableEntryResponseTest extends EzspFrameTest {
-    @Test
-    public void testVersion() {
-        EzspFrame.setEzspVersion(4);
-        EzspGetRouteTableEntryResponse response = new EzspGetRouteTableEntryResponse(
-                getPacketData("28 80 7B 00 FF FF 00 00 03 00 00 00"));
+	@Test
+	public void testVersion() {
+		EzspFrame.setEzspVersion(4);
+		EzspGetRouteTableEntryResponse response = new EzspGetRouteTableEntryResponse(
+				getPacketData("28 80 7B 00 FF FF 00 00 03 00 00 00"));
 
-        assertEquals(true, response.isResponse());
-        assertEquals(EzspGetRouteTableEntryResponse.FRAME_ID, response.getFrameId());
-        assertEquals(EmberStatus.EMBER_SUCCESS, response.getStatus());
-        EmberRouteTableEntry route = response.getValue();
-        assertNotNull(route);
-        assertEquals(3, route.getStatus());
-        assertEquals(65535, route.getDestination());
-    }
+		assertEquals(true, response.isResponse());
+		assertEquals(EzspGetRouteTableEntryResponse.FRAME_ID, response.getFrameId());
+		assertEquals(EmberStatus.EMBER_SUCCESS, response.getStatus());
+		EmberRouteTableEntry route = response.getValue();
+		assertNotNull(route);
+		assertEquals(3, route.getStatus());
+		assertEquals(65535, route.getDestination());
+	}
 }

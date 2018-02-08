@@ -23,35 +23,35 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberConcen
  *
  */
 public class EzspSetConcentratorRequestTest extends EzspFrameTest {
-    @Test
-    public void testEnabled() {
-        EzspFrame.setEzspVersion(4);
-        EzspSetConcentratorRequest request = new EzspSetConcentratorRequest();
-        request.setSequenceNumber(52);
-        request.setConcentratorType(EmberConcentratorType.EMBER_HIGH_RAM_CONCENTRATOR);
-        request.setMinTime(60);
-        request.setMaxTime(3600);
-        request.setMaxHops(0);
-        request.setEnable(true);
-        request.setDeliveryFailureThreshold(8);
-        request.setRouteErrorThreshold(8);
+	@Test
+	public void testEnabled() {
+		EzspFrame.setEzspVersion(4);
+		EzspSetConcentratorRequest request = new EzspSetConcentratorRequest();
+		request.setSequenceNumber(52);
+		request.setConcentratorType(EmberConcentratorType.EMBER_HIGH_RAM_CONCENTRATOR);
+		request.setMinTime(60);
+		request.setMaxTime(3600);
+		request.setMaxHops(0);
+		request.setEnable(true);
+		request.setDeliveryFailureThreshold(8);
+		request.setRouteErrorThreshold(8);
 
-        assertTrue(Arrays.equals(getPacketData("34 00 10 01 F9 FF 3C 00 10 0E 08 08 00"), request.serialize()));
-    }
+		assertTrue(Arrays.equals(getPacketData("34 00 10 01 F9 FF 3C 00 10 0E 08 08 00"), request.serialize()));
+	}
 
-    @Test
-    public void testDisabled() {
-        EzspFrame.setEzspVersion(4);
-        EzspSetConcentratorRequest request = new EzspSetConcentratorRequest();
-        request.setSequenceNumber(52);
-        request.setConcentratorType(EmberConcentratorType.EMBER_LOW_RAM_CONCENTRATOR);
-        request.setMinTime(60);
-        request.setMaxTime(3600);
-        request.setMaxHops(0);
-        request.setEnable(false);
-        request.setDeliveryFailureThreshold(8);
-        request.setRouteErrorThreshold(8);
+	@Test
+	public void testDisabled() {
+		EzspFrame.setEzspVersion(4);
+		EzspSetConcentratorRequest request = new EzspSetConcentratorRequest();
+		request.setSequenceNumber(52);
+		request.setConcentratorType(EmberConcentratorType.EMBER_LOW_RAM_CONCENTRATOR);
+		request.setMinTime(60);
+		request.setMaxTime(3600);
+		request.setMaxHops(0);
+		request.setEnable(false);
+		request.setDeliveryFailureThreshold(8);
+		request.setRouteErrorThreshold(8);
 
-        assertTrue(Arrays.equals(getPacketData("34 00 10 00 F8 FF 3C 00 10 0E 08 08 00"), request.serialize()));
-    }
+		assertTrue(Arrays.equals(getPacketData("34 00 10 00 F8 FF 3C 00 10 0E 08 08 00"), request.serialize()));
+	}
 }

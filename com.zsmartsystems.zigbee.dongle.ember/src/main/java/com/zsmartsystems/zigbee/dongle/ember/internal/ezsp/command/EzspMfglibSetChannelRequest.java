@@ -13,8 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>mfglibSetChannel</b>.
  * <p>
- * Sets the radio channel. Calibration occurs if this is the first time the channel has been
- * used.
+ * Sets the radio channel. Calibration occurs if this is the first time the
+ * channel has been used.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,64 +23,65 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibSetChannelRequest extends EzspFrameRequest {
-    public static int FRAME_ID = 0x8A;
+	public static int FRAME_ID = 0x8A;
 
-    /**
-     * The current channel.
-     * <p>
-     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-     */
-    private int channel;
+	/**
+	 * The current channel.
+	 * <p>
+	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+	 */
+	private int channel;
 
-    /**
-     * Serialiser used to seialise to binary line data
-     */
-    private EzspSerializer serializer;
+	/**
+	 * Serialiser used to seialise to binary line data
+	 */
+	private EzspSerializer serializer;
 
-    /**
-     * Request constructor
-     */
-    public EzspMfglibSetChannelRequest() {
-        frameId = FRAME_ID;
-        serializer = new EzspSerializer();
-    }
+	/**
+	 * Request constructor
+	 */
+	public EzspMfglibSetChannelRequest() {
+		frameId = FRAME_ID;
+		serializer = new EzspSerializer();
+	}
 
-    /**
-     * The current channel.
-     * <p>
-     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-     *
-     * @return the current channel as {@link int}
-     */
-    public int getChannel() {
-        return channel;
-    }
+	/**
+	 * The current channel.
+	 * <p>
+	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+	 *
+	 * @return the current channel as {@link int}
+	 */
+	public int getChannel() {
+		return channel;
+	}
 
-    /**
-     * The current channel.
-     *
-     * @param channel the channel to set as {@link int}
-     */
-    public void setChannel(int channel) {
-        this.channel = channel;
-    }
+	/**
+	 * The current channel.
+	 *
+	 * @param channel
+	 *            the channel to set as {@link int}
+	 */
+	public void setChannel(int channel) {
+		this.channel = channel;
+	}
 
-    @Override
-    public int[] serialize() {
-        // Serialize the header
-        serializeHeader(serializer);
+	@Override
+	public int[] serialize() {
+		// Serialize the header
+		serializeHeader(serializer);
 
-        // Serialize the fields
-        serializer.serializeUInt8(channel);
-        return serializer.getPayload();
-    }
+		// Serialize the fields
+		serializer.serializeUInt8(channel);
+		return serializer.getPayload();
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(55);
-        builder.append("EzspMfglibSetChannelRequest [channel=");
-        builder.append(channel);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(55);
+		builder.append("EzspMfglibSetChannelRequest [channel=");
+		builder.append(channel);
+		builder.append(']');
+		return builder.toString();
+	}
 }

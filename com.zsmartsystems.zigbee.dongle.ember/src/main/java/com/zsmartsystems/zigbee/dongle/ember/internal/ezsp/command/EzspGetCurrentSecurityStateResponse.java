@@ -14,7 +14,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>getCurrentSecurityState</b>.
  * <p>
- * Gets the current security state that is being used by a device that is joined in the network.
+ * Gets the current security state that is being used by a device that is joined
+ * in the network.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,82 +24,86 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetCurrentSecurityStateResponse extends EzspFrameResponse {
-    public static int FRAME_ID = 0x69;
+	public static int FRAME_ID = 0x69;
 
-    /**
-     * The success or failure code of the operation.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     */
-    private EmberStatus status;
+	/**
+	 * The success or failure code of the operation.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 */
+	private EmberStatus status;
 
-    /**
-     * The security configuration in use by the stack.
-     * <p>
-     * EZSP type is <i>EmberCurrentSecurityState</i> - Java type is {@link EmberCurrentSecurityState}
-     */
-    private EmberCurrentSecurityState state;
+	/**
+	 * The security configuration in use by the stack.
+	 * <p>
+	 * EZSP type is <i>EmberCurrentSecurityState</i> - Java type is
+	 * {@link EmberCurrentSecurityState}
+	 */
+	private EmberCurrentSecurityState state;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspGetCurrentSecurityStateResponse(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspGetCurrentSecurityStateResponse(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        status = deserializer.deserializeEmberStatus();
-        state = deserializer.deserializeEmberCurrentSecurityState();
-    }
+		// Deserialize the fields
+		status = deserializer.deserializeEmberStatus();
+		state = deserializer.deserializeEmberCurrentSecurityState();
+	}
 
-    /**
-     * The success or failure code of the operation.
-     * <p>
-     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-     *
-     * @return the current status as {@link EmberStatus}
-     */
-    public EmberStatus getStatus() {
-        return status;
-    }
+	/**
+	 * The success or failure code of the operation.
+	 * <p>
+	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+	 *
+	 * @return the current status as {@link EmberStatus}
+	 */
+	public EmberStatus getStatus() {
+		return status;
+	}
 
-    /**
-     * The success or failure code of the operation.
-     *
-     * @param status the status to set as {@link EmberStatus}
-     */
-    public void setStatus(EmberStatus status) {
-        this.status = status;
-    }
+	/**
+	 * The success or failure code of the operation.
+	 *
+	 * @param status
+	 *            the status to set as {@link EmberStatus}
+	 */
+	public void setStatus(EmberStatus status) {
+		this.status = status;
+	}
 
-    /**
-     * The security configuration in use by the stack.
-     * <p>
-     * EZSP type is <i>EmberCurrentSecurityState</i> - Java type is {@link EmberCurrentSecurityState}
-     *
-     * @return the current state as {@link EmberCurrentSecurityState}
-     */
-    public EmberCurrentSecurityState getState() {
-        return state;
-    }
+	/**
+	 * The security configuration in use by the stack.
+	 * <p>
+	 * EZSP type is <i>EmberCurrentSecurityState</i> - Java type is
+	 * {@link EmberCurrentSecurityState}
+	 *
+	 * @return the current state as {@link EmberCurrentSecurityState}
+	 */
+	public EmberCurrentSecurityState getState() {
+		return state;
+	}
 
-    /**
-     * The security configuration in use by the stack.
-     *
-     * @param state the state to set as {@link EmberCurrentSecurityState}
-     */
-    public void setState(EmberCurrentSecurityState state) {
-        this.state = state;
-    }
+	/**
+	 * The security configuration in use by the stack.
+	 *
+	 * @param state
+	 *            the state to set as {@link EmberCurrentSecurityState}
+	 */
+	public void setState(EmberCurrentSecurityState state) {
+		this.state = state;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(88);
-        builder.append("EzspGetCurrentSecurityStateResponse [status=");
-        builder.append(status);
-        builder.append(", state=");
-        builder.append(state);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(88);
+		builder.append("EzspGetCurrentSecurityStateResponse [status=");
+		builder.append(status);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(']');
+		return builder.toString();
+	}
 }

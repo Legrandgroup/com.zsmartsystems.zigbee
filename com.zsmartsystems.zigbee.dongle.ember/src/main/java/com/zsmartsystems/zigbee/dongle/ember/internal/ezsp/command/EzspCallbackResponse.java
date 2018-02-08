@@ -21,20 +21,20 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspCallbackResponse extends EzspFrameResponse {
-    public static int FRAME_ID = 0x06;
+	public static int FRAME_ID = 0x06;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspCallbackResponse(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspCallbackResponse(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-    }
+		// Deserialize the fields
+	}
 
-    @Override
-    public String toString() {
-        return "EzspCallbackResponse []";
-    }
+	@Override
+	public String toString() {
+		return "EzspCallbackResponse []";
+	}
 }

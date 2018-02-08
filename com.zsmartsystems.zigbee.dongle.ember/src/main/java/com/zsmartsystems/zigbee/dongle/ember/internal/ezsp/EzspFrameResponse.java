@@ -28,25 +28,26 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspDeseri
  *
  */
 public abstract class EzspFrameResponse extends EzspFrame {
-    protected EzspDeserializer deserializer;
+	protected EzspDeserializer deserializer;
 
-    /**
-     * Constructor used to create a received frame. The constructor reads the header fields from the incoming message.
-     *
-     * @param inputBuffer
-     */
-    protected EzspFrameResponse(int[] inputBuffer) {
-        super();
-        deserializer = new EzspDeserializer(inputBuffer);
+	/**
+	 * Constructor used to create a received frame. The constructor reads the header
+	 * fields from the incoming message.
+	 *
+	 * @param inputBuffer
+	 */
+	protected EzspFrameResponse(int[] inputBuffer) {
+		super();
+		deserializer = new EzspDeserializer(inputBuffer);
 
-        sequenceNumber = deserializer.deserializeUInt8();
-        frameControl = deserializer.deserializeUInt8();
-        frameId = deserializer.deserializeUInt8();
-        if (frameId == EZSP_LEGACY_FRAME_ID) {
-            deserializer.deserializeUInt8();
-            frameId = deserializer.deserializeUInt8();
-        }
-        isResponse = (frameControl & EZSP_FC_RESPONSE) != 0;
-    }
+		sequenceNumber = deserializer.deserializeUInt8();
+		frameControl = deserializer.deserializeUInt8();
+		frameId = deserializer.deserializeUInt8();
+		if (frameId == EZSP_LEGACY_FRAME_ID) {
+			deserializer.deserializeUInt8();
+			frameId = deserializer.deserializeUInt8();
+		}
+		isResponse = (frameControl & EZSP_FC_RESPONSE) != 0;
+	}
 
 }

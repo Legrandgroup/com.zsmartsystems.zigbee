@@ -24,23 +24,23 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  *
  */
 public class EzspGetNetworkParametersResponseTest extends EzspFrameTest {
-    @Test
-    public void testVersionError() {
-        EzspFrame.setEzspVersion(4);
-        EzspGetNetworkParametersResponse response = new EzspGetNetworkParametersResponse(
-                getPacketData("05 80 28 00 01 EF CB B1 57 A8 CC C6 D7 05 C8 00 0B 00 00 00 00 00 F8 FF 07"));
+	@Test
+	public void testVersionError() {
+		EzspFrame.setEzspVersion(4);
+		EzspGetNetworkParametersResponse response = new EzspGetNetworkParametersResponse(
+				getPacketData("05 80 28 00 01 EF CB B1 57 A8 CC C6 D7 05 C8 00 0B 00 00 00 00 00 F8 FF 07"));
 
-        assertEquals(5, response.getSequenceNumber());
-        assertEquals(true, response.isResponse());
-        assertEquals(EzspGetNetworkParametersResponse.FRAME_ID, response.getFrameId());
-        assertEquals(EmberStatus.EMBER_SUCCESS, response.getStatus());
-        assertEquals(EmberNodeType.EMBER_COORDINATOR, response.getNodeType());
+		assertEquals(5, response.getSequenceNumber());
+		assertEquals(true, response.isResponse());
+		assertEquals(EzspGetNetworkParametersResponse.FRAME_ID, response.getFrameId());
+		assertEquals(EmberStatus.EMBER_SUCCESS, response.getStatus());
+		assertEquals(EmberNodeType.EMBER_COORDINATOR, response.getNodeType());
 
-        EmberNetworkParameters networkParameters = response.getParameters();
-        assertEquals(11, networkParameters.getRadioChannel());
-        assertEquals(0, networkParameters.getRadioTxPower());
-        assertEquals(EmberJoinMethod.EMBER_USE_MAC_ASSOCIATION, networkParameters.getJoinMethod());
-        assertEquals(0, networkParameters.getNwkManagerId());
-        assertEquals(134215680, networkParameters.getChannels());
-    }
+		EmberNetworkParameters networkParameters = response.getParameters();
+		assertEquals(11, networkParameters.getRadioChannel());
+		assertEquals(0, networkParameters.getRadioTxPower());
+		assertEquals(EmberJoinMethod.EMBER_USE_MAC_ASSOCIATION, networkParameters.getJoinMethod());
+		assertEquals(0, networkParameters.getNwkManagerId());
+		assertEquals(134215680, networkParameters.getChannels());
+	}
 }

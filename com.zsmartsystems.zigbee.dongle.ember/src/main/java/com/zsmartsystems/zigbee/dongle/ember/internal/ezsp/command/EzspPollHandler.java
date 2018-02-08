@@ -22,52 +22,53 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspPollHandler extends EzspFrameResponse {
-    public static int FRAME_ID = 0x44;
+	public static int FRAME_ID = 0x44;
 
-    /**
-     * The EUI64 of the sender.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     */
-    private IeeeAddress senderEui64;
+	/**
+	 * The EUI64 of the sender.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 */
+	private IeeeAddress senderEui64;
 
-    /**
-     * Response and Handler constructor
-     */
-    public EzspPollHandler(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+	/**
+	 * Response and Handler constructor
+	 */
+	public EzspPollHandler(int[] inputBuffer) {
+		// Super creates deserializer and reads header fields
+		super(inputBuffer);
 
-        // Deserialize the fields
-        senderEui64 = deserializer.deserializeEmberEui64();
-    }
+		// Deserialize the fields
+		senderEui64 = deserializer.deserializeEmberEui64();
+	}
 
-    /**
-     * The EUI64 of the sender.
-     * <p>
-     * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
-     *
-     * @return the current senderEui64 as {@link IeeeAddress}
-     */
-    public IeeeAddress getSenderEui64() {
-        return senderEui64;
-    }
+	/**
+	 * The EUI64 of the sender.
+	 * <p>
+	 * EZSP type is <i>EmberEUI64</i> - Java type is {@link IeeeAddress}
+	 *
+	 * @return the current senderEui64 as {@link IeeeAddress}
+	 */
+	public IeeeAddress getSenderEui64() {
+		return senderEui64;
+	}
 
-    /**
-     * The EUI64 of the sender.
-     *
-     * @param senderEui64 the senderEui64 to set as {@link IeeeAddress}
-     */
-    public void setSenderEui64(IeeeAddress senderEui64) {
-        this.senderEui64 = senderEui64;
-    }
+	/**
+	 * The EUI64 of the sender.
+	 *
+	 * @param senderEui64
+	 *            the senderEui64 to set as {@link IeeeAddress}
+	 */
+	public void setSenderEui64(IeeeAddress senderEui64) {
+		this.senderEui64 = senderEui64;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder(43);
-        builder.append("EzspPollHandler [senderEui64=");
-        builder.append(senderEui64);
-        builder.append(']');
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(43);
+		builder.append("EzspPollHandler [senderEui64=");
+		builder.append(senderEui64);
+		builder.append(']');
+		return builder.toString();
+	}
 }
