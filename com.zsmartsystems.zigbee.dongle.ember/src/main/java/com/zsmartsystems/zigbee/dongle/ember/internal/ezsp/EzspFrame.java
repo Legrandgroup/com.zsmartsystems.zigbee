@@ -16,103 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zsmartsystems.zigbee.dongle.ember.internal.ash.AshFrameData;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspAddEndpointResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspAddOrUpdateKeyTableEntryResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspAddTransientLinkKeyResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspBecomeTrustCenterResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspBindingIsActiveResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspCallbackResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspChildJoinHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspClearBindingTableResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspClearKeyTableResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspClearTransientLinkKeysResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspCounterRolloverHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspDeleteBindingResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspEnergyScanRequestResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspEnergyScanResultHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspErraseKeyTableEntryResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspFindKeyTableEntryResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspFormNetworkResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetAddressTableRemoteEui64Response;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetBindingRemoteNodeIdResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetBindingResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetChildDataResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetConfigurationValueResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetCurrentSecurityStateResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetEui64Response;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetExtendedTimeoutResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetKeyResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetKeyTableEntryResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetNeighborResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetNetworkParametersResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetNodeIdResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetParentChildParametersResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetPolicyResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetRouteTableEntryResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetStandaloneBootloaderVersionPlatMicroPhyResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetValueResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGetXncpInfoResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspGpEpIncomingMessageHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspIdConflictHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspIncomingMessageHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspIncomingRouteErrorHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspIncomingRouteRecordHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspInvalidCommandResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspJoinNetworkResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspLaunchStandaloneBootloaderResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspLeaveNetworkResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspLookupEui64ByNodeIdResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspLookupNodeIdByEui64Response;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMacFilterMatchMessageHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMessageSentHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibEndResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibGetChannelResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibGetPowerResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibRxHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibSendPacketResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibSetChannelResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibSetPowerResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibStartResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibStartStreamResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibStartToneResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspMfglibStopStreamResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspNeighborCountResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspNetworkFoundHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspNetworkInitResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspNetworkStateResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspNoCallbacksResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspPermitJoiningResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspPollHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspReadAndClearCountersResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspReadCountersResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspRemoteDeleteBindingHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspRemoteSetBindingHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspRemoveDeviceResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspResetToFactoryDefaultsResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspScanCompleteHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSendBroadcastResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSendManyToOneRouteRequestResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSendMulticastResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSendReplyResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSendUnicastResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetBindingRemoteNodeIdResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetBindingResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetConcentratorResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetConfigurationValueResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetExtendedTimeoutResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetInitialSecurityStateResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetKeyTableEntryResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetPolicyResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetRadioChannelResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetSourceRouteResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSetValueResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspStackStatusHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspStartScanResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspStopScanResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspSwitchNetworkKeyHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspTrustCenterJoinHandler;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspVersionResponse;
-import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.EzspZigbeeKeyEstablishmentHandler;
+import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.command.*;
 
 /**
  * The EmberZNet Serial Protocol (EZSP) is the protocol used by a host
@@ -149,10 +53,6 @@ public abstract class EzspFrame {
 	 */
 	private final static Logger logger = LoggerFactory.getLogger(EzspFrame.class);
 
-	/**
-	 * The upper protocol version supported by this module
-	 */
-	private static final int MAX_SUPPORTED_EZSP_VERSION = 6;
 
 	/**
 	 * The maximum supported version of EZSP
@@ -287,19 +187,6 @@ public abstract class EzspFrame {
 	protected static final int FRAME_ID_GET_KEY = 0x6A;
 	protected static final int FRAME_ID_GP_EP_INCOMING_MESSAGE_HANDLER = 0xC5;
 
-	// Mfglib Frames
-	protected static final int FRAME_ID_MFG_LIB_START = 0x83;
-	protected static final int FRAME_ID_MFG_LIB_END = 0x84;
-	protected static final int FRAME_ID_MFG_LIB_START_TONE = 0x85;
-	protected static final int FRAME_ID_MFG_LIB_STOP_TONE = 0x86;
-	protected static final int FRAME_ID_MFG_LIB_START_STREAM = 0x87;
-	protected static final int FRAME_ID_MFG_LIB_STOP_STREAM = 0x88;
-	protected static final int FRAME_ID_MFG_LIB_SEND_PACKET = 0x89;
-	protected static final int FRAME_ID_MFG_LIB_SET_CHANNEL = 0x8a;
-	protected static final int FRAME_ID_MFG_LIB_GET_CHANNEL = 0x8b;
-	protected static final int FRAME_ID_MFG_LIB_SET_POWER = 0x8c;
-	protected static final int FRAME_ID_MFG_LIB_GET_POWER = 0x8d;
-	protected static final int FRAME_ID_MFG_LIB_RX_HANDLER = 0x8e;
 
 	protected int sequenceNumber;
 	protected int frameControl;

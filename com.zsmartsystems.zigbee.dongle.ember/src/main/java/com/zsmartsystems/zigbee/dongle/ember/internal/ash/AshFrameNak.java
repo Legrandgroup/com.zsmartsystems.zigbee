@@ -29,8 +29,8 @@ public class AshFrameNak extends AshFrame {
 		processHeader(frameBuffer);
 	}
 
-	@Override
-	public String toString() {
-		return "AshFrameNak [ackNum=" + ackNum + "]";
-	}
+    @Override
+    public String toString() {
+        return "AshFrameNak [ackNum=" + ackNum + ", notRdy=" + nRdy + "]";
+    }
 }
