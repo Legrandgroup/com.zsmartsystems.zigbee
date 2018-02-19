@@ -20,7 +20,8 @@ import java.util.HashMap;
 public enum ZigBeeProfileType {
     UNKNOWN(-1, "Unknown Profile"),
     HOME_AUTOMATION(0x0104, "Home Automation"),
-    ZIGBEE_LIGHT_LINK(0xc05e, "ZigBee Light Link");
+    ZIGBEE_LIGHT_LINK(0xc05e, "ZigBee Light Link"),
+    ZIGBEE_GREEN_POWER(0xa1e0, "ZigBee Green Power");
 
     /*
      * The ZigBee profile ID

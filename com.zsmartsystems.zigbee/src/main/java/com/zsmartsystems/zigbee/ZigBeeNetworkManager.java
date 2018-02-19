@@ -488,11 +488,21 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
             // For ZCL commands we pass the NWK and APS headers as classes to the transport layer.
             // The ZCL packet is serialised here.
             ZclCommand zclCommand = (ZclCommand) command;
+            
+            // TODO add enum in place of value for green power cluster
+            if( 0x0021 == zclCommand.getClusterId() ) {
+                apsFrame.setSourceEndpoint(242);
 
-            apsFrame.setSourceEndpoint(1);
+                // TODO set the profile properly
+                apsFrame.setProfile(ZigBeeProfileType.ZIGBEE_GREEN_POWER.getId());
+            }
+            else {
+                apsFrame.setSourceEndpoint(1);
 
-            // TODO set the profile properly
-            apsFrame.setProfile(0x104);
+                // TODO set the profile properly
+                apsFrame.setProfile(ZigBeeProfileType.HOME_AUTOMATION.getId());
+            }
+
 
             // Create the cluster library header
             ZclHeader zclHeader = new ZclHeader();
@@ -548,8 +558,9 @@ public class ZigBeeNetworkManager implements ZigBeeNetwork, ZigBeeTransportRecei
             case 0x0000:
                 command = receiveZdoCommand(fieldDeserializer, apsFrame);
                 break;
-            case 0x0104:
-            case 0xC05E:
+            case 0x0104: // home automation
+            case 0xC05E: // light link
+            case 0xA1E0: // green power
                 command = receiveZclCommand(fieldDeserializer, apsFrame);
                 break;
             default:
