@@ -213,17 +213,8 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
         getNetworkParameters();
 
         // Add the endpoint
-        EzspAddEndpointRequest addEndpoint = new EzspAddEndpointRequest();
-        addEndpoint.setEndpoint(1);
-        addEndpoint.setDeviceId(0);
-        addEndpoint.setProfileId(ZigBeeProfileType.HOME_AUTOMATION.getId());
-        addEndpoint.setInputClusterList(new int[] { 0 });
-        addEndpoint.setOutputClusterList(new int[] { 0 });
-        logger.debug(addEndpoint.toString());
-        EzspTransaction addEndpointTransaction = ashHandler
-                .sendEzspTransaction(new EzspSingleResponseTransaction(addEndpoint, EzspAddEndpointResponse.class));
-        EzspAddEndpointResponse addEndpointResponse = (EzspAddEndpointResponse) addEndpointTransaction.getResponse();
-        logger.debug(addEndpointResponse.toString());
+        addEndpoint(1, 0x0000, ZigBeeProfileType.HOME_AUTOMATION.getId(), new int[] { 0 }, new int[] { 0 });
+        addEndpoint(242, 0x0064, ZigBeeProfileType.ZIGBEE_GREEN_POWER.getId(), new int[] { 0x0021 }, new int[] { 0 });
 
         // Now initialise the network
         EzspNetworkInitRequest networkInitRequest = new EzspNetworkInitRequest();
@@ -779,4 +770,32 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
 
         return counters;
     }
+    
+	/**
+	 * adding a new endpoint to NCP, shall be done before initializing network
+	 * 
+	 * @param i_epNumber
+	 * @param i_deviceId
+	 * @param i_profileId
+	 * @param i_inClusterList
+	 * @param i_outClusterList
+	 * @return
+	 */
+	public EzspStatus addEndpoint(int i_epNumber, int i_deviceId, int i_profileId, int[] i_inClusterList,
+			int[] i_outClusterList) {
+		// Add endpoint
+		EzspAddEndpointRequest addEndpoint = new EzspAddEndpointRequest();
+		addEndpoint.setEndpoint(i_epNumber);
+		addEndpoint.setDeviceId(i_deviceId);
+		addEndpoint.setProfileId(i_profileId);
+		addEndpoint.setInputClusterList(i_inClusterList);
+		addEndpoint.setOutputClusterList(i_outClusterList);
+		logger.debug(addEndpoint.toString());
+		EzspTransaction addEndpointTransaction = ashHandler
+				.sendEzspTransaction(new EzspSingleResponseTransaction(addEndpoint, EzspAddEndpointResponse.class));
+		EzspAddEndpointResponse addEndpointResponse = (EzspAddEndpointResponse) addEndpointTransaction.getResponse();
+		logger.debug(addEndpointResponse.toString());
+
+		return addEndpointResponse.getStatus();
+	}    
 }
