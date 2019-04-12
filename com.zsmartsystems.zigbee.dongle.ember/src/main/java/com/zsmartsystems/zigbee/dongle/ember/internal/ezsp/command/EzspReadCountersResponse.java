@@ -12,8 +12,7 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
 /**
  * Class to implement the Ember EZSP command <b>readCounters</b>.
  * <p>
- * Retrieves Ember counters. See the EmberCounterType enumeration for the
- * counter types.
+ * Retrieves Ember counters. See the EmberCounterType enumeration for the counter types.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -22,61 +21,57 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspReadCountersResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0xF1;
+    public static int FRAME_ID = 0xF1;
 
-	/**
-	 * A list of all counter values ordered according to the EmberCounterType
-	 * enumeration.
-	 * <p>
-	 * EZSP type is <i>uint16_t[29]</i> - Java type is {@link int[]}
-	 */
-	private int[] values;
+    /**
+     * A list of all counter values ordered according to the EmberCounterType enumeration.
+     * <p>
+     * EZSP type is <i>uint16_t[29]</i> - Java type is {@link int[]}
+     */
+    private int[] values;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspReadCountersResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspReadCountersResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		values = deserializer.deserializeUInt16Array(29);
-	}
+        // Deserialize the fields
+        values = deserializer.deserializeUInt16Array(29);
+    }
 
-	/**
-	 * A list of all counter values ordered according to the EmberCounterType
-	 * enumeration.
-	 * <p>
-	 * EZSP type is <i>uint16_t[29]</i> - Java type is {@link int[]}
-	 *
-	 * @return the current values as {@link int[]}
-	 */
-	public int[] getValues() {
-		return values;
-	}
+    /**
+     * A list of all counter values ordered according to the EmberCounterType enumeration.
+     * <p>
+     * EZSP type is <i>uint16_t[29]</i> - Java type is {@link int[]}
+     *
+     * @return the current values as {@link int[]}
+     */
+    public int[] getValues() {
+        return values;
+    }
 
-	/**
-	 * A list of all counter values ordered according to the EmberCounterType
-	 * enumeration.
-	 *
-	 * @param values
-	 *            the values to set as {@link int[]}
-	 */
-	public void setValues(int[] values) {
-		this.values = values;
-	}
+    /**
+     * A list of all counter values ordered according to the EmberCounterType enumeration.
+     *
+     * @param values the values to set as {@link int[]}
+     */
+    public void setValues(int[] values) {
+        this.values = values;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(52);
-		builder.append("EzspReadCountersResponse [values=");
-		for (int c = 0; c < values.length; c++) {
-			if (c > 0) {
-				builder.append(' ');
-			}
-			builder.append(String.format("%02X", values[c]));
-		}
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(52);
+        builder.append("EzspReadCountersResponse [values=");
+        for (int c = 0; c < values.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", values[c]));
+        }
+        builder.append(']');
+        return builder.toString();
+    }
 }

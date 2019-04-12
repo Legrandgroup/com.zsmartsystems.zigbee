@@ -46,7 +46,6 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspValueId
  *
  */
 public class EzspSerializer {
-
     protected int[] buffer = new int[131];
     protected int length = 0;
     protected int position = 0;

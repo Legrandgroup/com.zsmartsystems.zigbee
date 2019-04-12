@@ -18,87 +18,87 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberNodeType {
-	/**
-	 * Default unknown value
-	 */
-	UNKNOWN(-1),
+    /**
+     * Default unknown value
+     */
+    UNKNOWN(-1),
 
-	/**
-	 * Device is not joined
-	 */
-	EMBER_UNKNOWN_DEVICE(0x0000),
+    /**
+     * Device is not joined
+     */
+    EMBER_UNKNOWN_DEVICE(0x0000),
 
-	/**
-	 * Will relay messages and can act as a parent to other nodes.
-	 */
-	EMBER_COORDINATOR(0x0001),
+    /**
+     * Will relay messages and can act as a parent to other nodes.
+     */
+    EMBER_COORDINATOR(0x0001),
 
-	/**
-	 * Will relay messages and can act as a parent to other nodes.
-	 */
-	EMBER_ROUTER(0x0002),
+    /**
+     * Will relay messages and can act as a parent to other nodes.
+     */
+    EMBER_ROUTER(0x0002),
 
-	/**
-	 * Communicates only with its parent and will not relay messages.
-	 */
-	EMBER_END_DEVICE(0x0003),
+    /**
+     * Communicates only with its parent and will not relay messages.
+     */
+    EMBER_END_DEVICE(0x0003),
 
-	/**
-	 * An end device whose radio can be turned off to save power. The application
-	 * must poll to receive messages.
-	 */
-	EMBER_SLEEPY_END_DEVICE(0x0004),
+    /**
+     * An end device whose radio can be turned off to save power. The application must poll to receive
+     * messages.
+     */
+    EMBER_SLEEPY_END_DEVICE(0x0004),
 
-	/**
-	 * A sleepy end device that can move through the network.
-	 */
-	EMBER_MOBILE_END_DEVICE(0x0005);
+    /**
+     * A sleepy end device that can move through the network.
+     */
+    EMBER_MOBILE_END_DEVICE(0x0005);
 
-	/**
-	 * A mapping between the integer code and its corresponding type to facilitate
-	 * lookup by code.
-	 */
-	private static Map<Integer, EmberNodeType> codeMapping;
+    /**
+     * A mapping between the integer code and its corresponding type to
+     * facilitate lookup by code.
+     */
+    private static Map<Integer, EmberNodeType> codeMapping;
 
-	private int key;
+    private int key;
 
-	private EmberNodeType(int key) {
-		this.key = key;
-	}
+    private EmberNodeType(int key) {
+        this.key = key;
+    }
 
-	private static void initMapping() {
-		codeMapping = new HashMap<Integer, EmberNodeType>();
-		for (EmberNodeType s : values()) {
-			codeMapping.put(s.key, s);
-		}
-	}
+    private static void initMapping() {
+        codeMapping = new HashMap<Integer, EmberNodeType>();
+        for (EmberNodeType s : values()) {
+            codeMapping.put(s.key, s);
+        }
+    }
 
-	/**
-	 * Lookup function based on the EmberStatus type code. Returns null if the code
-	 * does not exist.
-	 *
-	 * @param code
-	 *            the code to lookup
-	 * @return enumeration value of the alarm type.
-	 */
-	public static EmberNodeType getEmberNodeType(int code) {
-		if (codeMapping == null) {
-			initMapping();
-		}
+    /**
+     * Lookup function based on the EmberStatus type code. Returns null if the
+     * code does not exist.
+     *
+     * @param code
+     *            the code to lookup
+     * @return enumeration value of the alarm type.
+     */
+    public static EmberNodeType getEmberNodeType(int code) {
+        if (codeMapping == null) {
+            initMapping();
+        }
 
-		if (codeMapping.get(code) == null) {
-			return UNKNOWN;
-		}
+        if (codeMapping.get(code) == null) {
+            return UNKNOWN;
+        }
 
-		return codeMapping.get(code);
-	}
+        return codeMapping.get(code);
+    }
 
-	/**
-	 * Returns the EZSP protocol defined value for this enum
-	 *
-	 * @return the EZSP protocol key
-	 */
-	public int getKey() {
-		return key;
-	}
+    /**
+     * Returns the EZSP protocol defined value for this enum
+     *
+     * @return the EZSP protocol key
+     */
+    public int getKey() {
+        return key;
+    }
 }

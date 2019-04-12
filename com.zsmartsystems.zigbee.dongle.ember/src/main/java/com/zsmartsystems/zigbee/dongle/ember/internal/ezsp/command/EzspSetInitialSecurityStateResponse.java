@@ -13,10 +13,10 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>setInitialSecurityState</b>.
  * <p>
- * Sets the security state that will be used by the device when it forms or
- * joins the network. This call should not be used when restoring saved network
- * state via networkInit as this will result in a loss of security data and will
- * cause communication problems when the device re-enters the network.
+ * Sets the security state that will be used by the device when it forms or joins the network. This
+ * call should not be used when restoring saved network state via networkInit as this will
+ * result in a loss of security data and will cause communication problems when the device
+ * re-enters the network.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -25,53 +25,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetInitialSecurityStateResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x68;
+    public static int FRAME_ID = 0x68;
 
-	/**
-	 * The success or failure code of the operation.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 */
-	private EmberStatus status;
+    /**
+     * The success or failure code of the operation.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     */
+    private EmberStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspSetInitialSecurityStateResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspSetInitialSecurityStateResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEmberStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEmberStatus();
+    }
 
-	/**
-	 * The success or failure code of the operation.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 *
-	 * @return the current status as {@link EmberStatus}
-	 */
-	public EmberStatus getStatus() {
-		return status;
-	}
+    /**
+     * The success or failure code of the operation.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     *
+     * @return the current status as {@link EmberStatus}
+     */
+    public EmberStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * The success or failure code of the operation.
-	 *
-	 * @param status
-	 *            the status to set as {@link EmberStatus}
-	 */
-	public void setStatus(EmberStatus status) {
-		this.status = status;
-	}
+    /**
+     * The success or failure code of the operation.
+     *
+     * @param status the status to set as {@link EmberStatus}
+     */
+    public void setStatus(EmberStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(63);
-		builder.append("EzspSetInitialSecurityStateResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(63);
+        builder.append("EzspSetInitialSecurityStateResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

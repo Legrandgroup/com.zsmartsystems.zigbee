@@ -27,36 +27,36 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.transaction.EzspTrans
  *
  */
 public class EzspSingleResponseTransactionTest extends EzspFrameTest {
-	@Test
-	public void testResponseMatches() {
-		EzspVersionRequest version = new EzspVersionRequest();
-		version.setSequenceNumber(3);
-		version.setDesiredProtocolVersion(4);
+    @Test
+    public void testResponseMatches() {
+        EzspVersionRequest version = new EzspVersionRequest();
+        version.setSequenceNumber(3);
+        version.setDesiredProtocolVersion(4);
 
-		EzspTransaction versionTransaction = new EzspSingleResponseTransaction(version, EzspVersionResponse.class);
+        EzspTransaction versionTransaction = new EzspSingleResponseTransaction(version, EzspVersionResponse.class);
 
-		EzspVersionResponse versionResponse = new EzspVersionResponse(getPacketData("03 80 00 04 02 00 58"));
+        EzspVersionResponse versionResponse = new EzspVersionResponse(getPacketData("03 80 00 04 02 00 58"));
 
-		assertTrue(versionTransaction.isMatch(versionResponse));
+        assertTrue(versionTransaction.isMatch(versionResponse));
 
-		versionTransaction.getRequest();
-		assertEquals(1, versionTransaction.getResponses().size());
-		assertNotNull(versionTransaction.getResponses());
-		assertEquals(versionTransaction.getResponses().get(0), versionTransaction.getResponse());
-	}
+        versionTransaction.getRequest();
+        assertEquals(1, versionTransaction.getResponses().size());
+        assertNotNull(versionTransaction.getResponses());
+        assertEquals(versionTransaction.getResponses().get(0), versionTransaction.getResponse());
+    }
 
-	@Test
-	public void testResponseMatchFails() {
-		EzspVersionRequest version = new EzspVersionRequest();
-		version.setSequenceNumber(4);
-		version.setDesiredProtocolVersion(4);
+    @Test
+    public void testResponseMatchFails() {
+        EzspVersionRequest version = new EzspVersionRequest();
+        version.setSequenceNumber(4);
+        version.setDesiredProtocolVersion(4);
 
-		EzspTransaction versionTransaction = new EzspSingleResponseTransaction(version, EzspVersionResponse.class);
+        EzspTransaction versionTransaction = new EzspSingleResponseTransaction(version, EzspVersionResponse.class);
 
-		EzspVersionResponse versionResponse = new EzspVersionResponse(getPacketData("03 80 00 04 02 00 58"));
+        EzspVersionResponse versionResponse = new EzspVersionResponse(getPacketData("03 80 00 04 02 00 58"));
 
-		assertFalse(versionTransaction.isMatch(versionResponse));
-		assertNull(versionTransaction.getResponse());
-		assertNull(versionTransaction.getResponses());
-	}
+        assertFalse(versionTransaction.isMatch(versionResponse));
+        assertNull(versionTransaction.getResponse());
+        assertNull(versionTransaction.getResponses());
+    }
 }

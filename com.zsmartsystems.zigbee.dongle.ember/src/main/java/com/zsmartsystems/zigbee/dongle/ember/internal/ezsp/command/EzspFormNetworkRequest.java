@@ -23,67 +23,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberNetwor
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspFormNetworkRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x1E;
+    public static int FRAME_ID = 0x1E;
 
-	/**
-	 * Specification of the new network.
-	 * <p>
-	 * EZSP type is <i>EmberNetworkParameters</i> - Java type is
-	 * {@link EmberNetworkParameters}
-	 */
-	private EmberNetworkParameters parameters;
+    /**
+     * Specification of the new network.
+     * <p>
+     * EZSP type is <i>EmberNetworkParameters</i> - Java type is {@link EmberNetworkParameters}
+     */
+    private EmberNetworkParameters parameters;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspFormNetworkRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspFormNetworkRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * Specification of the new network.
-	 * <p>
-	 * EZSP type is <i>EmberNetworkParameters</i> - Java type is
-	 * {@link EmberNetworkParameters}
-	 *
-	 * @return the current parameters as {@link EmberNetworkParameters}
-	 */
-	public EmberNetworkParameters getParameters() {
-		return parameters;
-	}
+    /**
+     * Specification of the new network.
+     * <p>
+     * EZSP type is <i>EmberNetworkParameters</i> - Java type is {@link EmberNetworkParameters}
+     *
+     * @return the current parameters as {@link EmberNetworkParameters}
+     */
+    public EmberNetworkParameters getParameters() {
+        return parameters;
+    }
 
-	/**
-	 * Specification of the new network.
-	 *
-	 * @param parameters
-	 *            the parameters to set as {@link EmberNetworkParameters}
-	 */
-	public void setParameters(EmberNetworkParameters parameters) {
-		this.parameters = parameters;
-	}
+    /**
+     * Specification of the new network.
+     *
+     * @param parameters the parameters to set as {@link EmberNetworkParameters}
+     */
+    public void setParameters(EmberNetworkParameters parameters) {
+        this.parameters = parameters;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeEmberNetworkParameters(parameters);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeEmberNetworkParameters(parameters);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(50);
-		builder.append("EzspFormNetworkRequest [parameters=");
-		builder.append(parameters);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(50);
+        builder.append("EzspFormNetworkRequest [parameters=");
+        builder.append(parameters);
+        builder.append(']');
+        return builder.toString();
+    }
 }

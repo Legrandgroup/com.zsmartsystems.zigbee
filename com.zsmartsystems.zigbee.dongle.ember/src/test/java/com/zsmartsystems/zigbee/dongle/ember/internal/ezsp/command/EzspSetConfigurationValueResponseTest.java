@@ -21,16 +21,16 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  *
  */
 public class EzspSetConfigurationValueResponseTest extends EzspFrameTest {
-	@Test
-	public void testVersion() {
-		EzspFrame.setEzspVersion(4);
+    @Test
+    public void testVersion() {
+        EzspFrame.setEzspVersion(4);
 
-		EzspSetConfigurationValueResponse response = new EzspSetConfigurationValueResponse(
-				getPacketData("02 80 53 00"));
+        EzspSetConfigurationValueResponse response = new EzspSetConfigurationValueResponse(
+                getPacketData("02 80 53 00"));
 
-		assertEquals(2, response.getSequenceNumber());
-		assertEquals(true, response.isResponse());
-		assertEquals(EzspSetConfigurationValueResponse.FRAME_ID, response.getFrameId());
-		assertEquals(EzspStatus.EZSP_SUCCESS, response.getStatus());
-	}
+        assertEquals(2, response.getSequenceNumber());
+        assertEquals(true, response.isResponse());
+        assertEquals(EzspSetConfigurationValueResponse.FRAME_ID, response.getFrameId());
+        assertEquals(EzspStatus.EZSP_SUCCESS, response.getStatus());
+    }
 }

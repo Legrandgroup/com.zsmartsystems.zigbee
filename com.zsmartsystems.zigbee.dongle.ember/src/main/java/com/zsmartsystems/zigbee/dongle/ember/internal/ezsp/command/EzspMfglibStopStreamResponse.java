@@ -13,8 +13,7 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>mfglibStopStream</b>.
  * <p>
- * Stops transmitting a random stream of characters started by
- * mfglibStartStream().
+ * Stops transmitting a random stream of characters started by mfglibStartStream().
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,53 +22,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibStopStreamResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x88;
+    public static int FRAME_ID = 0x88;
 
-	/**
-	 * The success or failure code of the operation.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 */
-	private EmberStatus status;
+    /**
+     * The success or failure code of the operation.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     */
+    private EmberStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspMfglibStopStreamResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspMfglibStopStreamResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEmberStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEmberStatus();
+    }
 
-	/**
-	 * The success or failure code of the operation.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 *
-	 * @return the current status as {@link EmberStatus}
-	 */
-	public EmberStatus getStatus() {
-		return status;
-	}
+    /**
+     * The success or failure code of the operation.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     *
+     * @return the current status as {@link EmberStatus}
+     */
+    public EmberStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * The success or failure code of the operation.
-	 *
-	 * @param status
-	 *            the status to set as {@link EmberStatus}
-	 */
-	public void setStatus(EmberStatus status) {
-		this.status = status;
-	}
+    /**
+     * The success or failure code of the operation.
+     *
+     * @param status the status to set as {@link EmberStatus}
+     */
+    public void setStatus(EmberStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(56);
-		builder.append("EzspMfglibStopStreamResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(56);
+        builder.append("EzspMfglibStopStreamResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

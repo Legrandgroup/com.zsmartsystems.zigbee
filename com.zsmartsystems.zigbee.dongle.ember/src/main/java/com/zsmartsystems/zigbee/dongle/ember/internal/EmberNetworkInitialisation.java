@@ -54,7 +54,6 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.transaction.EzspTrans
  *
  */
 public class EmberNetworkInitialisation {
-
     /**
      * The {@link Logger}.
      */

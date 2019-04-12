@@ -12,10 +12,10 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
 /**
  * Class to implement the Ember EZSP command <b>bindingIsActive</b>.
  * <p>
- * Indicates whether any messages are currently being sent using this binding
- * table entry. Note that this command does not indicate whether a binding is
- * clear. To determine whether a binding is clear, check whether the type field
- * of the EmberBindingTableEntry has the value EMBER_UNUSED_BINDING.
+ * Indicates whether any messages are currently being sent using this binding table entry.
+ * Note that this command does not indicate whether a binding is clear. To determine whether a
+ * binding is clear, check whether the type field of the EmberBindingTableEntry has the value
+ * EMBER_UNUSED_BINDING.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,53 +24,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspBindingIsActiveResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x2E;
+    public static int FRAME_ID = 0x2E;
 
-	/**
-	 * True if the binding table entry is active, false otherwise.
-	 * <p>
-	 * EZSP type is <i>bool</i> - Java type is {@link boolean}
-	 */
-	private boolean active;
+    /**
+     * True if the binding table entry is active, false otherwise.
+     * <p>
+     * EZSP type is <i>bool</i> - Java type is {@link boolean}
+     */
+    private boolean active;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspBindingIsActiveResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspBindingIsActiveResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		active = deserializer.deserializeBool();
-	}
+        // Deserialize the fields
+        active = deserializer.deserializeBool();
+    }
 
-	/**
-	 * True if the binding table entry is active, false otherwise.
-	 * <p>
-	 * EZSP type is <i>bool</i> - Java type is {@link boolean}
-	 *
-	 * @return the current active as {@link boolean}
-	 */
-	public boolean getActive() {
-		return active;
-	}
+    /**
+     * True if the binding table entry is active, false otherwise.
+     * <p>
+     * EZSP type is <i>bool</i> - Java type is {@link boolean}
+     *
+     * @return the current active as {@link boolean}
+     */
+    public boolean getActive() {
+        return active;
+    }
 
-	/**
-	 * True if the binding table entry is active, false otherwise.
-	 *
-	 * @param active
-	 *            the active to set as {@link boolean}
-	 */
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    /**
+     * True if the binding table entry is active, false otherwise.
+     *
+     * @param active the active to set as {@link boolean}
+     */
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(55);
-		builder.append("EzspBindingIsActiveResponse [active=");
-		builder.append(active);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(55);
+        builder.append("EzspBindingIsActiveResponse [active=");
+        builder.append(active);
+        builder.append(']');
+        return builder.toString();
+    }
 }

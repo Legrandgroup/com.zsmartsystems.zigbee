@@ -40,41 +40,41 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  *
  */
 public abstract class EzspFrameRequest extends EzspFrame {
-	private final static AtomicLong sequence = new AtomicLong(1);
+    private final static AtomicLong sequence = new AtomicLong(1);
 
-	protected EzspFrameResponse response = null;
+    protected EzspFrameResponse response = null;
 
-	/**
-	 * Constructor used to create an outgoing frame
-	 *
-	 * @param frameId
-	 */
-	protected EzspFrameRequest() {
-		sequenceNumber = (int) sequence.getAndIncrement();
-		if (sequenceNumber == 254) {
-			sequence.set(1);
-		}
-	}
+    /**
+     * Constructor used to create an outgoing frame
+     *
+     * @param frameId
+     */
+    protected EzspFrameRequest() {
+        sequenceNumber = (int) sequence.getAndIncrement();
+        if (sequenceNumber == 254) {
+            sequence.set(1);
+        }
+    }
 
-	protected void serializeHeader(final EzspSerializer serializer) {
-		// Output sequence number
-		serializer.serializeUInt8(sequenceNumber);
+    protected void serializeHeader(final EzspSerializer serializer) {
+        // Output sequence number
+        serializer.serializeUInt8(sequenceNumber);
 
-		// Output Frame Control Byte
-		serializer.serializeUInt8(EZSP_FC_REQUEST);
+        // Output Frame Control Byte
+        serializer.serializeUInt8(EZSP_FC_REQUEST);
 
-		if (ezspVersion > 4) {
-			serializer.serializeUInt8(EZSP_LEGACY_FRAME_ID);
-			serializer.serializeUInt8(0x00);
-		}
+        if (ezspVersion > 4) {
+            serializer.serializeUInt8(EZSP_LEGACY_FRAME_ID);
+            serializer.serializeUInt8(0x00);
+        }
 
-		// Output Frame ID
-		serializer.serializeUInt8(frameId);
-	}
+        // Output Frame ID
+        serializer.serializeUInt8(frameId);
+    }
 
-	public int[] serialize() {
-		EzspSerializer serializer = new EzspSerializer();
-		serializeHeader(serializer);
-		return serializer.getPayload();
-	}
+    public int[] serialize() {
+        EzspSerializer serializer = new EzspSerializer();
+        serializeHeader(serializer);
+        return serializer.getPayload();
+    }
 }

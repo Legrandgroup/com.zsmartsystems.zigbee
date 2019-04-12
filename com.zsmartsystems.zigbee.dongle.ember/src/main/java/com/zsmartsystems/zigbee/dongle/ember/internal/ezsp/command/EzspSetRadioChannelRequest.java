@@ -13,12 +13,12 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>setRadioChannel</b>.
  * <p>
- * Sets the channel to use for sending and receiving messages. For a list of
- * available radio channels, see the technical specification for the RF
- * communication module in your Developer Kit.
+ * Sets the channel to use for sending and receiving messages. For a list of available radio
+ * channels, see the technical specification for the RF communication module in your
+ * Developer Kit.
  * <p>
- * <b>Note:</b> Care should be taken when using this API, as all devices on a
- * network must use the same channel.
+ * <b>Note:</b> Care should be taken when using this API, as all devices on a network must use
+ * the same channel.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -27,65 +27,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetRadioChannelRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x9A;
+    public static int FRAME_ID = 0x9A;
 
-	/**
-	 * Desired radio channel.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int channel;
+    /**
+     * Desired radio channel.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int channel;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspSetRadioChannelRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspSetRadioChannelRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * Desired radio channel.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current channel as {@link int}
-	 */
-	public int getChannel() {
-		return channel;
-	}
+    /**
+     * Desired radio channel.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current channel as {@link int}
+     */
+    public int getChannel() {
+        return channel;
+    }
 
-	/**
-	 * Desired radio channel.
-	 *
-	 * @param channel
-	 *            the channel to set as {@link int}
-	 */
-	public void setChannel(int channel) {
-		this.channel = channel;
-	}
+    /**
+     * Desired radio channel.
+     *
+     * @param channel the channel to set as {@link int}
+     */
+    public void setChannel(int channel) {
+        this.channel = channel;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeUInt8(channel);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeUInt8(channel);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(54);
-		builder.append("EzspSetRadioChannelRequest [channel=");
-		builder.append(channel);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(54);
+        builder.append("EzspSetRadioChannelRequest [channel=");
+        builder.append(channel);
+        builder.append(']');
+        return builder.toString();
+    }
 }

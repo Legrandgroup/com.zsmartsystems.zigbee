@@ -18,95 +18,95 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberOutgoingMessageType {
-	/**
-	 * Default unknown value
-	 */
-	UNKNOWN(-1),
+    /**
+     * Default unknown value
+     */
+    UNKNOWN(-1),
 
-	/**
-	 * Unicast sent directly to an EmberNodeId.
-	 */
-	EMBER_OUTGOING_DIRECT(0x0000),
+    /**
+     * Unicast sent directly to an EmberNodeId.
+     */
+    EMBER_OUTGOING_DIRECT(0x0000),
 
-	/**
-	 * Unicast sent using an entry in the address table.
-	 */
-	EMBER_OUTGOING_VIA_ADDRESS_TABLE(0x0001),
+    /**
+     * Unicast sent using an entry in the address table.
+     */
+    EMBER_OUTGOING_VIA_ADDRESS_TABLE(0x0001),
 
-	/**
-	 * Unicast sent using an entry in the binding table.
-	 */
-	EMBER_OUTGOING_VIA_BINDING(0x0002),
+    /**
+     * Unicast sent using an entry in the binding table.
+     */
+    EMBER_OUTGOING_VIA_BINDING(0x0002),
 
-	/**
-	 * Multicast message. This value is passed to emberMessageSentHandler() only. It
-	 * may not be passed to emberSendUnicast().
-	 */
-	EMBER_OUTGOING_MULTICAST(0x0003),
+    /**
+     * Multicast message. This value is passed to emberMessageSentHandler() only. It may not be
+     * passed to emberSendUnicast().
+     */
+    EMBER_OUTGOING_MULTICAST(0x0003),
 
-	/**
-	 * Aliased multicast message. This value is passed to emberMessageSentHandler()
-	 * only. It may not be passed to emberSendUnicast().
-	 */
-	EMBER_OUTGOING_MULTICAST_WITH_ALIAS(0x0004),
+    /**
+     * Aliased multicast message.  This value is passed to emberMessageSentHandler() only. It may
+     * not be passed to emberSendUnicast().
+     */
+    EMBER_OUTGOING_MULTICAST_WITH_ALIAS(0x0004),
 
-	/**
-	 * Aliased broadcast message. This value is passed to emberMessageSentHandler()
-	 * only. It may not be passed to emberSendUnicast().
-	 */
-	EMBER_OUTGOING_BROADCAST_WITH_ALIAS(0x0005),
+    /**
+     * Aliased broadcast message.  This value is passed to emberMessageSentHandler() only. It may
+     * not be passed to emberSendUnicast().
+     */
+    EMBER_OUTGOING_BROADCAST_WITH_ALIAS(0x0005),
 
-	/**
-	 * Broadcast message. This value is passed to emberMessageSentHandler() only. It
-	 * may not be passed to emberSendUnicast().
-	 */
-	EMBER_OUTGOING_BROADCAST(0x0006);
+    /**
+     * Broadcast message. This value is passed to emberMessageSentHandler() only. It may not be
+     * passed to emberSendUnicast().
+     */
+    EMBER_OUTGOING_BROADCAST(0x0006);
 
-	/**
-	 * A mapping between the integer code and its corresponding type to facilitate
-	 * lookup by code.
-	 */
-	private static Map<Integer, EmberOutgoingMessageType> codeMapping;
+    /**
+     * A mapping between the integer code and its corresponding type to
+     * facilitate lookup by code.
+     */
+    private static Map<Integer, EmberOutgoingMessageType> codeMapping;
 
-	private int key;
+    private int key;
 
-	private EmberOutgoingMessageType(int key) {
-		this.key = key;
-	}
+    private EmberOutgoingMessageType(int key) {
+        this.key = key;
+    }
 
-	private static void initMapping() {
-		codeMapping = new HashMap<Integer, EmberOutgoingMessageType>();
-		for (EmberOutgoingMessageType s : values()) {
-			codeMapping.put(s.key, s);
-		}
-	}
+    private static void initMapping() {
+        codeMapping = new HashMap<Integer, EmberOutgoingMessageType>();
+        for (EmberOutgoingMessageType s : values()) {
+            codeMapping.put(s.key, s);
+        }
+    }
 
-	/**
-	 * Lookup function based on the EmberStatus type code. Returns null if the code
-	 * does not exist.
-	 *
-	 * @param code
-	 *            the code to lookup
-	 * @return enumeration value of the alarm type.
-	 */
-	public static EmberOutgoingMessageType getEmberOutgoingMessageType(int code) {
-		if (codeMapping == null) {
-			initMapping();
-		}
+    /**
+     * Lookup function based on the EmberStatus type code. Returns null if the
+     * code does not exist.
+     *
+     * @param code
+     *            the code to lookup
+     * @return enumeration value of the alarm type.
+     */
+    public static EmberOutgoingMessageType getEmberOutgoingMessageType(int code) {
+        if (codeMapping == null) {
+            initMapping();
+        }
 
-		if (codeMapping.get(code) == null) {
-			return UNKNOWN;
-		}
+        if (codeMapping.get(code) == null) {
+            return UNKNOWN;
+        }
 
-		return codeMapping.get(code);
-	}
+        return codeMapping.get(code);
+    }
 
-	/**
-	 * Returns the EZSP protocol defined value for this enum
-	 *
-	 * @return the EZSP protocol key
-	 */
-	public int getKey() {
-		return key;
-	}
+    /**
+     * Returns the EZSP protocol defined value for this enum
+     *
+     * @return the EZSP protocol key
+     */
+    public int getKey() {
+        return key;
+    }
 }

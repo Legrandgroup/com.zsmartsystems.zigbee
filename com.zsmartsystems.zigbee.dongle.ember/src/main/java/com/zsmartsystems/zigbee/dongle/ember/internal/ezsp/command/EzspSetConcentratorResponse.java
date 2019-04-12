@@ -22,53 +22,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetConcentratorResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x10;
+    public static int FRAME_ID = 0x10;
 
-	/**
-	 * An EmberStatus value indicating success or the reason for failure.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 */
-	private EzspStatus status;
+    /**
+     * An EmberStatus value indicating success or the reason for failure.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     */
+    private EzspStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspSetConcentratorResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspSetConcentratorResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEzspStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEzspStatus();
+    }
 
-	/**
-	 * An EmberStatus value indicating success or the reason for failure.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 *
-	 * @return the current status as {@link EzspStatus}
-	 */
-	public EzspStatus getStatus() {
-		return status;
-	}
+    /**
+     * An EmberStatus value indicating success or the reason for failure.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     *
+     * @return the current status as {@link EzspStatus}
+     */
+    public EzspStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * An EmberStatus value indicating success or the reason for failure.
-	 *
-	 * @param status
-	 *            the status to set as {@link EzspStatus}
-	 */
-	public void setStatus(EzspStatus status) {
-		this.status = status;
-	}
+    /**
+     * An EmberStatus value indicating success or the reason for failure.
+     *
+     * @param status the status to set as {@link EzspStatus}
+     */
+    public void setStatus(EzspStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(55);
-		builder.append("EzspSetConcentratorResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(55);
+        builder.append("EzspSetConcentratorResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

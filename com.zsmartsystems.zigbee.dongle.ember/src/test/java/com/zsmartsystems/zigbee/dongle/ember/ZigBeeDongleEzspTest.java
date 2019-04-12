@@ -22,36 +22,36 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrame;
  *
  */
 public class ZigBeeDongleEzspTest {
-	@Test
-	public void setZigBeeExtendedPanId() {
-		ZigBeeDongleEzsp dongle = new ZigBeeDongleEzsp(null);
+    @Test
+    public void setZigBeeExtendedPanId() {
+        ZigBeeDongleEzsp dongle = new ZigBeeDongleEzsp(null);
 
-		dongle.setZigBeeExtendedPanId(new ExtendedPanId("123456789abcdef"));
-		assertEquals(new ExtendedPanId("123456789abcdef"), dongle.getZigBeeExtendedPanId());
-	}
+        dongle.setZigBeeExtendedPanId(new ExtendedPanId("123456789abcdef"));
+        assertEquals(new ExtendedPanId("123456789abcdef"), dongle.getZigBeeExtendedPanId());
+    }
 
-	@Test
-	public void setZigBeePanId() {
-		ZigBeeDongleEzsp dongle = new ZigBeeDongleEzsp(null);
+    @Test
+    public void setZigBeePanId() {
+        ZigBeeDongleEzsp dongle = new ZigBeeDongleEzsp(null);
 
-		dongle.setZigBeePanId(0x1234);
-		assertEquals(0x1234, dongle.getZigBeePanId());
-	}
+        dongle.setZigBeePanId(0x1234);
+        assertEquals(0x1234, dongle.getZigBeePanId());
+    }
 
-	@Test
-	public void testEzspVersions() {
-		EzspFrame.setEzspVersion(4);
-		assertEquals(4, EzspFrame.getEzspVersion());
-		assertFalse(EzspFrame.setEzspVersion(3));
-		assertEquals(4, EzspFrame.getEzspVersion());
-		assertTrue(EzspFrame.setEzspVersion(4));
-		assertEquals(4, EzspFrame.getEzspVersion());
-		assertTrue(EzspFrame.setEzspVersion(5));
-		assertEquals(5, EzspFrame.getEzspVersion());
-		assertTrue(EzspFrame.setEzspVersion(6));
-		assertEquals(6, EzspFrame.getEzspVersion());
-		assertFalse(EzspFrame.setEzspVersion(7));
-		assertEquals(6, EzspFrame.getEzspVersion());
-		EzspFrame.setEzspVersion(4);
-	}
+    @Test
+    public void testEzspVersions() {
+        EzspFrame.setEzspVersion(4);
+        assertEquals(4, EzspFrame.getEzspVersion());
+        assertFalse(EzspFrame.setEzspVersion(3));
+        assertEquals(4, EzspFrame.getEzspVersion());
+        assertTrue(EzspFrame.setEzspVersion(4));
+        assertEquals(4, EzspFrame.getEzspVersion());
+        assertTrue(EzspFrame.setEzspVersion(5));
+        assertEquals(5, EzspFrame.getEzspVersion());
+        assertTrue(EzspFrame.setEzspVersion(6));
+        assertEquals(6, EzspFrame.getEzspVersion());
+        assertFalse(EzspFrame.setEzspVersion(7));
+        assertEquals(6, EzspFrame.getEzspVersion());
+        EzspFrame.setEzspVersion(4);
+    }
 }

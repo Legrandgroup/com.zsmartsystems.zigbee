@@ -13,10 +13,9 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>networkInit</b>.
  * <p>
- * Resume network operation after a reboot. The node retains its original type.
- * This should be called on startup whether or not the node was previously part
- * of a network. EMBER_NOT_JOINED is returned if the node is not part of a
- * network.
+ * Resume network operation after a reboot. The node retains its original type. This should be
+ * called on startup whether or not the node was previously part of a network. EMBER_NOT_JOINED
+ * is returned if the node is not part of a network.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -25,32 +24,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspNetworkInitRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x17;
+    public static int FRAME_ID = 0x17;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspNetworkInitRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspNetworkInitRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		return "EzspNetworkInitRequest []";
-	}
+    @Override
+    public String toString() {
+        return "EzspNetworkInitRequest []";
+    }
 }

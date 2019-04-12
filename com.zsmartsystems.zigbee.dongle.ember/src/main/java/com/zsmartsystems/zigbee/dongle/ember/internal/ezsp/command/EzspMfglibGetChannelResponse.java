@@ -21,53 +21,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibGetChannelResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x8B;
+    public static int FRAME_ID = 0x8B;
 
-	/**
-	 * The current channel.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int channel;
+    /**
+     * The current channel.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int channel;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspMfglibGetChannelResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspMfglibGetChannelResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		channel = deserializer.deserializeUInt8();
-	}
+        // Deserialize the fields
+        channel = deserializer.deserializeUInt8();
+    }
 
-	/**
-	 * The current channel.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current channel as {@link int}
-	 */
-	public int getChannel() {
-		return channel;
-	}
+    /**
+     * The current channel.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current channel as {@link int}
+     */
+    public int getChannel() {
+        return channel;
+    }
 
-	/**
-	 * The current channel.
-	 *
-	 * @param channel
-	 *            the channel to set as {@link int}
-	 */
-	public void setChannel(int channel) {
-		this.channel = channel;
-	}
+    /**
+     * The current channel.
+     *
+     * @param channel the channel to set as {@link int}
+     */
+    public void setChannel(int channel) {
+        this.channel = channel;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(56);
-		builder.append("EzspMfglibGetChannelResponse [channel=");
-		builder.append(channel);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(56);
+        builder.append("EzspMfglibGetChannelResponse [channel=");
+        builder.append(channel);
+        builder.append(']');
+        return builder.toString();
+    }
 }

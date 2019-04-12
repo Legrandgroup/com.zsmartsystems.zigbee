@@ -18,79 +18,78 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberJoinDecision {
-	/**
-	 * Default unknown value
-	 */
-	UNKNOWN(-1),
+    /**
+     * Default unknown value
+     */
+    UNKNOWN(-1),
 
-	/**
-	 * Allow the node to join. The joining node should have a pre-configured key.
-	 * The security data sent to it will be encrypted with that key.
-	 */
-	EMBER_USE_PRECONFIGURED_KEY(0x0000),
+    /**
+     * Allow the node to join. The joining node should have a pre-configured key. The security data
+     * sent to it will be encrypted with that key.
+     */
+    EMBER_USE_PRECONFIGURED_KEY(0x0000),
 
-	/**
-	 * Allow the node to join. Send the necessary key (the Network Key in Standard
-	 * Security mode, the Trust Center Master in High Security mode) in-the-clear to
-	 * the joining device.
-	 */
-	EMBER_SEND_KEY_IN_THE_CLEAR(0x0001),
+    /**
+     * Allow the node to join. Send the necessary key (the Network Key in Standard Security mode, the
+     * Trust Center Master in High Security mode) in-the-clear to the joining device.
+     */
+    EMBER_SEND_KEY_IN_THE_CLEAR(0x0001),
 
-	/**
-	 * Deny join.
-	 */
-	EMBER_DENY_JOIN(0x0002),
+    /**
+     * Deny join.
+     */
+    EMBER_DENY_JOIN(0x0002),
 
-	/**
-	 * Take no action.
-	 */
-	EMBER_NO_ACTION(0x0003);
+    /**
+     * Take no action.
+     */
+    EMBER_NO_ACTION(0x0003);
 
-	/**
-	 * A mapping between the integer code and its corresponding type to facilitate
-	 * lookup by code.
-	 */
-	private static Map<Integer, EmberJoinDecision> codeMapping;
+    /**
+     * A mapping between the integer code and its corresponding type to
+     * facilitate lookup by code.
+     */
+    private static Map<Integer, EmberJoinDecision> codeMapping;
 
-	private int key;
+    private int key;
 
-	private EmberJoinDecision(int key) {
-		this.key = key;
-	}
+    private EmberJoinDecision(int key) {
+        this.key = key;
+    }
 
-	private static void initMapping() {
-		codeMapping = new HashMap<Integer, EmberJoinDecision>();
-		for (EmberJoinDecision s : values()) {
-			codeMapping.put(s.key, s);
-		}
-	}
+    private static void initMapping() {
+        codeMapping = new HashMap<Integer, EmberJoinDecision>();
+        for (EmberJoinDecision s : values()) {
+            codeMapping.put(s.key, s);
+        }
+    }
 
-	/**
-	 * Lookup function based on the EmberStatus type code. Returns null if the code
-	 * does not exist.
-	 *
-	 * @param code
-	 *            the code to lookup
-	 * @return enumeration value of the alarm type.
-	 */
-	public static EmberJoinDecision getEmberJoinDecision(int code) {
-		if (codeMapping == null) {
-			initMapping();
-		}
+    /**
+     * Lookup function based on the EmberStatus type code. Returns null if the
+     * code does not exist.
+     *
+     * @param code
+     *            the code to lookup
+     * @return enumeration value of the alarm type.
+     */
+    public static EmberJoinDecision getEmberJoinDecision(int code) {
+        if (codeMapping == null) {
+            initMapping();
+        }
 
-		if (codeMapping.get(code) == null) {
-			return UNKNOWN;
-		}
+        if (codeMapping.get(code) == null) {
+            return UNKNOWN;
+        }
 
-		return codeMapping.get(code);
-	}
+        return codeMapping.get(code);
+    }
 
-	/**
-	 * Returns the EZSP protocol defined value for this enum
-	 *
-	 * @return the EZSP protocol key
-	 */
-	public int getKey() {
-		return key;
-	}
+    /**
+     * Returns the EZSP protocol defined value for this enum
+     *
+     * @return the EZSP protocol key
+     */
+    public int getKey() {
+        return key;
+    }
 }

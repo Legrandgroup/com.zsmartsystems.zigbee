@@ -22,65 +22,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetAddressTableRemoteEui64Request extends EzspFrameRequest {
-	public static int FRAME_ID = 0x5E;
+    public static int FRAME_ID = 0x5E;
 
-	/**
-	 * The index of an address table entry.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int addressTableIndex;
+    /**
+     * The index of an address table entry.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int addressTableIndex;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspGetAddressTableRemoteEui64Request() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspGetAddressTableRemoteEui64Request() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * The index of an address table entry.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current addressTableIndex as {@link int}
-	 */
-	public int getAddressTableIndex() {
-		return addressTableIndex;
-	}
+    /**
+     * The index of an address table entry.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current addressTableIndex as {@link int}
+     */
+    public int getAddressTableIndex() {
+        return addressTableIndex;
+    }
 
-	/**
-	 * The index of an address table entry.
-	 *
-	 * @param addressTableIndex
-	 *            the addressTableIndex to set as {@link int}
-	 */
-	public void setAddressTableIndex(int addressTableIndex) {
-		this.addressTableIndex = addressTableIndex;
-	}
+    /**
+     * The index of an address table entry.
+     *
+     * @param addressTableIndex the addressTableIndex to set as {@link int}
+     */
+    public void setAddressTableIndex(int addressTableIndex) {
+        this.addressTableIndex = addressTableIndex;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeUInt8(addressTableIndex);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeUInt8(addressTableIndex);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(65);
-		builder.append("EzspGetAddressTableRemoteEui64Request [addressTableIndex=");
-		builder.append(addressTableIndex);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(65);
+        builder.append("EzspGetAddressTableRemoteEui64Request [addressTableIndex=");
+        builder.append(addressTableIndex);
+        builder.append(']');
+        return builder.toString();
+    }
 }

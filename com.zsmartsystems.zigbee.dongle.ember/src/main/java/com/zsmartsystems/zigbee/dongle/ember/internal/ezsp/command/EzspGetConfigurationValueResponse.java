@@ -22,87 +22,85 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetConfigurationValueResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x52;
+    public static int FRAME_ID = 0x52;
 
-	/**
-	 * EZSP_SUCCESS if the value was read successfully, EZSP_ERROR_INVALID_ID if the
-	 * NCP does not recognize configId.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 */
-	private EzspStatus status;
+    /**
+     * EZSP_SUCCESS if the value was read successfully, EZSP_ERROR_INVALID_ID if the NCP does not
+     * recognize configId.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     */
+    private EzspStatus status;
 
-	/**
-	 * The configuration value.
-	 * <p>
-	 * EZSP type is <i>uint16_t</i> - Java type is {@link int}
-	 */
-	private int value;
+    /**
+     * The configuration value.
+     * <p>
+     * EZSP type is <i>uint16_t</i> - Java type is {@link int}
+     */
+    private int value;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspGetConfigurationValueResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspGetConfigurationValueResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEzspStatus();
-		value = deserializer.deserializeUInt16();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEzspStatus();
+        value = deserializer.deserializeUInt16();
+    }
 
-	/**
-	 * EZSP_SUCCESS if the value was read successfully, EZSP_ERROR_INVALID_ID if the
-	 * NCP does not recognize configId.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 *
-	 * @return the current status as {@link EzspStatus}
-	 */
-	public EzspStatus getStatus() {
-		return status;
-	}
+    /**
+     * EZSP_SUCCESS if the value was read successfully, EZSP_ERROR_INVALID_ID if the NCP does not
+     * recognize configId.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     *
+     * @return the current status as {@link EzspStatus}
+     */
+    public EzspStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * EZSP_SUCCESS if the value was read successfully, EZSP_ERROR_INVALID_ID if the
-	 * NCP does not recognize configId.
-	 *
-	 * @param status
-	 *            the status to set as {@link EzspStatus}
-	 */
-	public void setStatus(EzspStatus status) {
-		this.status = status;
-	}
+    /**
+     * EZSP_SUCCESS if the value was read successfully, EZSP_ERROR_INVALID_ID if the NCP does not
+     * recognize configId.
+     *
+     * @param status the status to set as {@link EzspStatus}
+     */
+    public void setStatus(EzspStatus status) {
+        this.status = status;
+    }
 
-	/**
-	 * The configuration value.
-	 * <p>
-	 * EZSP type is <i>uint16_t</i> - Java type is {@link int}
-	 *
-	 * @return the current value as {@link int}
-	 */
-	public int getValue() {
-		return value;
-	}
+    /**
+     * The configuration value.
+     * <p>
+     * EZSP type is <i>uint16_t</i> - Java type is {@link int}
+     *
+     * @return the current value as {@link int}
+     */
+    public int getValue() {
+        return value;
+    }
 
-	/**
-	 * The configuration value.
-	 *
-	 * @param value
-	 *            the value to set as {@link int}
-	 */
-	public void setValue(int value) {
-		this.value = value;
-	}
+    /**
+     * The configuration value.
+     *
+     * @param value the value to set as {@link int}
+     */
+    public void setValue(int value) {
+        this.value = value;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(86);
-		builder.append("EzspGetConfigurationValueResponse [status=");
-		builder.append(status);
-		builder.append(", value=");
-		builder.append(value);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(86);
+        builder.append("EzspGetConfigurationValueResponse [status=");
+        builder.append(status);
+        builder.append(", value=");
+        builder.append(value);
+        builder.append(']');
+        return builder.toString();
+    }
 }

@@ -13,11 +13,10 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>mfglibSetPower</b>.
  * <p>
- * First select the transmit power mode, and then include a method for selecting
- * the radio transmit power. The valid power settings depend upon the specific
- * radio in use. Ember radios have discrete power settings, and then requested
- * power is rounded to a valid power setting; the actual power output is
- * available to the caller via mfglibGetPower().
+ * First select the transmit power mode, and then include a method for selecting the radio
+ * transmit power. The valid power settings depend upon the specific radio in use. Ember radios
+ * have discrete power settings, and then requested power is rounded to a valid power setting;
+ * the actual power output is available to the caller via mfglibGetPower().
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -26,53 +25,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibSetPowerResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x8C;
+    public static int FRAME_ID = 0x8C;
 
-	/**
-	 * The success or failure code of the operation.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 */
-	private EmberStatus status;
+    /**
+     * The success or failure code of the operation.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     */
+    private EmberStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspMfglibSetPowerResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspMfglibSetPowerResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEmberStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEmberStatus();
+    }
 
-	/**
-	 * The success or failure code of the operation.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 *
-	 * @return the current status as {@link EmberStatus}
-	 */
-	public EmberStatus getStatus() {
-		return status;
-	}
+    /**
+     * The success or failure code of the operation.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     *
+     * @return the current status as {@link EmberStatus}
+     */
+    public EmberStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * The success or failure code of the operation.
-	 *
-	 * @param status
-	 *            the status to set as {@link EmberStatus}
-	 */
-	public void setStatus(EmberStatus status) {
-		this.status = status;
-	}
+    /**
+     * The success or failure code of the operation.
+     *
+     * @param status the status to set as {@link EmberStatus}
+     */
+    public void setStatus(EmberStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(54);
-		builder.append("EzspMfglibSetPowerResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(54);
+        builder.append("EzspMfglibSetPowerResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

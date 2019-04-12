@@ -22,53 +22,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspInvalidCommandResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x58;
+    public static int FRAME_ID = 0x58;
 
-	/**
-	 * The reason why the command was invalid.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 */
-	private EzspStatus reason;
+    /**
+     * The reason why the command was invalid.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     */
+    private EzspStatus reason;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspInvalidCommandResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspInvalidCommandResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		reason = deserializer.deserializeEzspStatus();
-	}
+        // Deserialize the fields
+        reason = deserializer.deserializeEzspStatus();
+    }
 
-	/**
-	 * The reason why the command was invalid.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 *
-	 * @return the current reason as {@link EzspStatus}
-	 */
-	public EzspStatus getReason() {
-		return reason;
-	}
+    /**
+     * The reason why the command was invalid.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     *
+     * @return the current reason as {@link EzspStatus}
+     */
+    public EzspStatus getReason() {
+        return reason;
+    }
 
-	/**
-	 * The reason why the command was invalid.
-	 *
-	 * @param reason
-	 *            the reason to set as {@link EzspStatus}
-	 */
-	public void setReason(EzspStatus reason) {
-		this.reason = reason;
-	}
+    /**
+     * The reason why the command was invalid.
+     *
+     * @param reason the reason to set as {@link EzspStatus}
+     */
+    public void setReason(EzspStatus reason) {
+        this.reason = reason;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(54);
-		builder.append("EzspInvalidCommandResponse [reason=");
-		builder.append(reason);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(54);
+        builder.append("EzspInvalidCommandResponse [reason=");
+        builder.append(reason);
+        builder.append(']');
+        return builder.toString();
+    }
 }

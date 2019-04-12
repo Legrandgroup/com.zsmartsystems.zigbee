@@ -21,53 +21,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetNodeIdResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x27;
+    public static int FRAME_ID = 0x27;
 
-	/**
-	 * The 16-bit ID.
-	 * <p>
-	 * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
-	 */
-	private int nodeId;
+    /**
+     * The 16-bit ID.
+     * <p>
+     * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
+     */
+    private int nodeId;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspGetNodeIdResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspGetNodeIdResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		nodeId = deserializer.deserializeUInt16();
-	}
+        // Deserialize the fields
+        nodeId = deserializer.deserializeUInt16();
+    }
 
-	/**
-	 * The 16-bit ID.
-	 * <p>
-	 * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
-	 *
-	 * @return the current nodeId as {@link int}
-	 */
-	public int getNodeId() {
-		return nodeId;
-	}
+    /**
+     * The 16-bit ID.
+     * <p>
+     * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
+     *
+     * @return the current nodeId as {@link int}
+     */
+    public int getNodeId() {
+        return nodeId;
+    }
 
-	/**
-	 * The 16-bit ID.
-	 *
-	 * @param nodeId
-	 *            the nodeId to set as {@link int}
-	 */
-	public void setNodeId(int nodeId) {
-		this.nodeId = nodeId;
-	}
+    /**
+     * The 16-bit ID.
+     *
+     * @param nodeId the nodeId to set as {@link int}
+     */
+    public void setNodeId(int nodeId) {
+        this.nodeId = nodeId;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(49);
-		builder.append("EzspGetNodeIdResponse [nodeId=");
-		builder.append(nodeId);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(49);
+        builder.append("EzspGetNodeIdResponse [nodeId=");
+        builder.append(nodeId);
+        builder.append(']');
+        return builder.toString();
+    }
 }

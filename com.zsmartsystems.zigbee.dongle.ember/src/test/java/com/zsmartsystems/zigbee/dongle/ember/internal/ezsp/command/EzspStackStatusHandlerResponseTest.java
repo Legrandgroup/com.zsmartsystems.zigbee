@@ -21,13 +21,13 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  *
  */
 public class EzspStackStatusHandlerResponseTest extends EzspFrameTest {
-	@Test
-	public void testStackHandler() {
-		EzspFrame.setEzspVersion(4);
+    @Test
+    public void testStackHandler() {
+        EzspFrame.setEzspVersion(4);
 
-		EzspStackStatusHandler response = new EzspStackStatusHandler(getPacketData("03 90 19 90"));
-		assertEquals(EzspStackStatusHandler.FRAME_ID, response.getFrameId());
-		assertEquals(EmberStatus.EMBER_NETWORK_UP, response.getStatus());
-		assertEquals(3, response.getSequenceNumber());
-	}
+        EzspStackStatusHandler response = new EzspStackStatusHandler(getPacketData("03 90 19 90"));
+        assertEquals(EzspStackStatusHandler.FRAME_ID, response.getFrameId());
+        assertEquals(EmberStatus.EMBER_NETWORK_UP, response.getStatus());
+        assertEquals(3, response.getSequenceNumber());
+    }
 }

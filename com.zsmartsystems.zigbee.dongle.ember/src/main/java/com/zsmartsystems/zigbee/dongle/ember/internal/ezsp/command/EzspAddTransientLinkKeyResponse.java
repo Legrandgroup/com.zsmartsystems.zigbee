@@ -13,9 +13,9 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
 /**
  * Class to implement the Ember EZSP command <b>addTransientLinkKey</b>.
  * <p>
- * This is a function to add a temporary link key for a joining device. The key
- * will get timed out after a defined timeout period if the device does not
- * update its link key with the Trust Center.
+ * This is a function to add a temporary link key for a joining device. The key will get timed out
+ * after a defined timeout period if the device does not update its link key with the Trust
+ * Center.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,53 +24,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspAddTransientLinkKeyResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0xAF;
+    public static int FRAME_ID = 0xAF;
 
-	/**
-	 * The success or failure of adding a transient key.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 */
-	private EmberStatus status;
+    /**
+     * The success or failure of adding a transient key.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     */
+    private EmberStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspAddTransientLinkKeyResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspAddTransientLinkKeyResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEmberStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEmberStatus();
+    }
 
-	/**
-	 * The success or failure of adding a transient key.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 *
-	 * @return the current status as {@link EmberStatus}
-	 */
-	public EmberStatus getStatus() {
-		return status;
-	}
+    /**
+     * The success or failure of adding a transient key.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     *
+     * @return the current status as {@link EmberStatus}
+     */
+    public EmberStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * The success or failure of adding a transient key.
-	 *
-	 * @param status
-	 *            the status to set as {@link EmberStatus}
-	 */
-	public void setStatus(EmberStatus status) {
-		this.status = status;
-	}
+    /**
+     * The success or failure of adding a transient key.
+     *
+     * @param status the status to set as {@link EmberStatus}
+     */
+    public void setStatus(EmberStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(59);
-		builder.append("EzspAddTransientLinkKeyResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(59);
+        builder.append("EzspAddTransientLinkKeyResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

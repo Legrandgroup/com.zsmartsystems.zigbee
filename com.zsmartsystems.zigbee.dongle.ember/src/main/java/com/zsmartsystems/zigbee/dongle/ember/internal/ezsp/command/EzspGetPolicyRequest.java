@@ -23,65 +23,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspPolicyI
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetPolicyRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x56;
+    public static int FRAME_ID = 0x56;
 
-	/**
-	 * Identifies which policy to modify.
-	 * <p>
-	 * EZSP type is <i>EzspPolicyId</i> - Java type is {@link EzspPolicyId}
-	 */
-	private EzspPolicyId policyId;
+    /**
+     * Identifies which policy to modify.
+     * <p>
+     * EZSP type is <i>EzspPolicyId</i> - Java type is {@link EzspPolicyId}
+     */
+    private EzspPolicyId policyId;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspGetPolicyRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspGetPolicyRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * Identifies which policy to modify.
-	 * <p>
-	 * EZSP type is <i>EzspPolicyId</i> - Java type is {@link EzspPolicyId}
-	 *
-	 * @return the current policyId as {@link EzspPolicyId}
-	 */
-	public EzspPolicyId getPolicyId() {
-		return policyId;
-	}
+    /**
+     * Identifies which policy to modify.
+     * <p>
+     * EZSP type is <i>EzspPolicyId</i> - Java type is {@link EzspPolicyId}
+     *
+     * @return the current policyId as {@link EzspPolicyId}
+     */
+    public EzspPolicyId getPolicyId() {
+        return policyId;
+    }
 
-	/**
-	 * Identifies which policy to modify.
-	 *
-	 * @param policyId
-	 *            the policyId to set as {@link EzspPolicyId}
-	 */
-	public void setPolicyId(EzspPolicyId policyId) {
-		this.policyId = policyId;
-	}
+    /**
+     * Identifies which policy to modify.
+     *
+     * @param policyId the policyId to set as {@link EzspPolicyId}
+     */
+    public void setPolicyId(EzspPolicyId policyId) {
+        this.policyId = policyId;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeEzspPolicyId(policyId);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeEzspPolicyId(policyId);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(48);
-		builder.append("EzspGetPolicyRequest [policyId=");
-		builder.append(policyId);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(48);
+        builder.append("EzspGetPolicyRequest [policyId=");
+        builder.append(policyId);
+        builder.append(']');
+        return builder.toString();
+    }
 }

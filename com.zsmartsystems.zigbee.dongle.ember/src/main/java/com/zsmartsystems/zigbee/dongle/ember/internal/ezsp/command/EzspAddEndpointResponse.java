@@ -13,11 +13,10 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
 /**
  * Class to implement the Ember EZSP command <b>addEndpoint</b>.
  * <p>
- * Configures endpoint information on the NCP. The NCP does not remember these
- * settings after a reset. Endpoints can be added by the Host after the NCP has
- * reset. Once the status of the stack changes to EMBER_NETWORK_UP, endpoints
- * can no longer be added and this command will respond with
- * EZSP_ERROR_INVALID_CALL.
+ * Configures endpoint information on the NCP. The NCP does not remember these settings after a
+ * reset. Endpoints can be added by the Host after the NCP has reset. Once the status of the stack
+ * changes to EMBER_NETWORK_UP, endpoints can no longer be added and this command will respond
+ * with EZSP_ERROR_INVALID_CALL.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -26,65 +25,61 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspAddEndpointResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x02;
+    public static int FRAME_ID = 0x02;
 
-	/**
-	 * EZSP_SUCCESS if the configuration value was changed, EZSP_ERROR_OUT_OF_MEMORY
-	 * if the new value exceeded the available memory, EZSP_ERROR_INVALID_VALUE if
-	 * the new value was out of bounds, EZSP_ERROR_INVALID_ID if the NCP does not
-	 * recognize configId, EZSP_ERROR_INVALID_CALL if configuration values can no
-	 * longer be modified.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 */
-	private EzspStatus status;
+    /**
+     * EZSP_SUCCESS if the configuration value was changed, EZSP_ERROR_OUT_OF_MEMORY if the new
+     * value exceeded the available memory, EZSP_ERROR_INVALID_VALUE if the new value was out of
+     * bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize configId,
+     * EZSP_ERROR_INVALID_CALL if configuration values can no longer be modified.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     */
+    private EzspStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspAddEndpointResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspAddEndpointResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEzspStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEzspStatus();
+    }
 
-	/**
-	 * EZSP_SUCCESS if the configuration value was changed, EZSP_ERROR_OUT_OF_MEMORY
-	 * if the new value exceeded the available memory, EZSP_ERROR_INVALID_VALUE if
-	 * the new value was out of bounds, EZSP_ERROR_INVALID_ID if the NCP does not
-	 * recognize configId, EZSP_ERROR_INVALID_CALL if configuration values can no
-	 * longer be modified.
-	 * <p>
-	 * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
-	 *
-	 * @return the current status as {@link EzspStatus}
-	 */
-	public EzspStatus getStatus() {
-		return status;
-	}
+    /**
+     * EZSP_SUCCESS if the configuration value was changed, EZSP_ERROR_OUT_OF_MEMORY if the new
+     * value exceeded the available memory, EZSP_ERROR_INVALID_VALUE if the new value was out of
+     * bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize configId,
+     * EZSP_ERROR_INVALID_CALL if configuration values can no longer be modified.
+     * <p>
+     * EZSP type is <i>EzspStatus</i> - Java type is {@link EzspStatus}
+     *
+     * @return the current status as {@link EzspStatus}
+     */
+    public EzspStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * EZSP_SUCCESS if the configuration value was changed, EZSP_ERROR_OUT_OF_MEMORY
-	 * if the new value exceeded the available memory, EZSP_ERROR_INVALID_VALUE if
-	 * the new value was out of bounds, EZSP_ERROR_INVALID_ID if the NCP does not
-	 * recognize configId, EZSP_ERROR_INVALID_CALL if configuration values can no
-	 * longer be modified.
-	 *
-	 * @param status
-	 *            the status to set as {@link EzspStatus}
-	 */
-	public void setStatus(EzspStatus status) {
-		this.status = status;
-	}
+    /**
+     * EZSP_SUCCESS if the configuration value was changed, EZSP_ERROR_OUT_OF_MEMORY if the new
+     * value exceeded the available memory, EZSP_ERROR_INVALID_VALUE if the new value was out of
+     * bounds, EZSP_ERROR_INVALID_ID if the NCP does not recognize configId,
+     * EZSP_ERROR_INVALID_CALL if configuration values can no longer be modified.
+     *
+     * @param status the status to set as {@link EzspStatus}
+     */
+    public void setStatus(EzspStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(51);
-		builder.append("EzspAddEndpointResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(51);
+        builder.append("EzspAddEndpointResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

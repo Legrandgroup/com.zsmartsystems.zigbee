@@ -13,8 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>erraseKeyTableEntry</b>.
  * <p>
- * This function erases the data in the key table entry at the specified index.
- * If the index is invalid, falseis returned.
+ * This function erases the data in the key table entry at the specified index. If the index is
+ * invalid, falseis returned.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,65 +23,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspErraseKeyTableEntryRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x76;
+    public static int FRAME_ID = 0x76;
 
-	/**
-	 * This indicates the index of entry to erase.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int index;
+    /**
+     * This indicates the index of entry to erase.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int index;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspErraseKeyTableEntryRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspErraseKeyTableEntryRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * This indicates the index of entry to erase.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current index as {@link int}
-	 */
-	public int getIndex() {
-		return index;
-	}
+    /**
+     * This indicates the index of entry to erase.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current index as {@link int}
+     */
+    public int getIndex() {
+        return index;
+    }
 
-	/**
-	 * This indicates the index of entry to erase.
-	 *
-	 * @param index
-	 *            the index to set as {@link int}
-	 */
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    /**
+     * This indicates the index of entry to erase.
+     *
+     * @param index the index to set as {@link int}
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeUInt8(index);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeUInt8(index);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(58);
-		builder.append("EzspErraseKeyTableEntryRequest [index=");
-		builder.append(index);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(58);
+        builder.append("EzspErraseKeyTableEntryRequest [index=");
+        builder.append(index);
+        builder.append(']');
+        return builder.toString();
+    }
 }

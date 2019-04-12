@@ -23,86 +23,82 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberStatus
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetBindingResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x2C;
+    public static int FRAME_ID = 0x2C;
 
-	/**
-	 * An EmberStatus value indicating the success or failure of the command.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 */
-	private EmberStatus status;
+    /**
+     * An EmberStatus value indicating the success or failure of the command.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     */
+    private EmberStatus status;
 
-	/**
-	 * The contents of the binding entry.
-	 * <p>
-	 * EZSP type is <i>EmberBindingTableEntry</i> - Java type is
-	 * {@link EmberBindingTableEntry}
-	 */
-	private EmberBindingTableEntry value;
+    /**
+     * The contents of the binding entry.
+     * <p>
+     * EZSP type is <i>EmberBindingTableEntry</i> - Java type is {@link EmberBindingTableEntry}
+     */
+    private EmberBindingTableEntry value;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspGetBindingResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspGetBindingResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEmberStatus();
-		value = deserializer.deserializeEmberBindingTableEntry();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEmberStatus();
+        value = deserializer.deserializeEmberBindingTableEntry();
+    }
 
-	/**
-	 * An EmberStatus value indicating the success or failure of the command.
-	 * <p>
-	 * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
-	 *
-	 * @return the current status as {@link EmberStatus}
-	 */
-	public EmberStatus getStatus() {
-		return status;
-	}
+    /**
+     * An EmberStatus value indicating the success or failure of the command.
+     * <p>
+     * EZSP type is <i>EmberStatus</i> - Java type is {@link EmberStatus}
+     *
+     * @return the current status as {@link EmberStatus}
+     */
+    public EmberStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * An EmberStatus value indicating the success or failure of the command.
-	 *
-	 * @param status
-	 *            the status to set as {@link EmberStatus}
-	 */
-	public void setStatus(EmberStatus status) {
-		this.status = status;
-	}
+    /**
+     * An EmberStatus value indicating the success or failure of the command.
+     *
+     * @param status the status to set as {@link EmberStatus}
+     */
+    public void setStatus(EmberStatus status) {
+        this.status = status;
+    }
 
-	/**
-	 * The contents of the binding entry.
-	 * <p>
-	 * EZSP type is <i>EmberBindingTableEntry</i> - Java type is
-	 * {@link EmberBindingTableEntry}
-	 *
-	 * @return the current value as {@link EmberBindingTableEntry}
-	 */
-	public EmberBindingTableEntry getValue() {
-		return value;
-	}
+    /**
+     * The contents of the binding entry.
+     * <p>
+     * EZSP type is <i>EmberBindingTableEntry</i> - Java type is {@link EmberBindingTableEntry}
+     *
+     * @return the current value as {@link EmberBindingTableEntry}
+     */
+    public EmberBindingTableEntry getValue() {
+        return value;
+    }
 
-	/**
-	 * The contents of the binding entry.
-	 *
-	 * @param value
-	 *            the value to set as {@link EmberBindingTableEntry}
-	 */
-	public void setValue(EmberBindingTableEntry value) {
-		this.value = value;
-	}
+    /**
+     * The contents of the binding entry.
+     *
+     * @param value the value to set as {@link EmberBindingTableEntry}
+     */
+    public void setValue(EmberBindingTableEntry value) {
+        this.value = value;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(75);
-		builder.append("EzspGetBindingResponse [status=");
-		builder.append(status);
-		builder.append(", value=");
-		builder.append(value);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(75);
+        builder.append("EzspGetBindingResponse [status=");
+        builder.append(status);
+        builder.append(", value=");
+        builder.append(value);
+        builder.append(']');
+        return builder.toString();
+    }
 }

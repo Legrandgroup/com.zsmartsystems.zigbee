@@ -13,8 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>setBindingRemoteNodeId</b>.
  * <p>
- * Set the node ID for the binding's destination. See getBindingRemoteNodeId for
- * a description.
+ * Set the node ID for the binding's destination. See getBindingRemoteNodeId for a
+ * description.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,96 +23,94 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetBindingRemoteNodeIdRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x30;
+    public static int FRAME_ID = 0x30;
 
-	/**
-	 * The index of a binding table entry.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int index;
+    /**
+     * The index of a binding table entry.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int index;
 
-	/**
-	 * The short ID of the destination node.
-	 * <p>
-	 * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
-	 */
-	private int nodeId;
+    /**
+     * The short ID of the destination node.
+     * <p>
+     * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
+     */
+    private int nodeId;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspSetBindingRemoteNodeIdRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspSetBindingRemoteNodeIdRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * The index of a binding table entry.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current index as {@link int}
-	 */
-	public int getIndex() {
-		return index;
-	}
+    /**
+     * The index of a binding table entry.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current index as {@link int}
+     */
+    public int getIndex() {
+        return index;
+    }
 
-	/**
-	 * The index of a binding table entry.
-	 *
-	 * @param index
-	 *            the index to set as {@link int}
-	 */
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    /**
+     * The index of a binding table entry.
+     *
+     * @param index the index to set as {@link int}
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	/**
-	 * The short ID of the destination node.
-	 * <p>
-	 * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
-	 *
-	 * @return the current nodeId as {@link int}
-	 */
-	public int getNodeId() {
-		return nodeId;
-	}
+    /**
+     * The short ID of the destination node.
+     * <p>
+     * EZSP type is <i>EmberNodeId</i> - Java type is {@link int}
+     *
+     * @return the current nodeId as {@link int}
+     */
+    public int getNodeId() {
+        return nodeId;
+    }
 
-	/**
-	 * The short ID of the destination node.
-	 *
-	 * @param nodeId
-	 *            the nodeId to set as {@link int}
-	 */
-	public void setNodeId(int nodeId) {
-		this.nodeId = nodeId;
-	}
+    /**
+     * The short ID of the destination node.
+     *
+     * @param nodeId the nodeId to set as {@link int}
+     */
+    public void setNodeId(int nodeId) {
+        this.nodeId = nodeId;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeUInt8(index);
-		serializer.serializeUInt16(nodeId);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeUInt8(index);
+        serializer.serializeUInt16(nodeId);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(86);
-		builder.append("EzspSetBindingRemoteNodeIdRequest [index=");
-		builder.append(index);
-		builder.append(", nodeId=");
-		builder.append(nodeId);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(86);
+        builder.append("EzspSetBindingRemoteNodeIdRequest [index=");
+        builder.append(index);
+        builder.append(", nodeId=");
+        builder.append(nodeId);
+        builder.append(']');
+        return builder.toString();
+    }
 }

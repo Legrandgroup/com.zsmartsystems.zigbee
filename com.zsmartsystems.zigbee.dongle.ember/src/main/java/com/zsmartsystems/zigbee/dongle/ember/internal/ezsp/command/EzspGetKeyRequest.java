@@ -23,65 +23,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberKeyTyp
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetKeyRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x6A;
+    public static int FRAME_ID = 0x6A;
 
-	/**
-	 * 
-	 * <p>
-	 * EZSP type is <i>EmberKeyType</i> - Java type is {@link EmberKeyType}
-	 */
-	private EmberKeyType keyType;
+    /**
+     * 
+     * <p>
+     * EZSP type is <i>EmberKeyType</i> - Java type is {@link EmberKeyType}
+     */
+    private EmberKeyType keyType;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspGetKeyRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspGetKeyRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * 
-	 * <p>
-	 * EZSP type is <i>EmberKeyType</i> - Java type is {@link EmberKeyType}
-	 *
-	 * @return the current keyType as {@link EmberKeyType}
-	 */
-	public EmberKeyType getKeyType() {
-		return keyType;
-	}
+    /**
+     * 
+     * <p>
+     * EZSP type is <i>EmberKeyType</i> - Java type is {@link EmberKeyType}
+     *
+     * @return the current keyType as {@link EmberKeyType}
+     */
+    public EmberKeyType getKeyType() {
+        return keyType;
+    }
 
-	/**
-	 * 
-	 *
-	 * @param keyType
-	 *            the keyType to set as {@link EmberKeyType}
-	 */
-	public void setKeyType(EmberKeyType keyType) {
-		this.keyType = keyType;
-	}
+    /**
+     * 
+     *
+     * @param keyType the keyType to set as {@link EmberKeyType}
+     */
+    public void setKeyType(EmberKeyType keyType) {
+        this.keyType = keyType;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeEmberKeyType(keyType);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeEmberKeyType(keyType);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(45);
-		builder.append("EzspGetKeyRequest [keyType=");
-		builder.append(keyType);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(45);
+        builder.append("EzspGetKeyRequest [keyType=");
+        builder.append(keyType);
+        builder.append(']');
+        return builder.toString();
+    }
 }

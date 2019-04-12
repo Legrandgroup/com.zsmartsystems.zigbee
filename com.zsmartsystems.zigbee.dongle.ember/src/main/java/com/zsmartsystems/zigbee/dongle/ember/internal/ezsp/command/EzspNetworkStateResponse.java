@@ -13,8 +13,7 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberNetwor
 /**
  * Class to implement the Ember EZSP command <b>networkState</b>.
  * <p>
- * Returns a value indicating whether the node is joining, joined to, or leaving
- * a network.
+ * Returns a value indicating whether the node is joining, joined to, or leaving a network.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,55 +22,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EmberNetwor
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspNetworkStateResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x18;
+    public static int FRAME_ID = 0x18;
 
-	/**
-	 * An EmberNetworkStatus value indicating the current join status.
-	 * <p>
-	 * EZSP type is <i>EmberNetworkStatus</i> - Java type is
-	 * {@link EmberNetworkStatus}
-	 */
-	private EmberNetworkStatus status;
+    /**
+     * An EmberNetworkStatus value indicating the current join status.
+     * <p>
+     * EZSP type is <i>EmberNetworkStatus</i> - Java type is {@link EmberNetworkStatus}
+     */
+    private EmberNetworkStatus status;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspNetworkStateResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspNetworkStateResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		status = deserializer.deserializeEmberNetworkStatus();
-	}
+        // Deserialize the fields
+        status = deserializer.deserializeEmberNetworkStatus();
+    }
 
-	/**
-	 * An EmberNetworkStatus value indicating the current join status.
-	 * <p>
-	 * EZSP type is <i>EmberNetworkStatus</i> - Java type is
-	 * {@link EmberNetworkStatus}
-	 *
-	 * @return the current status as {@link EmberNetworkStatus}
-	 */
-	public EmberNetworkStatus getStatus() {
-		return status;
-	}
+    /**
+     * An EmberNetworkStatus value indicating the current join status.
+     * <p>
+     * EZSP type is <i>EmberNetworkStatus</i> - Java type is {@link EmberNetworkStatus}
+     *
+     * @return the current status as {@link EmberNetworkStatus}
+     */
+    public EmberNetworkStatus getStatus() {
+        return status;
+    }
 
-	/**
-	 * An EmberNetworkStatus value indicating the current join status.
-	 *
-	 * @param status
-	 *            the status to set as {@link EmberNetworkStatus}
-	 */
-	public void setStatus(EmberNetworkStatus status) {
-		this.status = status;
-	}
+    /**
+     * An EmberNetworkStatus value indicating the current join status.
+     *
+     * @param status the status to set as {@link EmberNetworkStatus}
+     */
+    public void setStatus(EmberNetworkStatus status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(52);
-		builder.append("EzspNetworkStateResponse [status=");
-		builder.append(status);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(52);
+        builder.append("EzspNetworkStateResponse [status=");
+        builder.append(status);
+        builder.append(']');
+        return builder.toString();
+    }
 }

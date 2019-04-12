@@ -22,39 +22,39 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameTest;
  *
  */
 public class EzspAddEndpointRequestTest extends EzspFrameTest {
-	@Test
-	public void testAddEndpointRequest() {
-		EzspFrame.setEzspVersion(4);
-		int[] clusters = new int[] { 0, 1, 6 };
-		EzspAddEndpointRequest request = new EzspAddEndpointRequest();
-		request.setAppFlags(0);
-		request.setDeviceId(0);
-		request.setEndpoint(1);
-		request.setInputClusterList(clusters);
-		request.setOutputClusterList(clusters);
-		request.setProfileId(0x104);
-		request.setSequenceNumber(2);
+    @Test
+    public void testAddEndpointRequest() {
+        EzspFrame.setEzspVersion(4);
+        int[] clusters = new int[] { 0, 1, 6 };
+        EzspAddEndpointRequest request = new EzspAddEndpointRequest();
+        request.setAppFlags(0);
+        request.setDeviceId(0);
+        request.setEndpoint(1);
+        request.setInputClusterList(clusters);
+        request.setOutputClusterList(clusters);
+        request.setProfileId(0x104);
+        request.setSequenceNumber(2);
 
-		System.out.println(request);
+        System.out.println(request);
 
-		assertTrue(Arrays.equals(getPacketData("02 00 02 01 04 01 00 00 00 03 03 00 00 01 00 06 00 00 00 01 00 06 00"),
-				request.serialize()));
-	}
+        assertTrue(Arrays.equals(getPacketData("02 00 02 01 04 01 00 00 00 03 03 00 00 01 00 06 00 00 00 01 00 06 00"),
+                request.serialize()));
+    }
 
-	@Test
-	public void testAddEndpointRequestNoClusters() {
-		EzspFrame.setEzspVersion(4);
-		int[] clusters = new int[] {};
-		EzspAddEndpointRequest request = new EzspAddEndpointRequest();
-		request.setDeviceId(0);
-		request.setEndpoint(1);
-		request.setInputClusterList(clusters);
-		request.setOutputClusterList(clusters);
-		request.setProfileId(0x104);
-		request.setSequenceNumber(170);
+    @Test
+    public void testAddEndpointRequestNoClusters() {
+        EzspFrame.setEzspVersion(4);
+        int[] clusters = new int[] {};
+        EzspAddEndpointRequest request = new EzspAddEndpointRequest();
+        request.setDeviceId(0);
+        request.setEndpoint(1);
+        request.setInputClusterList(clusters);
+        request.setOutputClusterList(clusters);
+        request.setProfileId(0x104);
+        request.setSequenceNumber(170);
 
-		System.out.println(request);
+        System.out.println(request);
 
-		assertTrue(Arrays.equals(getPacketData("AA 00 02 01 04 01 00 00 00 00 00"), request.serialize()));
-	}
+        assertTrue(Arrays.equals(getPacketData("AA 00 02 01 04 01 00 00 00 00 00"), request.serialize()));
+    }
 }

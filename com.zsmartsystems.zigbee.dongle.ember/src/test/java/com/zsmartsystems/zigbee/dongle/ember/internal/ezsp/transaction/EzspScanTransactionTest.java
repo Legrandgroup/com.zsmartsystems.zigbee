@@ -35,48 +35,48 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.transaction.EzspMulti
  *
  */
 public class EzspScanTransactionTest extends EzspFrameTest {
-	@Test
-	public void testScanTransaction() {
-		EzspStartScanRequest energyScan = new EzspStartScanRequest();
-		energyScan.setChannelMask(ZigBeeChannelMask.CHANNEL_MASK_2GHZ);
-		energyScan.setDuration(1);
-		energyScan.setSequenceNumber(3);
-		energyScan.setScanType(EzspNetworkScanType.EZSP_ENERGY_SCAN);
+    @Test
+    public void testScanTransaction() {
+        EzspStartScanRequest energyScan = new EzspStartScanRequest();
+        energyScan.setChannelMask(ZigBeeChannelMask.CHANNEL_MASK_2GHZ);
+        energyScan.setDuration(1);
+        energyScan.setSequenceNumber(3);
+        energyScan.setScanType(EzspNetworkScanType.EZSP_ENERGY_SCAN);
 
-		Set<Class<?>> relatedResponses = new HashSet<Class<?>>(Arrays.asList(EzspStartScanResponse.class,
-				EzspNetworkFoundHandler.class, EzspEnergyScanResultHandler.class));
-		EzspMultiResponseTransaction scanTransaction = new EzspMultiResponseTransaction(energyScan,
-				EzspScanCompleteHandler.class, relatedResponses);
+        Set<Class<?>> relatedResponses = new HashSet<Class<?>>(Arrays.asList(EzspStartScanResponse.class,
+                EzspNetworkFoundHandler.class, EzspEnergyScanResultHandler.class));
+        EzspMultiResponseTransaction scanTransaction = new EzspMultiResponseTransaction(energyScan,
+                EzspScanCompleteHandler.class, relatedResponses);
 
-		EzspFrameResponse response;
+        EzspFrameResponse response;
 
-		// Start Scan Response
-		response = new EzspStartScanResponse(getPacketData("03 80 1A 00"));
-		assertFalse(scanTransaction.isMatch(response));
+        // Start Scan Response
+        response = new EzspStartScanResponse(getPacketData("03 80 1A 00"));
+        assertFalse(scanTransaction.isMatch(response));
 
-		response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0B 9D"));
-		assertEquals(11, ((EzspEnergyScanResultHandler) response).getChannel());
-		assertEquals(-99, ((EzspEnergyScanResultHandler) response).getMaxRssiValue());
-		assertFalse(scanTransaction.isMatch(response));
+        response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0B 9D"));
+        assertEquals(11, ((EzspEnergyScanResultHandler) response).getChannel());
+        assertEquals(-99, ((EzspEnergyScanResultHandler) response).getMaxRssiValue());
+        assertFalse(scanTransaction.isMatch(response));
 
-		response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0C 9D"));
-		assertFalse(scanTransaction.isMatch(response));
+        response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0C 9D"));
+        assertFalse(scanTransaction.isMatch(response));
 
-		response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0D AB"));
-		assertEquals(13, ((EzspEnergyScanResultHandler) response).getChannel());
-		assertEquals(-85, ((EzspEnergyScanResultHandler) response).getMaxRssiValue());
-		assertFalse(scanTransaction.isMatch(response));
+        response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0D AB"));
+        assertEquals(13, ((EzspEnergyScanResultHandler) response).getChannel());
+        assertEquals(-85, ((EzspEnergyScanResultHandler) response).getMaxRssiValue());
+        assertFalse(scanTransaction.isMatch(response));
 
-		response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0E 9D"));
-		assertFalse(scanTransaction.isMatch(response));
+        response = new EzspEnergyScanResultHandler(getPacketData("03 90 48 0E 9D"));
+        assertFalse(scanTransaction.isMatch(response));
 
-		response = new EzspScanCompleteHandler(getPacketData("03 90 1C 0B 00"));
-		assertEquals(EmberStatus.EMBER_SUCCESS, ((EzspScanCompleteHandler) response).getStatus());
-		assertTrue(scanTransaction.isMatch(response));
+        response = new EzspScanCompleteHandler(getPacketData("03 90 1C 0B 00"));
+        assertEquals(EmberStatus.EMBER_SUCCESS, ((EzspScanCompleteHandler) response).getStatus());
+        assertTrue(scanTransaction.isMatch(response));
 
-		assertEquals(6, scanTransaction.getResponses().size());
-		assertTrue(scanTransaction.getResponses().get(0) instanceof EzspStartScanResponse);
-		assertTrue(scanTransaction.getResponses().get(1) instanceof EzspEnergyScanResultHandler);
-		assertTrue(scanTransaction.getResponse() instanceof EzspScanCompleteHandler);
-	}
+        assertEquals(6, scanTransaction.getResponses().size());
+        assertTrue(scanTransaction.getResponses().get(0) instanceof EzspStartScanResponse);
+        assertTrue(scanTransaction.getResponses().get(1) instanceof EzspEnergyScanResultHandler);
+        assertTrue(scanTransaction.getResponse() instanceof EzspScanCompleteHandler);
+    }
 }

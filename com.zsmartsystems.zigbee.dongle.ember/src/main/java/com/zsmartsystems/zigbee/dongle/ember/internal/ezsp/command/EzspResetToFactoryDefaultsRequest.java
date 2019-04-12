@@ -22,32 +22,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspResetToFactoryDefaultsRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0xCC;
+    public static int FRAME_ID = 0xCC;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspResetToFactoryDefaultsRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspResetToFactoryDefaultsRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		return "EzspResetToFactoryDefaultsRequest []";
-	}
+    @Override
+    public String toString() {
+        return "EzspResetToFactoryDefaultsRequest []";
+    }
 }

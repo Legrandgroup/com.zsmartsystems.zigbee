@@ -21,53 +21,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspNeighborCountResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x7A;
+    public static int FRAME_ID = 0x7A;
 
-	/**
-	 * The number of active entries in the neighbor table
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int value;
+    /**
+     * The number of active entries in the neighbor table
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int value;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspNeighborCountResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspNeighborCountResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		value = deserializer.deserializeUInt8();
-	}
+        // Deserialize the fields
+        value = deserializer.deserializeUInt8();
+    }
 
-	/**
-	 * The number of active entries in the neighbor table
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current value as {@link int}
-	 */
-	public int getValue() {
-		return value;
-	}
+    /**
+     * The number of active entries in the neighbor table
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current value as {@link int}
+     */
+    public int getValue() {
+        return value;
+    }
 
-	/**
-	 * The number of active entries in the neighbor table
-	 *
-	 * @param value
-	 *            the value to set as {@link int}
-	 */
-	public void setValue(int value) {
-		this.value = value;
-	}
+    /**
+     * The number of active entries in the neighbor table
+     *
+     * @param value the value to set as {@link int}
+     */
+    public void setValue(int value) {
+        this.value = value;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(53);
-		builder.append("EzspNeighborCountResponse [value=");
-		builder.append(value);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(53);
+        builder.append("EzspNeighborCountResponse [value=");
+        builder.append(value);
+        builder.append(']');
+        return builder.toString();
+    }
 }

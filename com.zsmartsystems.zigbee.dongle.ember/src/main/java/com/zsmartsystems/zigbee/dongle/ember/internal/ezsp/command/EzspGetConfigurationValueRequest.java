@@ -23,65 +23,64 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspConfigI
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetConfigurationValueRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x52;
+    public static int FRAME_ID = 0x52;
 
-	/**
-	 * Identifies which configuration value to read
-	 * <p>
-	 * EZSP type is <i>EzspConfigId</i> - Java type is {@link EzspConfigId}
-	 */
-	private EzspConfigId configId;
+    /**
+     * Identifies which configuration value to read
+     * <p>
+     * EZSP type is <i>EzspConfigId</i> - Java type is {@link EzspConfigId}
+     */
+    private EzspConfigId configId;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspGetConfigurationValueRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspGetConfigurationValueRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	/**
-	 * Identifies which configuration value to read
-	 * <p>
-	 * EZSP type is <i>EzspConfigId</i> - Java type is {@link EzspConfigId}
-	 *
-	 * @return the current configId as {@link EzspConfigId}
-	 */
-	public EzspConfigId getConfigId() {
-		return configId;
-	}
+    /**
+     * Identifies which configuration value to read
+     * <p>
+     * EZSP type is <i>EzspConfigId</i> - Java type is {@link EzspConfigId}
+     *
+     * @return the current configId as {@link EzspConfigId}
+     */
+    public EzspConfigId getConfigId() {
+        return configId;
+    }
 
-	/**
-	 * Identifies which configuration value to read
-	 *
-	 * @param configId
-	 *            the configId to set as {@link EzspConfigId}
-	 */
-	public void setConfigId(EzspConfigId configId) {
-		this.configId = configId;
-	}
+    /**
+     * Identifies which configuration value to read
+     *
+     * @param configId the configId to set as {@link EzspConfigId}
+     */
+    public void setConfigId(EzspConfigId configId) {
+        this.configId = configId;
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		serializer.serializeEzspConfigId(configId);
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        serializer.serializeEzspConfigId(configId);
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(60);
-		builder.append("EzspGetConfigurationValueRequest [configId=");
-		builder.append(configId);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(60);
+        builder.append("EzspGetConfigurationValueRequest [configId=");
+        builder.append(configId);
+        builder.append(']');
+        return builder.toString();
+    }
 }

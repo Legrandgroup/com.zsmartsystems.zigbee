@@ -12,8 +12,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
 /**
  * Class to implement the Ember EZSP command <b>setBindingRemoteNodeId</b>.
  * <p>
- * Set the node ID for the binding's destination. See getBindingRemoteNodeId for
- * a description.
+ * Set the node ID for the binding's destination. See getBindingRemoteNodeId for a
+ * description.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -22,20 +22,20 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSetBindingRemoteNodeIdResponse extends EzspFrameResponse {
-	public static int FRAME_ID = 0x30;
+    public static int FRAME_ID = 0x30;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspSetBindingRemoteNodeIdResponse(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspSetBindingRemoteNodeIdResponse(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-	}
+        // Deserialize the fields
+    }
 
-	@Override
-	public String toString() {
-		return "EzspSetBindingRemoteNodeIdResponse []";
-	}
+    @Override
+    public String toString() {
+        return "EzspSetBindingRemoteNodeIdResponse []";
+    }
 }

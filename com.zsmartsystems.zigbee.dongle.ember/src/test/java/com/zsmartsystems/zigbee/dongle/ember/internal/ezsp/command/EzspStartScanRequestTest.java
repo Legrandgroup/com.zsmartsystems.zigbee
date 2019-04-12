@@ -24,15 +24,15 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspNetwork
  *
  */
 public class EzspStartScanRequestTest extends EzspFrameTest {
-	@Test
-	public void testVersion() {
-		EzspFrame.setEzspVersion(4);
-		EzspStartScanRequest request = new EzspStartScanRequest();
-		request.setSequenceNumber(3);
-		request.setScanType(EzspNetworkScanType.EZSP_ENERGY_SCAN);
-		request.setChannelMask(ZigBeeChannelMask.CHANNEL_MASK_2GHZ);
-		request.setDuration(1);
+    @Test
+    public void testVersion() {
+        EzspFrame.setEzspVersion(4);
+        EzspStartScanRequest request = new EzspStartScanRequest();
+        request.setSequenceNumber(3);
+        request.setScanType(EzspNetworkScanType.EZSP_ENERGY_SCAN);
+        request.setChannelMask(ZigBeeChannelMask.CHANNEL_MASK_2GHZ);
+        request.setDuration(1);
 
-		assertTrue(Arrays.equals(getPacketData("03 00 1A 00 00 F8 FF 07 01"), request.serialize()));
-	}
+        assertTrue(Arrays.equals(getPacketData("03 00 1A 00 00 F8 FF 07 01"), request.serialize()));
+    }
 }

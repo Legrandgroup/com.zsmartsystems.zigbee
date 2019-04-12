@@ -18,88 +18,87 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberKeyType {
-	/**
-	 * Default unknown value
-	 */
-	UNKNOWN(-1),
+    /**
+     * Default unknown value
+     */
+    UNKNOWN(-1),
 
-	/**
-	 * A shared key between the Trust Center and a device.
-	 */
-	EMBER_TRUST_CENTER_LINK_KEY(0x0001),
+    /**
+     * A shared key between the Trust Center and a device.
+     */
+    EMBER_TRUST_CENTER_LINK_KEY(0x0001),
 
-	/**
-	 * A shared secret used for deriving keys between the Trust Center and a device
-	 */
-	EMBER_TRUST_CENTER_MASTER_KEY(0x0002),
+    /**
+     * A shared secret used for deriving keys between the Trust Center and a device
+     */
+    EMBER_TRUST_CENTER_MASTER_KEY(0x0002),
 
-	/**
-	 * The current active Network Key used by all devices in the network.
-	 */
-	EMBER_CURRENT_NETWORK_KEY(0x0003),
+    /**
+     * The current active Network Key used by all devices in the network.
+     */
+    EMBER_CURRENT_NETWORK_KEY(0x0003),
 
-	/**
-	 * The alternate Network Key that was previously in use, or the newer key that
-	 * will be switched to.
-	 */
-	EMBER_NEXT_NETWORK_KEY(0x0004),
+    /**
+     * The alternate Network Key that was previously in use, or the newer key that will be switched
+     * to.
+     */
+    EMBER_NEXT_NETWORK_KEY(0x0004),
 
-	/**
-	 * An Application Link Key shared with another (non-Trust Center) device.
-	 */
-	EMBER_APPLICATION_LINK_KEY(0x0005),
+    /**
+     * An Application Link Key shared with another (non-Trust Center) device.
+     */
+    EMBER_APPLICATION_LINK_KEY(0x0005),
 
-	/**
-	 * An Application Master Key shared secret used to derive an Application Link
-	 * Key.
-	 */
-	EMBER_APPLICATION_MASTER_KEY(0x0006);
+    /**
+     * An Application Master Key shared secret used to derive an Application Link Key.
+     */
+    EMBER_APPLICATION_MASTER_KEY(0x0006);
 
-	/**
-	 * A mapping between the integer code and its corresponding type to facilitate
-	 * lookup by code.
-	 */
-	private static Map<Integer, EmberKeyType> codeMapping;
+    /**
+     * A mapping between the integer code and its corresponding type to
+     * facilitate lookup by code.
+     */
+    private static Map<Integer, EmberKeyType> codeMapping;
 
-	private int key;
+    private int key;
 
-	private EmberKeyType(int key) {
-		this.key = key;
-	}
+    private EmberKeyType(int key) {
+        this.key = key;
+    }
 
-	private static void initMapping() {
-		codeMapping = new HashMap<Integer, EmberKeyType>();
-		for (EmberKeyType s : values()) {
-			codeMapping.put(s.key, s);
-		}
-	}
+    private static void initMapping() {
+        codeMapping = new HashMap<Integer, EmberKeyType>();
+        for (EmberKeyType s : values()) {
+            codeMapping.put(s.key, s);
+        }
+    }
 
-	/**
-	 * Lookup function based on the EmberStatus type code. Returns null if the code
-	 * does not exist.
-	 *
-	 * @param code
-	 *            the code to lookup
-	 * @return enumeration value of the alarm type.
-	 */
-	public static EmberKeyType getEmberKeyType(int code) {
-		if (codeMapping == null) {
-			initMapping();
-		}
+    /**
+     * Lookup function based on the EmberStatus type code. Returns null if the
+     * code does not exist.
+     *
+     * @param code
+     *            the code to lookup
+     * @return enumeration value of the alarm type.
+     */
+    public static EmberKeyType getEmberKeyType(int code) {
+        if (codeMapping == null) {
+            initMapping();
+        }
 
-		if (codeMapping.get(code) == null) {
-			return UNKNOWN;
-		}
+        if (codeMapping.get(code) == null) {
+            return UNKNOWN;
+        }
 
-		return codeMapping.get(code);
-	}
+        return codeMapping.get(code);
+    }
 
-	/**
-	 * Returns the EZSP protocol defined value for this enum
-	 *
-	 * @return the EZSP protocol key
-	 */
-	public int getKey() {
-		return key;
-	}
+    /**
+     * Returns the EZSP protocol defined value for this enum
+     *
+     * @return the EZSP protocol key
+     */
+    public int getKey() {
+        return key;
+    }
 }

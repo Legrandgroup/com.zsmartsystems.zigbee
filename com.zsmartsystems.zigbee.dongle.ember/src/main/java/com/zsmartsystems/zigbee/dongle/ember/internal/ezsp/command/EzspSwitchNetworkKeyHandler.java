@@ -12,9 +12,9 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
 /**
  * Class to implement the Ember EZSP command <b>switchNetworkKeyHandler</b>.
  * <p>
- * A callback to inform the application that the Network Key has been updated
- * and the node has been switched over to use the new key. The actual key being
- * used is not passed up, but the sequence number is.
+ * A callback to inform the application that the Network Key has been updated and the node has
+ * been switched over to use the new key. The actual key being used is not passed up, but the
+ * sequence number is.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -23,53 +23,52 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameResponse;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspSwitchNetworkKeyHandler extends EzspFrameResponse {
-	public static int FRAME_ID = 0x6E;
+    public static int FRAME_ID = 0x6E;
 
-	/**
-	 * The sequence number of the new network key.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 */
-	private int sequenceNumber;
+    /**
+     * The sequence number of the new network key.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     */
+    private int sequenceNumber;
 
-	/**
-	 * Response and Handler constructor
-	 */
-	public EzspSwitchNetworkKeyHandler(int[] inputBuffer) {
-		// Super creates deserializer and reads header fields
-		super(inputBuffer);
+    /**
+     * Response and Handler constructor
+     */
+    public EzspSwitchNetworkKeyHandler(int[] inputBuffer) {
+        // Super creates deserializer and reads header fields
+        super(inputBuffer);
 
-		// Deserialize the fields
-		sequenceNumber = deserializer.deserializeUInt8();
-	}
+        // Deserialize the fields
+        sequenceNumber = deserializer.deserializeUInt8();
+    }
 
-	/**
-	 * The sequence number of the new network key.
-	 * <p>
-	 * EZSP type is <i>uint8_t</i> - Java type is {@link int}
-	 *
-	 * @return the current sequenceNumber as {@link int}
-	 */
-	public int getSequenceNumber() {
-		return sequenceNumber;
-	}
+    /**
+     * The sequence number of the new network key.
+     * <p>
+     * EZSP type is <i>uint8_t</i> - Java type is {@link int}
+     *
+     * @return the current sequenceNumber as {@link int}
+     */
+    public int getSequenceNumber() {
+        return sequenceNumber;
+    }
 
-	/**
-	 * The sequence number of the new network key.
-	 *
-	 * @param sequenceNumber
-	 *            the sequenceNumber to set as {@link int}
-	 */
-	public void setSequenceNumber(int sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
-	}
+    /**
+     * The sequence number of the new network key.
+     *
+     * @param sequenceNumber the sequenceNumber to set as {@link int}
+     */
+    public void setSequenceNumber(int sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder(55);
-		builder.append("EzspSwitchNetworkKeyHandler [sequenceNumber=");
-		builder.append(sequenceNumber);
-		builder.append(']');
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder(55);
+        builder.append("EzspSwitchNetworkKeyHandler [sequenceNumber=");
+        builder.append(sequenceNumber);
+        builder.append(']');
+        return builder.toString();
+    }
 }

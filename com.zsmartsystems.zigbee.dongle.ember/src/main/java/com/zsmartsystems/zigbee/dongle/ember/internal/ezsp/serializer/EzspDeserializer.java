@@ -47,14 +47,13 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.structure.EzspStatus;
 /**
  * The EmberZNet Serial Protocol Data Representation
  *
- * This class contains low level methods for deserialising Ember data packets
- * and structures from the incoming received array
+ * This class contains low level methods for deserialising Ember data packets and
+ * structures from the incoming received array
  *
  * @author Chris Jackson
  *
  */
 public class EzspDeserializer {
-
     private int[] buffer = new int[131];
     private int position = 0;
 
@@ -306,4 +305,5 @@ public class EzspDeserializer {
     public EmberGpKeyType deserializeEmberGpKeyType() {
         return EmberGpKeyType.getEmberGpKeyType(deserializeUInt8());
     }
+
 }

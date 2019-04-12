@@ -13,9 +13,8 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>mfglibEnd</b>.
  * <p>
- * Deactivate use of mfglib test routines; restores the hardware to the state it
- * was in prior to mfglibStart() and stops receiving packets started by
- * mfglibStart() at the same time.
+ * Deactivate use of mfglib test routines; restores the hardware to the state it was in prior to
+ * mfglibStart() and stops receiving packets started by mfglibStart() at the same time.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,32 +23,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspMfglibEndRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x84;
+    public static int FRAME_ID = 0x84;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspMfglibEndRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspMfglibEndRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		return "EzspMfglibEndRequest []";
-	}
+    @Override
+    public String toString() {
+        return "EzspMfglibEndRequest []";
+    }
 }

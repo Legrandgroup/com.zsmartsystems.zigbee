@@ -87,14 +87,12 @@ import com.zsmartsystems.zigbee.transport.ZigBeeTransportState;
 import com.zsmartsystems.zigbee.transport.ZigBeeTransportTransmit;
 
 /**
- * Implementation of the Silabs Ember NCP (Network Co Processor) EZSP dongle
- * implementation.
+ * Implementation of the Silabs Ember NCP (Network Co Processor) EZSP dongle implementation.
  *
  * @author Chris Jackson
  *
  */
 public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTransportFirmwareUpdate, EzspFrameHandler {
-
     /**
      * The {@link Logger}.
      */
@@ -150,10 +148,10 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
      */
     private String versionString = "Unknown";
 
-	/**
-	 * ezsp frame listener
-	 */
-	private List<EzspFrameHandler> ezspListener = new ArrayList<EzspFrameHandler>();
+    /**
+     * ezsp frame listener
+     */
+    private List<EzspFrameHandler> ezspListener = new ArrayList<EzspFrameHandler>();
 
     public ZigBeeDongleEzsp(final ZigBeePort serialPort) {
         this.serialPort = serialPort;
@@ -187,43 +185,43 @@ public class ZigBeeDongleEzsp implements ZigBeeTransportTransmit, ZigBeeTranspor
 
     @Override
     public ZigBeeInitializeResponse initialize() {
-	logger.debug("EZSP dongle initialize.");
+        logger.debug("EZSP dongle initialize.");
 
-	if (null != zigbeeTransportReceive) {
+        if (null != zigbeeTransportReceive) {
 		zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.UNINITIALISED);
-	}
+        }
 
-	if (!initializeEzspProtocol()) {
-		return ZigBeeInitializeResponse.FAILED;
-	}
+        if (!initializeEzspProtocol()) {
+            return ZigBeeInitializeResponse.FAILED;
+        }
 
-	// Perform any stack configuration
+        // Perform any stack configuration
 	applyStackConfiguration();
 	applyStackPolicy();
 
-	getNetworkParameters();
+        getNetworkParameters();
 
-	// Add the endpoint
+        // Add the endpoint
 	addEndpoint(1, 0x0000, ZigBeeProfileType.HOME_AUTOMATION.getId(), new int[] { 0 }, new int[] { 0 });
 
-	// Now initialise the network
+        // Now initialise the network
 	EmberStatus l_nwk_init_status = initializeZigbeeNetwork();
 
-	networkParameters = getNetworkParameters();
-	getCurrentSecurityState();
+        networkParameters = getNetworkParameters();
+        getCurrentSecurityState();
 
 	if (null != zigbeeTransportReceive) {
 		zigbeeTransportReceive.setNetworkState(ZigBeeTransportState.INITIALISING);
 	}
 
-	logger.debug("EZSP dongle initialize done: Initialised {}", l_nwk_init_status == EmberStatus.EMBER_NOT_JOINED);
+        logger.debug("EZSP dongle initialize done: Initialised {}", l_nwk_init_status == EmberStatus.EMBER_NOT_JOINED);
 
-	// Check if the network is initialised or if we're yet to join
+        // Check if the network is initialised or if we're yet to join
 	if (l_nwk_init_status == EmberStatus.EMBER_NOT_JOINED) {
 		return ZigBeeInitializeResponse.NOT_JOINED;
 	}
 
-	return ZigBeeInitializeResponse.JOINED;
+        return ZigBeeInitializeResponse.JOINED;
     }
 
     @Override

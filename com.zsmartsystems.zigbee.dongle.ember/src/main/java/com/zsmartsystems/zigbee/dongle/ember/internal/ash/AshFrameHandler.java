@@ -41,14 +41,12 @@ import com.zsmartsystems.zigbee.transport.ZigBeePort;
  * of their responds. Higher layers can simply send EZSP messages synchronously
  * and the handler will return with the completed result.
  * <p>
- * UG101: UART GATEWAY PROTOCOL REFERENCE: FOR THE EMBER® EZSP NETWORK
- * CO-PROCESSOR
+ * UG101: UART GATEWAY PROTOCOL REFERENCE: FOR THE EMBER® EZSP NETWORK CO-PROCESSOR
  *
  * @author Chris Jackson
  *
  */
 public class AshFrameHandler {
-
     /**
      * The logger.
      */

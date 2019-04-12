@@ -18,91 +18,91 @@ import java.util.Map;
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public enum EmberIncomingMessageType {
-	/**
-	 * Default unknown value
-	 */
-	UNKNOWN(-1),
+    /**
+     * Default unknown value
+     */
+    UNKNOWN(-1),
 
-	/**
-	 * Unicast
-	 */
-	EMBER_INCOMING_UNICAST(0x0000),
+    /**
+     * Unicast
+     */
+    EMBER_INCOMING_UNICAST(0x0000),
 
-	/**
-	 * Unicast reply
-	 */
-	EMBER_INCOMING_UNICAST_REPLY(0x0001),
+    /**
+     * Unicast reply
+     */
+    EMBER_INCOMING_UNICAST_REPLY(0x0001),
 
-	/**
-	 * Multicast
-	 */
-	EMBER_INCOMING_MULTICAST(0x0002),
+    /**
+     * Multicast
+     */
+    EMBER_INCOMING_MULTICAST(0x0002),
 
-	/**
-	 * Multicast sent by the local device
-	 */
-	EMBER_INCOMING_MULTICAST_LOOPBACK(0x0003),
+    /**
+     * Multicast sent by the local device
+     */
+    EMBER_INCOMING_MULTICAST_LOOPBACK(0x0003),
 
-	/**
-	 * Broadcast
-	 */
-	EMBER_INCOMING_BROADCAST(0x0004),
+    /**
+     * Broadcast
+     */
+    EMBER_INCOMING_BROADCAST(0x0004),
 
-	/**
-	 * Broadcast sent by the local device.
-	 */
-	EMBER_INCOMING_BROADCAST_LOOPBACK(0x0005),
+    /**
+     * Broadcast sent by the local device.
+     */
+    EMBER_INCOMING_BROADCAST_LOOPBACK(0x0005),
 
-	/**
-	 * Many to one route request
-	 */
-	EMBER_INCOMING_MANY_TO_ONE_ROUTE_REQUEST(0x0006);
+    /**
+     * Many to one route request
+     */
+    EMBER_INCOMING_MANY_TO_ONE_ROUTE_REQUEST(0x0006);
 
-	/**
-	 * A mapping between the integer code and its corresponding type to facilitate
-	 * lookup by code.
-	 */
-	private static Map<Integer, EmberIncomingMessageType> codeMapping;
+    /**
+     * A mapping between the integer code and its corresponding type to
+     * facilitate lookup by code.
+     */
+    private static Map<Integer, EmberIncomingMessageType> codeMapping;
 
-	private int key;
+    private int key;
 
-	private EmberIncomingMessageType(int key) {
-		this.key = key;
-	}
+    private EmberIncomingMessageType(int key) {
+        this.key = key;
+    }
 
-	private static void initMapping() {
-		codeMapping = new HashMap<Integer, EmberIncomingMessageType>();
-		for (EmberIncomingMessageType s : values()) {
-			codeMapping.put(s.key, s);
-		}
-	}
+    private static void initMapping() {
+        codeMapping = new HashMap<Integer, EmberIncomingMessageType>();
+        for (EmberIncomingMessageType s : values()) {
+            codeMapping.put(s.key, s);
+        }
+    }
 
-	/**
-	 * Lookup function based on the EmberStatus type code. Returns null if the code
-	 * does not exist.
-	 *
-	 * @param code
-	 *            the code to lookup
-	 * @return enumeration value of the alarm type.
-	 */
-	public static EmberIncomingMessageType getEmberIncomingMessageType(int code) {
-		if (codeMapping == null) {
-			initMapping();
-		}
+    /**
+     * Lookup function based on the EmberStatus type code. Returns null if the
+     * code does not exist.
+     *
+     * @param code
+     *            the code to lookup
+     * @return enumeration value of the alarm type.
+     */
+    public static EmberIncomingMessageType getEmberIncomingMessageType(int code) {
+        if (codeMapping == null) {
+            initMapping();
+        }
 
-		if (codeMapping.get(code) == null) {
-			return UNKNOWN;
-		}
+        if (codeMapping.get(code) == null) {
+            return UNKNOWN;
+        }
 
-		return codeMapping.get(code);
-	}
+        return codeMapping.get(code);
+    }
 
-	/**
-	 * Returns the EZSP protocol defined value for this enum
-	 *
-	 * @return the EZSP protocol key
-	 */
-	public int getKey() {
-		return key;
-	}
+    /**
+     * Returns the EZSP protocol defined value for this enum
+     *
+     * @return the EZSP protocol key
+     */
+    public int getKey() {
+        return key;
+    }
 }

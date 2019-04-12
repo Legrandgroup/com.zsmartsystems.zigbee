@@ -11,13 +11,11 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.EzspFrameRequest;
 import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerializer;
 
 /**
- * Class to implement the Ember EZSP command
- * <b>getStandaloneBootloaderVersionPlatMicroPhy</b>.
+ * Class to implement the Ember EZSP command <b>getStandaloneBootloaderVersionPlatMicroPhy</b>.
  * <p>
- * Detects if the standalone bootloader is installed, and if so returns the
- * installed version. If not return 0xffff. A returned version of 0x1234 would
- * indicate version 1.2 build 34. Also return the node's version of PLAT, MICRO
- * and PHY.
+ * Detects if the standalone bootloader is installed, and if so returns the installed version.
+ * If not return 0xffff. A returned version of 0x1234 would indicate version 1.2 build 34. Also
+ * return the node's version of PLAT, MICRO and PHY.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -26,32 +24,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetStandaloneBootloaderVersionPlatMicroPhyRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x91;
+    public static int FRAME_ID = 0x91;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspGetStandaloneBootloaderVersionPlatMicroPhyRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspGetStandaloneBootloaderVersionPlatMicroPhyRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		return "EzspGetStandaloneBootloaderVersionPlatMicroPhyRequest []";
-	}
+    @Override
+    public String toString() {
+        return "EzspGetStandaloneBootloaderVersionPlatMicroPhyRequest []";
+    }
 }

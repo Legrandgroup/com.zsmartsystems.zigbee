@@ -17,14 +17,12 @@ import org.slf4j.LoggerFactory;
  * is a data-link layer protocol below EZSP and above the serial device (or
  * UART) driver.
  * <p>
- * UG101: UART GATEWAY PROTOCOL REFERENCE: FOR THE EMBER® EZSP NETWORK
- * CO-PROCESSOR
+ * UG101: UART GATEWAY PROTOCOL REFERENCE: FOR THE EMBER® EZSP NETWORK CO-PROCESSOR
  *
  * @author Chris Jackson
  *
  */
 public class AshFrame {
-
     private final static Logger logger = LoggerFactory.getLogger(AshFrame.class);
 
     protected int frmNum;

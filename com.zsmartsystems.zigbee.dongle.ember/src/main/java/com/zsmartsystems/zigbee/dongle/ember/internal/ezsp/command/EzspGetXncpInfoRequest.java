@@ -13,9 +13,9 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
 /**
  * Class to implement the Ember EZSP command <b>getXncpInfo</b>.
  * <p>
- * Allows the HOST to know whether the NCP is running the XNCP library. If so,
- * the response contains also the manufacturer ID and the version number of the
- * XNCP application that is running on the NCP.
+ * Allows the HOST to know whether the NCP is running the XNCP library. If so, the response
+ * contains also the manufacturer ID and the version number of the XNCP application that is
+ * running on the NCP.
  * <p>
  * This class provides methods for processing EZSP commands.
  * <p>
@@ -24,32 +24,32 @@ import com.zsmartsystems.zigbee.dongle.ember.internal.ezsp.serializer.EzspSerial
  * @author Chris Jackson - Initial contribution of Java code generator
  */
 public class EzspGetXncpInfoRequest extends EzspFrameRequest {
-	public static int FRAME_ID = 0x13;
+    public static int FRAME_ID = 0x13;
 
-	/**
-	 * Serialiser used to seialise to binary line data
-	 */
-	private EzspSerializer serializer;
+    /**
+     * Serialiser used to seialise to binary line data
+     */
+    private EzspSerializer serializer;
 
-	/**
-	 * Request constructor
-	 */
-	public EzspGetXncpInfoRequest() {
-		frameId = FRAME_ID;
-		serializer = new EzspSerializer();
-	}
+    /**
+     * Request constructor
+     */
+    public EzspGetXncpInfoRequest() {
+        frameId = FRAME_ID;
+        serializer = new EzspSerializer();
+    }
 
-	@Override
-	public int[] serialize() {
-		// Serialize the header
-		serializeHeader(serializer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(serializer);
 
-		// Serialize the fields
-		return serializer.getPayload();
-	}
+        // Serialize the fields
+        return serializer.getPayload();
+    }
 
-	@Override
-	public String toString() {
-		return "EzspGetXncpInfoRequest []";
-	}
+    @Override
+    public String toString() {
+        return "EzspGetXncpInfoRequest []";
+    }
 }
